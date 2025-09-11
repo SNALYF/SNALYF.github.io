@@ -2,6 +2,6 @@
 title: "About Me"
 ---
 
-About this site
+About Myself
 
-My name is Tianhao Cao
+My name is Tianhao Cao, a current Master of Data Science student @ University of British Columbia. Also a Melodic bass/dubstep producer!
