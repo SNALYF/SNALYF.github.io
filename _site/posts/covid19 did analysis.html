@@ -70,6 +70,26 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    // Auto-add data-aos to listing items and cards
+    const cards = document.querySelectorAll('.card, .listing-item, .quarto-listing-item');
+    cards.forEach(card => {
+      card.setAttribute('data-aos', 'fade-up');
+    });
+
+    // Initialize AOS
+    AOS.init({
+      duration: 800,
+      easing: 'ease-out-cubic',
+      once: true,
+      offset: 50
+    });
+  });
+</script>
 
 
 <link rel="stylesheet" href="../styles.css">
