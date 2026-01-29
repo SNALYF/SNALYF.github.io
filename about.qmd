@@ -2,7 +2,7 @@
 title: "About Me"
 about:
   template: trestles
-  image: ../img/profile.JPG
+  image: img/profile.JPG
   links:
     - icon: linkedin
       text: LinkedIn

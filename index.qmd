@@ -1,6 +1,6 @@
 ---
 title: "Tianhao Cao"
-image: ../img/profile.JPG
+image: img/profile.JPG
 about:
   template: jolla
   links:
