@@ -1,0 +1,31 @@
+---
+title: "Weather Insurance Purchasing Prediction"
+description: "Predicting farmers' insurance buying behavior using Lasso and Random Forest"
+author: "Tianhao Cao"
+date: "2022-06-05"
+categories: [Lasso, Random Forest, Cross-Validation, Econometrics]
+image: ../img/weather.png
+---
+
+## Project Overview
+
+This project focuses on quantifying factors influencing Chinese farmers' decisions to purchase weather insurance and predicting their purchasing probabilities. Using a dataset from Jiangxi, China, which includes 4,902 observations and 59 variables[cite: 30], the study navigates the challenges of predicting human economic behavior in a low-dimensional setting.
+
+By implementing Lasso Cross-Validation and Random Forest algorithms, the project contrasts linear regularization methods with non-linear tree-based methods to identify significant determinants such as "Understanding" and "Social Network".
+
+### Key Concepts Applied
+
+* **Variable Selection with Lasso**: Utilized Lasso regularization to handle the bias-variance trade-off. The optimal $\lambda$ zeroed out 14 regressors, highlighting "Understanding" and "Network-related" variables as the most significant predictors.
+* **Ensemble Learning (Random Forest)**: Constructed a Random Forest model with 300 trees to capture non-linear relationships. Results revealed that unlike in the Lasso model, "Age" played a considerable role in purchasing decisions, while "Risk Averse" traits were surprisingly less important.
+* **Performance Evaluation**: Evaluated models using ROC Curves, Sensitivity/Specificity trade-offs, and $R^2$. While the Lasso model achieved ~64% prediction correctness, the low $R^2$ (< 0.1) across both models highlighted the complexity of behavioral prediction and potential unobserved variables.
+* **Data Cleaning & Bias Analysis**: Processed raw data by handling NA values and removing variables with >1000 missing entries. Conducted a critical analysis of data limitations, acknowledging potential biases from omitted variables like modern technology adoption.
+
+## Paper Preview
+
+<object data="papers/weather insurance.pdf" type="application/pdf" width="100%" height="800px">
+    <p>Unable to display PDF file. <a href="papers/weather insurance.pdf">Download</a> instead.</p>
+</object>
+
+## Link to repo
+
+[Github Repository](https://github.com/SNALYF/Weather-Insurance-Purchase-Prediction)

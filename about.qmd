@@ -1,9 +1,37 @@
 ---
 title: "About Me"
+about:
+  template: trestles
+  image: profile.JPG
+  links:
+    - icon: linkedin
+      text: LinkedIn
+      href: https://linkedin.com
+    - icon: github
+      text: Github
+      href: snalyf.github.io
 ---
 
-About Myself
+## My Journey
 
-My name is Tianhao Cao, a current Master of Data Science student @ University of British Columbia. Also a Melodic bass/dubstep producer!
+I am currently a master's student at the **University of British Columbia (UBC)**, majoring in **Data Science, Computational Linguistics**.
 
-My Soundcloud: https://soundcloud.com/user-625963428
+My academic journey is driven by a fascination with *patterns*—whether they are hidden in large datasets, embedded in human language, or structured within musical compositions.
+
+## Technical Philosophy
+
+I don't just "run code." I believe in understanding the mathematical foundations behind the algorithms.
+
+* **In Data Science**: My background in Statistics and Computer Science allows me to deeply understand model behaviors, rather than being only a user of black-box models.
+* **In Economics**: My background in microeconomics and macroeconomics allows me to combine Economic theories with Data Science.
+
+## Experience & Mentorship
+
+**Mentoring Program** | Mentee
+*Working with Jacob Oh (Jan 2026 - Present)*
+Participating in a professional mentorship program to bridge the gap between academic theory and industry application. Focusing on career development in tech and software engineering best practices.
+
+## Beyond the Code
+
+When I'm not coding in Python or analyzing data, I am likely exploring **Music Theory**.
+I am fascinated by how chords and scales function mathematically. This hobby actually complements my coding work, as both require recognizing structures and creative problem-solving within a set of rules.

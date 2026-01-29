@@ -1,0 +1,33 @@
+---
+title: "Covid-19 DiD Analysis"
+description: "Identifying the influences of Early-Policies to the COVID-19 transmission and Deaths"
+author: "Tianhao Cao"
+date: "2022-03-18"
+categories: [Difference-in-Difference, Linear Regression]
+image: ../img/covid.png
+---
+
+## Project Overview
+
+This project estimates the early policy effects on COVID-19 transmission and damages through four dependent variables: daily new cases, cumulative cases, daily deaths, and cumulative deaths. The data is provided by the World Health Organization and Our World in Data.
+
+Two different Difference-in-Difference models were implemented to estimate the effects of Mandatory policies, Optional policies, and no-control policies. The analysis found that mandatory policies had the most significant impact on limiting and decreasing COVID-19 transmission and damages, followed by optional policies, while no-control policies were the least effective.
+
+### Key Concepts Applied
+
+* **Difference-in-Difference (DiD)**: Utilized DiD models to compare the impact of different policy stringency levels on infection and death rates over time.
+* **Policy Categorization**: Countries were categorized into three groups based on early policy stringency:
+    * **Mandatory Countries** (e.g., China): Strict travel restrictions and enforced preventive measures.
+    * **Optional Countries** (e.g., Canada, Japan, UK): Advised but not strictly enforced measures.
+    * **No-control Countries** (e.g., USA, India): Limited restrictions and guidance.
+* **Statistical Analysis**: Analyzed the effects on new cases, cumulative cases, new deaths, and cumulative deaths using empiricial statistical methods.
+
+## Paper Preview
+
+<object data="papers/covid19 did.pdf" type="application/pdf" width="100%" height="800px">
+    <p>Unable to display PDF file. <a href="papers/covid19 did.pdf">Download</a> instead.</p>
+</object>
+
+## Link to repo
+[Github Repository](https://github.com/SNALYF/Covid-19-Difference-in-Differences-Analysis)
+

@@ -1,22 +1,50 @@
 project:
   type: website
-  output-dir: docs
 
 website:
-  title: "Tianhao Cao's Quarto Site"
+  title: "Tianhao Cao"  # Name
   navbar:
     left:
       - href: index.qmd
         text: Home
-      - about.qmd
+      - href: projects.qmd
+        text: Projects
+      - href: resume.qmd
+        text: Resume
+      - href: about.qmd
+        text: About
+    right:
+      - icon: github
+        href: https://github.com/SNALYF
+      - icon: linkedin
+        href: https://www.linkedin.com/in/tianhao-cao-mds/
+      - icon: envelope
+        href: mailto:snalyf.c@gmail.com
 
 format:
   html:
-    theme:
-      - cosmo
-      - brand
-    css: styles.css
-    toc: true
+    theme: darkly       # 现代、专业、蓝白色调
+    css: styles.css    # 预留样式表，以后可以微调
+    toc: true          # 自动生成目录
+    include-in-header:
+      - text: |
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+          <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+          <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+          <script>
+            document.addEventListener("DOMContentLoaded", function() {
+              // Auto-add data-aos to listing items and cards
+              const cards = document.querySelectorAll('.card, .listing-item, .quarto-listing-item');
+              cards.forEach(card => {
+                card.setAttribute('data-aos', 'fade-up');
+              });
 
-
-
+              // Initialize AOS
+              AOS.init({
+                duration: 800,
+                easing: 'ease-out-cubic',
+                once: true,
+                offset: 50
+              });
+            });
+          </script>
