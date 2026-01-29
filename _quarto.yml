@@ -1,6 +1,6 @@
 project:
   type: website
-
+  output-dir: docs
 website:
   title: "Tianhao Cao"  # Name
   navbar:
@@ -23,9 +23,9 @@ website:
 
 format:
   html:
-    theme: darkly       # 现代、专业、蓝白色调
-    css: styles.css    # 预留样式表，以后可以微调
-    toc: true          # 自动生成目录
+    theme: darkly
+    css: styles.css
+    toc: true 
     include-in-header:
       - text: |
           <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>

@@ -35,10 +35,10 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-ea385d0e468b0dd5ea5bf0780b1290d9.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-bc185b5c5bdbcb35c2eb49d8a876ef70.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-c1fac2584b48ed01fb6e278e36375074.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-c09f7992e7ad36c4a4c784d127ab2153.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -66,12 +66,32 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    // Auto-add data-aos to listing items and cards
+    const cards = document.querySelectorAll('.card, .listing-item, .quarto-listing-item');
+    cards.forEach(card => {
+      card.setAttribute('data-aos', 'fade-up');
+    });
+
+    // Initialize AOS
+    AOS.init({
+      duration: 800,
+      easing: 'ease-out-cubic',
+      once: true,
+      offset: 50
+    });
+  });
+</script>
 
 
 <link rel="stylesheet" href="styles.css">
 </head>
 
-<body class="nav-fixed quarto-light">
+<body class="nav-fixed fullcontent quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -93,8 +113,33 @@ ul.task-list li input[type="checkbox"] {
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
+    <a class="nav-link" href="./projects.html"> 
+<span class="menu-text">Projects</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./resume.html"> 
+<span class="menu-text">Resume</span></a>
+  </li>  
+  <li class="nav-item">
     <a class="nav-link" href="./about.html"> 
-<span class="menu-text">About Me</span></a>
+<span class="menu-text">About</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/SNALYF"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://www.linkedin.com/in/tianhao-cao-mds/"> <i class="bi bi-linkedin" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="mailto:snalyf.c@gmail.com"> <i class="bi bi-envelope" role="img">
+</i> 
+<span class="menu-text"></span></a>
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
@@ -107,18 +152,10 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-  <ul>
-  <li><a href="#education" id="toc-education" class="nav-link active" data-scroll-target="#education">Education</a></li>
-  <li><a href="#interests" id="toc-interests" class="nav-link" data-scroll-target="#interests">Interests</a></li>
-  </ul>
-</nav>
-    </div>
+    
 <!-- main -->
 <div class="quarto-about-jolla">
-  <img src="profile.jpg" class="about-image
+  <img src="../img/profile.JPG" class="about-image
   round " style="height: 15em; width: 15em;">
  <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
@@ -127,23 +164,31 @@ ul.task-list li input[type="checkbox"] {
 <div class="quarto-title-meta">
   </div>
 </header><main class="content" id="quarto-document-content">
-
-<p>Hello! I am a student at the <strong>University of British Columbia (UBC)</strong>, passionate about bridging the gap between Statistics and Computer Science.</p>
-<p>My primary interests lie in <strong>Data Science</strong>, <strong>Machine Learning</strong>, and <strong>Natural Language Processing (NLP)</strong>. I enjoy building tools that solve real-world problems—whether it’s analyzing text data or configuring hardware interfaces.</p>
+<div style="text-align: left; max-width: 800px; margin: 0 auto;">
+<p>I am a student at the <strong>University of British Columbia (UBC)</strong>, passionate about bridging the gap between Statistics and Computer Science.</p>
+<p>My primary interests lie in <strong>Data Science</strong>, <strong>Machine Learning</strong>, and <strong>Natural Language Processing (NLP)</strong>. I enjoy building tools that solve real-world problems—whether it’s digging underlying logics behind phenomena or constructing fundamental model/algorithm to predict the output.</p>
 <section id="education" class="level3">
 <h3 data-anchor-id="education">Education</h3>
-<p><strong>University of British Columbia</strong> | Vancouver, BC Undergraduate Student in Statistics &amp; Computer Science | Sept 2022 - Present</p>
+<strong>University of British Columbia</strong> | Vancouver, BC, Canada
+<div style="padding-left: 1.5em; margin-bottom: 1em;">
+<p><strong>M.S.</strong> in Data Science, Computational Linguistics | <em>August 2025 - Present</em></p>
+</div>
+<strong>University of California, Santa Cruz</strong> | Santa Cruz, CA, United States
+<div style="padding-left: 1.5em; margin-bottom: 1em;">
+<p><strong>B.A.</strong> in Business Management Economics | <em>Sept 2019 - June 2022</em></p>
+</div>
 </section>
 <section id="interests" class="level3">
 <h3 data-anchor-id="interests">Interests</h3>
 <ul>
-<li><strong>Programming</strong>: Python (Pandas, NumPy), R, SQL</li>
-<li><strong>Data Science</strong>: Machine Learning, NLP (Word Embeddings, Parsing)</li>
+<li><strong>Programming</strong>: Python (Pandas, NumPy, ScikitLearn, PyTorch), R, SQL</li>
+<li><strong>Data Science</strong>: Machine Learning, Data Analaysis, NLP (Word Embeddings, Parsing)</li>
 <li><strong>Other</strong>: Music Theory, Mathematics</li>
 </ul>
-
-
 </section>
+</div>
+
+
 </main> 
   <hr class="about-sep">
    <div class="about-links">

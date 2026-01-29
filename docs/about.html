@@ -34,12 +34,11 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-ea385d0e468b0dd5ea5bf0780b1290d9.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-bc185b5c5bdbcb35c2eb49d8a876ef70.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-c1fac2584b48ed01fb6e278e36375074.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-c09f7992e7ad36c4a4c784d127ab2153.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -67,6 +66,26 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    // Auto-add data-aos to listing items and cards
+    const cards = document.querySelectorAll('.card, .listing-item, .quarto-listing-item');
+    cards.forEach(card => {
+      card.setAttribute('data-aos', 'fade-up');
+    });
+
+    // Initialize AOS
+    AOS.init({
+      duration: 800,
+      easing: 'ease-out-cubic',
+      once: true,
+      offset: 50
+    });
+  });
+</script>
 
 
 <link rel="stylesheet" href="styles.css">
@@ -94,8 +113,33 @@ ul.task-list li input[type="checkbox"] {
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
+    <a class="nav-link" href="./projects.html"> 
+<span class="menu-text">Projects</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./resume.html"> 
+<span class="menu-text">Resume</span></a>
+  </li>  
+  <li class="nav-item">
     <a class="nav-link active" href="./about.html" aria-current="page"> 
-<span class="menu-text">About Me</span></a>
+<span class="menu-text">About</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/SNALYF"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://www.linkedin.com/in/tianhao-cao-mds/"> <i class="bi bi-linkedin" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="mailto:snalyf.c@gmail.com"> <i class="bi bi-envelope" role="img">
+</i> 
+<span class="menu-text"></span></a>
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
@@ -108,47 +152,70 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+  <ul>
+  <li><a href="#my-journey" id="toc-my-journey" class="nav-link active" data-scroll-target="#my-journey">My Journey</a></li>
+  <li><a href="#technical-philosophy" id="toc-technical-philosophy" class="nav-link" data-scroll-target="#technical-philosophy">Technical Philosophy</a></li>
+  <li><a href="#experience-mentorship" id="toc-experience-mentorship" class="nav-link" data-scroll-target="#experience-mentorship">Experience &amp; Mentorship</a></li>
+  <li><a href="#beyond-the-code" id="toc-beyond-the-code" class="nav-link" data-scroll-target="#beyond-the-code">Beyond the Code</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
-
+<div class="quarto-about-trestles">
+  <div class="about-entity">
+    <img src="../img/profile.JPG" class="about-image
+  rounded " style="width: 20em;">
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title">About Me</h1>
 </div>
-
-
-
 <div class="quarto-title-meta">
-
-    
-  
-    
   </div>
-  
-
-
 </header>
+    <div class="about-links">
+  <a href="https://linkedin.com" class="about-link" rel="" target="">
+    <i class="bi bi-linkedin"></i>
+     <span class="about-link-text">LinkedIn</span>
+  </a>
+  <a href="/snalyf.github.io" class="about-link" rel="" target="">
+    <i class="bi bi-github"></i>
+     <span class="about-link-text">Github</span>
+  </a>
+</div>
+  </div>
+  <div class="about-contents"><main class="content" id="quarto-document-content">
+
+<section id="my-journey" class="level2">
+<h2 data-anchor-id="my-journey">My Journey</h2>
+<p>I am currently a master’s student at the <strong>University of British Columbia (UBC)</strong>, majoring in <strong>Data Science, Computational Linguistics</strong>.</p>
+<p>My academic journey is driven by a fascination with <em>patterns</em>—whether they are hidden in large datasets, embedded in human language, or structured within musical compositions.</p>
+</section>
+<section id="technical-philosophy" class="level2">
+<h2 data-anchor-id="technical-philosophy">Technical Philosophy</h2>
+<p>I don’t just “run code.” I believe in understanding the mathematical foundations behind the algorithms.</p>
+<ul>
+<li><strong>In Data Science</strong>: My background in Statistics and Computer Science allows me to deeply understand model behaviors, rather than being only a user of black-box models.</li>
+<li><strong>In Economics</strong>: My background in microeconomics and macroeconomics allows me to combine Economic theories with Data Science.</li>
+</ul>
+</section>
+<section id="experience-mentorship" class="level2">
+<h2 data-anchor-id="experience-mentorship">Experience &amp; Mentorship</h2>
+<p><strong>Mentoring Program</strong> | Mentee <em>Working with Jacob Oh (Jan 2026 - Present)</em> Participating in a professional mentorship program to bridge the gap between academic theory and industry application. Focusing on career development in tech and software engineering best practices.</p>
+</section>
+<section id="beyond-the-code" class="level2">
+<h2 data-anchor-id="beyond-the-code">Beyond the Code</h2>
+<p>When I’m not coding in Python or analyzing data, I am likely exploring <strong>Music Theory</strong>. I am fascinated by how chords and scales function mathematically. This hobby actually complements my coding work, as both require recognizing structures and creative problem-solving within a set of rules.</p>
 
 
-<p>About Myself</p>
-<p>My name is Tianhao Cao, a current Master of Data Science student @ University of British Columbia. Also a Melodic bass/dubstep producer!</p>
-<p>My Soundcloud: https://soundcloud.com/user-625963428</p>
-
-
-
-</main> <!-- /main -->
+</section>
+</main></div>
+</div>
+ <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
-    const icon = "";
-    const anchorJS = new window.AnchorJS();
-    anchorJS.options = {
-      placement: 'right',
-      icon: icon
-    };
-    anchorJS.add('.anchored');
     const isCodeAnnotation = (el) => {
       for (const clz of el.classList) {
         if (clz.startsWith('code-annotation-')) {                     
