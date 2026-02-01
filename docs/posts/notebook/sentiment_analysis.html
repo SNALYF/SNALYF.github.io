@@ -1,0 +1,2779 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.33">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>sentiment_analysis – Tianhao Cao</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-bc185b5c5bdbcb35c2eb49d8a876ef70.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-c09f7992e7ad36c4a4c784d127ab2153.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    // Auto-add data-aos to listing items and cards
+    const cards = document.querySelectorAll('.card, .listing-item, .quarto-listing-item');
+    cards.forEach(card => {
+      card.setAttribute('data-aos', 'fade-up');
+    });
+
+    // Initialize AOS
+    AOS.init({
+      duration: 800,
+      easing: 'ease-out-cubic',
+      once: true,
+      offset: 50
+    });
+  });
+</script>
+
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Tianhao Cao</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../projects.html"> 
+<span class="menu-text">Projects</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../resume.html"> 
+<span class="menu-text">Resume</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/SNALYF"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://www.linkedin.com/in/tianhao-cao-mds/"> <i class="bi bi-linkedin" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="mailto:snalyf.c@gmail.com"> <i class="bi bi-envelope" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#please-write-code-to-develop-you-system.-more-details-are-in-lab4.ipynb." id="toc-please-write-code-to-develop-you-system.-more-details-are-in-lab4.ipynb." class="nav-link active" data-scroll-target="#please-write-code-to-develop-you-system.-more-details-are-in-lab4.ipynb.">Please write code to develop you system. More details are in <code>Lab4.ipynb</code>.</a></li>
+  <li><a href="#eda" id="toc-eda" class="nav-link" data-scroll-target="#eda">EDA</a></li>
+  <li><a href="#baseline" id="toc-baseline" class="nav-link" data-scroll-target="#baseline">Baseline</a></li>
+  <li><a href="#cbow" id="toc-cbow" class="nav-link" data-scroll-target="#cbow">CBOW</a></li>
+  <li><a href="#lstm" id="toc-lstm" class="nav-link" data-scroll-target="#lstm">LSTM</a></li>
+  <li><a href="#predict-on-the-test-set" id="toc-predict-on-the-test-set" class="nav-link" data-scroll-target="#predict-on-the-test-set">predict on the test set</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
+
+
+
+
+<div id="cell-0" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:0}}" data-outputid="2867e29b-9678-4f34-c8b3-88e2e174a00a" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># all the necessary imports</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> torch</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> torch.utils.data <span class="im">import</span> Dataset, DataLoader</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> torch.nn <span class="im">as</span> nn</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> torch <span class="im">import</span> optim</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> torch</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> spacy</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> altair <span class="im">as</span> alt</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> gdown</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>nlp <span class="op">=</span> spacy.load(<span class="st">"en_core_web_sm"</span>)</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>alt.data_transformers.enable(<span class="st">"vegafusion"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="1">
+<pre><code>DataTransformerRegistry.enable('vegafusion')</code></pre>
+</div>
+</div>
+<div id="cell-1" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:0}}" data-outputid="1fb6e43d-ec57-4c2f-8103-5b652acb671e" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># set the seed</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>manual_seed <span class="op">=</span> <span class="dv">572</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>torch.manual_seed(manual_seed)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>device <span class="op">=</span> torch.device(<span class="st">"cuda"</span> <span class="cf">if</span> torch.cuda.is_available() <span class="cf">else</span> <span class="st">"cpu"</span>)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>n_gpu <span class="op">=</span> torch.cuda.device_count()</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(device)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>cuda</code></pre>
+</div>
+</div>
+<p>You can adap these two functions for your model.</p>
+<div id="cell-3" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> accuracy_score</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> f1_score</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> train(loader):</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    model.train()</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    total_loss <span class="op">=</span> <span class="fl">0.0</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    <span class="co"># iterate throught the data loader</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    num_sample <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> batch <span class="kw">in</span> loader:</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>        <span class="co"># load the current batch</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>        batch_input <span class="op">=</span> batch.review</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>        batch_output <span class="op">=</span> batch.label</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>        batch_input <span class="op">=</span> batch_input.to(device)</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>        batch_output <span class="op">=</span> batch_output.to(device)</span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>        <span class="co"># forward propagation</span></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>        <span class="co"># pass the data through the model</span></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>        model_outputs <span class="op">=</span> model(batch_input)</span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>        <span class="co"># compute the loss</span></span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>        cur_loss <span class="op">=</span> criterion(model_outputs, batch_output)</span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>        total_loss <span class="op">+=</span> cur_loss.cpu().item()</span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>        <span class="co"># backward propagation (compute the gradients and update the model)</span></span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>        <span class="co"># clear the buffer</span></span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>        optimizer.zero_grad()</span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>        <span class="co"># compute the gradients</span></span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a>        cur_loss.backward()</span>
+<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a>        <span class="co"># update the weights</span></span>
+<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a>        optimizer.step()</span>
+<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a>        num_sample <span class="op">+=</span> batch_output.shape[<span class="dv">0</span>]</span>
+<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> total_loss<span class="op">/</span>num_sample</span>
+<span id="cb5-34"><a href="#cb5-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-35"><a href="#cb5-35" aria-hidden="true" tabindex="-1"></a><span class="co"># evaluation logic based on classification accuracy</span></span>
+<span id="cb5-36"><a href="#cb5-36" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> evaluate(loader):</span>
+<span id="cb5-37"><a href="#cb5-37" aria-hidden="true" tabindex="-1"></a>    model.<span class="bu">eval</span>()</span>
+<span id="cb5-38"><a href="#cb5-38" aria-hidden="true" tabindex="-1"></a>    all_pred<span class="op">=</span>[]</span>
+<span id="cb5-39"><a href="#cb5-39" aria-hidden="true" tabindex="-1"></a>    all_label <span class="op">=</span> []</span>
+<span id="cb5-40"><a href="#cb5-40" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> torch.no_grad(): <span class="co"># impacts the autograd engine and deactivate it. reduces memory usage and speeds up computation</span></span>
+<span id="cb5-41"><a href="#cb5-41" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> batch <span class="kw">in</span> loader:</span>
+<span id="cb5-42"><a href="#cb5-42" aria-hidden="true" tabindex="-1"></a>             <span class="co"># load the current batch</span></span>
+<span id="cb5-43"><a href="#cb5-43" aria-hidden="true" tabindex="-1"></a>            batch_input <span class="op">=</span> batch.review</span>
+<span id="cb5-44"><a href="#cb5-44" aria-hidden="true" tabindex="-1"></a>            batch_output <span class="op">=</span> batch.label</span>
+<span id="cb5-45"><a href="#cb5-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-46"><a href="#cb5-46" aria-hidden="true" tabindex="-1"></a>            batch_input <span class="op">=</span> batch_input.to(device)</span>
+<span id="cb5-47"><a href="#cb5-47" aria-hidden="true" tabindex="-1"></a>            <span class="co"># forward propagation</span></span>
+<span id="cb5-48"><a href="#cb5-48" aria-hidden="true" tabindex="-1"></a>            <span class="co"># pass the data through the model</span></span>
+<span id="cb5-49"><a href="#cb5-49" aria-hidden="true" tabindex="-1"></a>            model_outputs <span class="op">=</span> model(batch_input)</span>
+<span id="cb5-50"><a href="#cb5-50" aria-hidden="true" tabindex="-1"></a>            <span class="co"># identify the predicted class for each example in the batch</span></span>
+<span id="cb5-51"><a href="#cb5-51" aria-hidden="true" tabindex="-1"></a>            probabilities, predicted <span class="op">=</span> torch.<span class="bu">max</span>(model_outputs.cpu().data, <span class="dv">1</span>)</span>
+<span id="cb5-52"><a href="#cb5-52" aria-hidden="true" tabindex="-1"></a>            <span class="co"># put all the true labels and predictions to two lists</span></span>
+<span id="cb5-53"><a href="#cb5-53" aria-hidden="true" tabindex="-1"></a>            all_pred.extend(predicted)</span>
+<span id="cb5-54"><a href="#cb5-54" aria-hidden="true" tabindex="-1"></a>            all_label.extend(batch_output.cpu())</span>
+<span id="cb5-55"><a href="#cb5-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-56"><a href="#cb5-56" aria-hidden="true" tabindex="-1"></a>    accuracy <span class="op">=</span> accuracy_score(all_label, all_pred)</span>
+<span id="cb5-57"><a href="#cb5-57" aria-hidden="true" tabindex="-1"></a>    f1score <span class="op">=</span> f1_score(all_label, all_pred, average<span class="op">=</span><span class="st">'macro'</span>)</span>
+<span id="cb5-58"><a href="#cb5-58" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> accuracy,f1score</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="cell-4" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># funtion for save prediction</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> out_prediction(first_name, last_name, prediction_list):</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co">    out_prediction takes three input varibles: first_name, last_name, prediction_list</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co">    &lt;first_name&gt;, string, your first name, e.g., Tom</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co">    &lt;last_name&gt;, string, your last name, e.g., Smith</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co">    &lt;prediction_list&gt;, list of string which includes all your predications of </span><span class="al">TEST</span><span class="co"> samples</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="co">                        e.g., ['1star','5star','3star']</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="co">    Generate a file is named with &lt;yourfirstname&gt;_&lt;yourlastname&gt;_PRED.txt in current directory</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>    output_file <span class="op">=</span> <span class="bu">open</span>(<span class="st">"</span><span class="sc">{}</span><span class="st">_</span><span class="sc">{}</span><span class="st">_PRED.txt"</span>.<span class="bu">format</span>(first_name,last_name),<span class="st">'w'</span>)</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> item <span class="kw">in</span> prediction_list:</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>        output_file.write(item<span class="op">+</span><span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>    output_file.close()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="please-write-code-to-develop-you-system.-more-details-are-in-lab4.ipynb." class="level1">
+<h1>Please write code to develop you system. More details are in <code>Lab4.ipynb</code>.</h1>
+<div id="cell-6" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:0}}" data-outputid="a01e5e49-6c90-4858-c82f-0ecc98367bfb" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Data download to colab working directory</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>url <span class="op">=</span> <span class="ss">f'https://drive.google.com/drive/folders/1zF5s4KRMxpr3OvUY8o_d0xv_YlaZSCsj?usp=drive_link'</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>gdown.download_folder(url, quiet <span class="op">=</span> <span class="va">False</span>, use_cookies <span class="op">=</span> <span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Retrieving folder contents</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Retrieving folder 1miNtgEGuJ6F-2cGJ5crifLQUbWnb-wJl yelp_review
+Retrieving folder 10gkkUq4rNU1HWSUr6GOQ0iwprA5gaV6e .ipynb_checkpoints
+Processing file 1FrYOgXiu-pVX_TQ57pSUtpwHeu1R4J0k EXAMPLE_GOLD-checkpoint.txt
+Processing file 1oCDq8R-xBdwcJBr_2KLpzg6WVgQN_Re9 EXAMPLE_PRED_result-checkpoint.txt
+Processing file 1MpSkPKP6T043NDhpS4zxi4JNgnzB_-Zg EXAMPLE_GOLD.txt
+Processing file 1ztc0m5FuX1CaTm72iVIZpP_eRxQpl0Wt EXAMPLE_PRED_result.txt
+Processing file 1jjiGoOLJLlucSlJtb_EJ0Vo2xIUaMN2r Scorer.py
+Processing file 1crLuR8fhJ89RKEVut-UjgIyOz6-y5eh4 test.tsv
+Processing file 10qVnIg3rvEXlcEA9hynHTKoYDURLQN4v train.tsv
+Processing file 1zozCGPs0XiJAPl1Il5cSWl9p0Aqv8YgO val.tsv
+Processing file 1Vr4eJVM9kIK38ZONzamuIrQKf_gi3pw- .Rhistory
+Processing file 19QypIq9BjPB_WhGIsT8Zrr658VV6uQHC readme.md</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Retrieving folder contents completed
+Building directory structure
+Building directory structure completed
+Downloading...
+From: https://drive.google.com/uc?id=1FrYOgXiu-pVX_TQ57pSUtpwHeu1R4J0k
+To: /content/data/yelp_review/.ipynb_checkpoints/EXAMPLE_GOLD-checkpoint.txt
+100%|██████████| 21.0k/21.0k [00:00&lt;00:00, 29.8MB/s]
+Downloading...
+From: https://drive.google.com/uc?id=1oCDq8R-xBdwcJBr_2KLpzg6WVgQN_Re9
+To: /content/data/yelp_review/.ipynb_checkpoints/EXAMPLE_PRED_result-checkpoint.txt
+100%|██████████| 149/149 [00:00&lt;00:00, 531kB/s]
+Downloading...
+From: https://drive.google.com/uc?id=1MpSkPKP6T043NDhpS4zxi4JNgnzB_-Zg
+To: /content/data/yelp_review/EXAMPLE_GOLD.txt
+100%|██████████| 21.0k/21.0k [00:00&lt;00:00, 41.5MB/s]
+Downloading...
+From: https://drive.google.com/uc?id=1ztc0m5FuX1CaTm72iVIZpP_eRxQpl0Wt
+To: /content/data/yelp_review/EXAMPLE_PRED_result.txt
+100%|██████████| 149/149 [00:00&lt;00:00, 638kB/s]
+Downloading...
+From (original): https://drive.google.com/uc?id=1jjiGoOLJLlucSlJtb_EJ0Vo2xIUaMN2r
+From (redirected): https://drive.google.com/uc?id=1jjiGoOLJLlucSlJtb_EJ0Vo2xIUaMN2r&amp;confirm=t&amp;uuid=d1b9cde2-621d-49fa-b05b-920687536023
+To: /content/data/yelp_review/Scorer.py
+100%|██████████| 3.35k/3.35k [00:00&lt;00:00, 10.2MB/s]
+Downloading...
+From: https://drive.google.com/uc?id=1crLuR8fhJ89RKEVut-UjgIyOz6-y5eh4
+To: /content/data/yelp_review/test.tsv
+100%|██████████| 2.63M/2.63M [00:00&lt;00:00, 13.1MB/s]
+Downloading...
+From: https://drive.google.com/uc?id=10qVnIg3rvEXlcEA9hynHTKoYDURLQN4v
+To: /content/data/yelp_review/train.tsv
+100%|██████████| 21.3M/21.3M [00:00&lt;00:00, 68.6MB/s]
+Downloading...
+From: https://drive.google.com/uc?id=1zozCGPs0XiJAPl1Il5cSWl9p0Aqv8YgO
+To: /content/data/yelp_review/val.tsv
+100%|██████████| 2.67M/2.67M [00:00&lt;00:00, 20.1MB/s]
+Downloading...
+From: https://drive.google.com/uc?id=1Vr4eJVM9kIK38ZONzamuIrQKf_gi3pw-
+To: /content/data/.Rhistory
+0.00B [00:00, ?B/s]
+Downloading...
+From: https://drive.google.com/uc?id=19QypIq9BjPB_WhGIsT8Zrr658VV6uQHC
+To: /content/data/readme.md
+100%|██████████| 98.0/98.0 [00:00&lt;00:00, 418kB/s]
+Download completed</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="5">
+<pre><code>['/content/data/yelp_review/.ipynb_checkpoints/EXAMPLE_GOLD-checkpoint.txt',
+ '/content/data/yelp_review/.ipynb_checkpoints/EXAMPLE_PRED_result-checkpoint.txt',
+ '/content/data/yelp_review/EXAMPLE_GOLD.txt',
+ '/content/data/yelp_review/EXAMPLE_PRED_result.txt',
+ '/content/data/yelp_review/Scorer.py',
+ '/content/data/yelp_review/test.tsv',
+ '/content/data/yelp_review/train.tsv',
+ '/content/data/yelp_review/val.tsv',
+ '/content/data/.Rhistory',
+ '/content/data/readme.md']</code></pre>
+</div>
+</div>
+<div id="cell-7" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:206}}" data-outputid="741eb492-b394-4bb2-9ac8-000e14afe8ab" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co">### Import for EDA</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>train_set <span class="op">=</span> pd.read_csv(<span class="st">'data/yelp_review/train.tsv'</span>, sep <span class="op">=</span> <span class="st">'</span><span class="ch">\t</span><span class="st">'</span>)</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>dev_set <span class="op">=</span> pd.read_csv(<span class="st">'data/yelp_review/val.tsv'</span>, sep <span class="op">=</span> <span class="st">'</span><span class="ch">\t</span><span class="st">'</span>)</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>test_set <span class="op">=</span> pd.read_csv(<span class="st">'data/yelp_review/test.tsv'</span>, sep <span class="op">=</span> <span class="st">'</span><span class="ch">\t</span><span class="st">'</span>)</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>train_set.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="6">
+<div id="df-ce362c25-36a6-404d-b7f3-c20428b22347" class="colab-df-container">
+    <div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">content</th>
+<th data-quarto-table-cell-role="th">rating</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>There are some restaurants that you don't want...</td>
+<td>4star</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>Lucky for us there was no wait unlike other ti...</td>
+<td>4star</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>Worst ever Michelin restaurant I have ever bee...</td>
+<td>1star</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>Came here today to celebrate my birthdays with...</td>
+<td>4star</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>This, is where hipsters go to get Caribbean fo...</td>
+<td>2star</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+    <div class="colab-df-buttons">
+
+  <div class="colab-df-container">
+    <button class="colab-df-convert" onclick="convertToInteractive('df-ce362c25-36a6-404d-b7f3-c20428b22347')" title="Convert this dataframe to an interactive table." style="display:none;">
+
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewbox="0 -960 960 960">
+    <path d="M120-120v-720h720v720H120Zm60-500h600v-160H180v160Zm220 220h160v-160H400v160Zm0 220h160v-160H400v160ZM180-400h160v-160H180v160Zm440 0h160v-160H620v160ZM180-180h160v-160H180v160Zm440 0h160v-160H620v160Z"></path>
+  </svg>
+    </button>
+
+  <style>
+    .colab-df-container {
+      display:flex;
+      gap: 12px;
+    }
+
+    .colab-df-convert {
+      background-color: #E8F0FE;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+      fill: #1967D2;
+      height: 32px;
+      padding: 0 0 0 0;
+      width: 32px;
+    }
+
+    .colab-df-convert:hover {
+      background-color: #E2EBFA;
+      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+      fill: #174EA6;
+    }
+
+    .colab-df-buttons div {
+      margin-bottom: 4px;
+    }
+
+    [theme=dark] .colab-df-convert {
+      background-color: #3B4455;
+      fill: #D2E3FC;
+    }
+
+    [theme=dark] .colab-df-convert:hover {
+      background-color: #434B5C;
+      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+      fill: #FFFFFF;
+    }
+  </style>
+
+    <script>
+      const buttonEl =
+        document.querySelector('#df-ce362c25-36a6-404d-b7f3-c20428b22347 button.colab-df-convert');
+      buttonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+      async function convertToInteractive(key) {
+        const element = document.querySelector('#df-ce362c25-36a6-404d-b7f3-c20428b22347');
+        const dataTable =
+          await google.colab.kernel.invokeFunction('convertToInteractive',
+                                                    [key], {});
+        if (!dataTable) return;
+
+        const docLinkHtml = 'Like what you see? Visit the ' +
+          '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
+          + ' to learn more about interactive tables.';
+        element.innerHTML = '';
+        dataTable['output_type'] = 'display_data';
+        await google.colab.output.renderOutput(dataTable, element);
+        const docLink = document.createElement('div');
+        docLink.innerHTML = docLinkHtml;
+        element.appendChild(docLink);
+      }
+    </script>
+  </div>
+
+
+    </div>
+  </div>
+</div>
+</div>
+</section>
+<section id="eda" class="level1">
+<h1>EDA</h1>
+<div id="cell-9" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:421}}" data-outputid="50c876cd-b7a1-4797-ef62-6ad940a3cd35" data-execution_count="31">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co">### EDA training set</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> copy</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>train_eda <span class="op">=</span> train_set.copy()</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>train_eda[<span class="st">'review_length'</span>] <span class="op">=</span> train_set[<span class="st">'content'</span>].<span class="bu">apply</span>(<span class="kw">lambda</span> x: <span class="bu">len</span>(<span class="bu">str</span>(x).split()))</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Rating Plot</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>ratings <span class="op">=</span> alt.Chart(train_eda).mark_bar().encode(</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> alt.X(<span class="st">'rating'</span>).sort([<span class="st">'1star'</span>, <span class="st">'2star'</span>, <span class="st">'3star'</span>, <span class="st">'4star'</span>, <span class="st">'5star'</span>]).title(<span class="st">'Rating'</span>),</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>    y <span class="op">=</span> alt.Y(<span class="st">'count()'</span>).title(<span class="st">'Number of Reviews'</span>),</span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>    color <span class="op">=</span> alt.Color(<span class="st">'rating'</span>).legend(<span class="va">None</span>),</span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>    tooltip <span class="op">=</span> [<span class="st">'rating'</span>, <span class="st">'count()'</span>]</span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>).properties(</span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>    title <span class="op">=</span> <span class="st">'Distribution of Ratings'</span>,</span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>    width <span class="op">=</span> <span class="dv">300</span>,</span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>    height <span class="op">=</span> <span class="dv">300</span></span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Length Plot</span></span>
+<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a>length <span class="op">=</span> alt.Chart(train_eda).mark_bar().encode(</span>
+<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span>alt.X(<span class="st">'review_length'</span>, <span class="bu">bin</span><span class="op">=</span>alt.Bin(maxbins<span class="op">=</span><span class="dv">60</span>), title<span class="op">=</span><span class="st">'Word Count per Review'</span>),</span>
+<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a>    y<span class="op">=</span>alt.Y(<span class="st">'count()'</span>, title<span class="op">=</span><span class="st">'Frequency'</span>),</span>
+<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a>    color <span class="op">=</span> alt.Color(<span class="st">'rating'</span>).legend(<span class="va">None</span>),</span>
+<span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a>    tooltip<span class="op">=</span>[<span class="st">'count()'</span>]</span>
+<span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a>).properties(</span>
+<span id="cb13-26"><a href="#cb13-26" aria-hidden="true" tabindex="-1"></a>    title<span class="op">=</span><span class="st">'Distribution of Review Lengths'</span>,</span>
+<span id="cb13-27"><a href="#cb13-27" aria-hidden="true" tabindex="-1"></a>    width<span class="op">=</span><span class="dv">400</span>,</span>
+<span id="cb13-28"><a href="#cb13-28" aria-hidden="true" tabindex="-1"></a>    height<span class="op">=</span><span class="dv">300</span></span>
+<span id="cb13-29"><a href="#cb13-29" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb13-30"><a href="#cb13-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-31"><a href="#cb13-31" aria-hidden="true" tabindex="-1"></a>final_chart <span class="op">=</span> ratings <span class="op">|</span> length</span>
+<span id="cb13-32"><a href="#cb13-32" aria-hidden="true" tabindex="-1"></a>final_chart</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="31">
+
+<style>
+  #altair-viz-9bdd20ab8e9c486e9cbffcfb73e23442.vega-embed {
+    width: 100%;
+    display: flex;
+  }
+
+  #altair-viz-9bdd20ab8e9c486e9cbffcfb73e23442.vega-embed details,
+  #altair-viz-9bdd20ab8e9c486e9cbffcfb73e23442.vega-embed details summary {
+    position: relative;
+  }
+</style>
+<div id="altair-viz-9bdd20ab8e9c486e9cbffcfb73e23442"></div>
+<script type="text/javascript">
+  var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
+  (function(spec, embedOpt){
+    let outputDiv = document.currentScript.previousElementSibling;
+    if (outputDiv.id !== "altair-viz-9bdd20ab8e9c486e9cbffcfb73e23442") {
+      outputDiv = document.getElementById("altair-viz-9bdd20ab8e9c486e9cbffcfb73e23442");
+    }
+
+    const paths = {
+      "vega": "https://cdn.jsdelivr.net/npm/vega@5?noext",
+      "vega-lib": "https://cdn.jsdelivr.net/npm/vega-lib?noext",
+      "vega-lite": "https://cdn.jsdelivr.net/npm/vega-lite@5.20.1?noext",
+      "vega-embed": "https://cdn.jsdelivr.net/npm/vega-embed@6?noext",
+    };
+
+    function maybeLoadScript(lib, version) {
+      var key = `${lib.replace("-", "")}_version`;
+      return (VEGA_DEBUG[key] == version) ?
+        Promise.resolve(paths[lib]) :
+        new Promise(function(resolve, reject) {
+          var s = document.createElement('script');
+          document.getElementsByTagName("head")[0].appendChild(s);
+          s.async = true;
+          s.onload = () => {
+            VEGA_DEBUG[key] = version;
+            return resolve(paths[lib]);
+          };
+          s.onerror = () => reject(`Error loading script: ${paths[lib]}`);
+          s.src = paths[lib];
+        });
+    }
+
+    function showError(err) {
+      outputDiv.innerHTML = `<div class="error" style="color:red;">${err}</div>`;
+      throw err;
+    }
+
+    function displayChart(vegaEmbed) {
+      vegaEmbed(outputDiv, spec, embedOpt)
+        .catch(err => showError(`Javascript Error: ${err.message}<br>This usually means there's a typo in your chart specification. See the javascript console for the full traceback.`));
+    }
+
+    if(typeof define === "function" && define.amd) {
+      requirejs.config({paths});
+      let deps = ["vega-embed"];
+      require(deps, displayChart, err => showError(`Error loading script: ${err.message}`));
+    } else {
+      maybeLoadScript("vega", "5")
+        .then(() => maybeLoadScript("vega-lite", "5.20.1"))
+        .then(() => maybeLoadScript("vega-embed", "6"))
+        .catch(showError)
+        .then(() => displayChart(vegaEmbed));
+    }
+  })({"$schema": "https://vega.github.io/schema/vega/v5.json", "data": [{"name": "source_0"}, {"name": "data_0"}, {"name": "data_1", "values": [{"__count": 5531, "rating": "4star"}, {"__count": 5619, "rating": "1star"}, {"__count": 5616, "rating": "2star"}, {"__count": 5651, "rating": "5star"}, {"__count": 5583, "rating": "3star"}]}, {"name": "data_2", "values": [{"__count": 400, "__count_end": 702.0, "__count_start": 302.0, "bin_maxbins_60_review_length": 140.0, "bin_maxbins_60_review_length_end": 160.0, "rating": "4star"}, {"__count": 602, "__count_end": 1276.0, "__count_start": 674.0, "bin_maxbins_60_review_length": 60.0, "bin_maxbins_60_review_length_end": 80.0, "rating": "4star"}, {"__count": 674, "__count_end": 2999.0, "__count_start": 2325.0, "bin_maxbins_60_review_length": 20.0, "bin_maxbins_60_review_length_end": 40.0, "rating": "1star"}, {"__count": 211, "__count_end": 352.0, "__count_start": 141.0, "bin_maxbins_60_review_length": 220.0, "bin_maxbins_60_review_length_end": 240.0, "rating": "4star"}, {"__count": 228, "__count_end": 819.0, "__count_start": 591.0, "bin_maxbins_60_review_length": 200.0, "bin_maxbins_60_review_length_end": 220.0, "rating": "2star"}, {"__count": 465, "__count_end": 465.0, "__count_start": 0.0, "bin_maxbins_60_review_length": 100.0, "bin_maxbins_60_review_length_end": 120.0, "rating": "5star"}, {"__count": 261, "__count_end": 1471.0, "__count_start": 1210.0, "bin_maxbins_60_review_length": 160.0, "bin_maxbins_60_review_length_end": 180.0, "rating": "1star"}, {"__count": 610, "__count_end": 1697.0, "__count_start": 1087.0, "bin_maxbins_60_review_length": 80.0, "bin_maxbins_60_review_length_end": 100.0, "rating": "3star"}, {"__count": 396, "__count_end": 2112.0, "__count_start": 1716.0, "bin_maxbins_60_review_length": 120.0, "bin_maxbins_60_review_length_end": 140.0, "rating": "1star"}, {"__count": 457, "__count_end": 1881.0, "__count_start": 1424.0, "bin_maxbins_60_review_length": 20.0, "bin_maxbins_60_review_length_end": 40.0, "rating": "3star"}, {"__count": 433, "__count_end": 1716.0, "__count_start": 1283.0, "bin_maxbins_60_review_length": 120.0, "bin_maxbins_60_review_length_end": 140.0, "rating": "2star"}, {"__count": 395, "__count_end": 1489.0, "__count_start": 1094.0, "bin_maxbins_60_review_length": 140.0, "bin_maxbins_60_review_length_end": 160.0, "rating": "2star"}, {"__count": 240, "__count_end": 240.0, "__count_start": 0.0, "bin_maxbins_60_review_length": 0.0, "bin_maxbins_60_review_length_end": 20.0, "rating": "5star"}, {"__count": 34, "__count_end": 62.0, "__count_start": 28.0, "bin_maxbins_60_review_length": 400.0, "bin_maxbins_60_review_length_end": 420.0, "rating": "4star"}, {"__count": 302, "__count_end": 302.0, "__count_start": 0.0, "bin_maxbins_60_review_length": 140.0, "bin_maxbins_60_review_length_end": 160.0, "rating": "5star"}, {"__count": 153, "__count_end": 541.0, "__count_start": 388.0, "bin_maxbins_60_review_length": 240.0, "bin_maxbins_60_review_length_end": 260.0, "rating": "2star"}, {"__count": 821, "__count_end": 821.0, "__count_start": 0.0, "bin_maxbins_60_review_length": 40.0, "bin_maxbins_60_review_length_end": 60.0, "rating": "5star"}, {"__count": 869, "__count_end": 869.0, "__count_start": 0.0, "bin_maxbins_60_review_length": 20.0, "bin_maxbins_60_review_length_end": 40.0, "rating": "5star"}, {"__count": 7, "__count_end": 9.0, "__count_start": 2.0, "bin_maxbins_60_review_length": 580.0, "bin_maxbins_60_review_length_end": 600.0, "rating": "4star"}, {"__count": 25, "__count_end": 55.0, "__count_start": 30.0, "bin_maxbins_60_review_length": 500.0, "bin_maxbins_60_review_length_end": 520.0, "rating": "2star"}, {"__count": 592, "__count_end": 3126.0, "__count_start": 2534.0, "bin_maxbins_60_review_length": 60.0, "bin_maxbins_60_review_length_end": 80.0, "rating": "1star"}, {"__count": 340, "__count_end": 931.0, "__count_start": 591.0, "bin_maxbins_60_review_length": 160.0, "bin_maxbins_60_review_length_end": 180.0, "rating": "3star"}, {"__count": 543, "__count_end": 543.0, "__count_start": 0.0, "bin_maxbins_60_review_length": 80.0, "bin_maxbins_60_review_length_end": 100.0, "rating": "5star"}, {"__count": 518, "__count_end": 1462.0, "__count_start": 944.0, "bin_maxbins_60_review_length": 100.0, "bin_maxbins_60_review_length_end": 120.0, "rating": "3star"}, {"__count": 552, "__count_end": 1988.0, "__count_start": 1436.0, "bin_maxbins_60_review_length": 40.0, "bin_maxbins_60_review_length_end": 60.0, "rating": "3star"}, {"__count": 90, "__count_end": 512.0, "__count_start": 422.0, "bin_maxbins_60_review_length": 0.0, "bin_maxbins_60_review_length_end": 20.0, "rating": "2star"}, {"__count": 182, "__count_end": 1001.0, "__count_start": 819.0, "bin_maxbins_60_review_length": 200.0, "bin_maxbins_60_review_length_end": 220.0, "rating": "1star"}, {"__count": 615, "__count_end": 1436.0, "__count_start": 821.0, "bin_maxbins_60_review_length": 40.0, "bin_maxbins_60_review_length_end": 60.0, "rating": "4star"}, {"__count": 381, "__count_end": 1870.0, "__count_start": 1489.0, "bin_maxbins_60_review_length": 140.0, "bin_maxbins_60_review_length_end": 160.0, "rating": "1star"}, {"__count": 535, "__count_end": 2823.0, "__count_start": 2288.0, "bin_maxbins_60_review_length": 80.0, "bin_maxbins_60_review_length_end": 100.0, "rating": "1star"}, {"__count": 111, "__count_end": 192.0, "__count_start": 81.0, "bin_maxbins_60_review_length": 260.0, "bin_maxbins_60_review_length_end": 280.0, "rating": "4star"}, {"__count": 555, "__count_end": 1424.0, "__count_start": 869.0, "bin_maxbins_60_review_length": 20.0, "bin_maxbins_60_review_length_end": 40.0, "rating": "4star"}, {"__count": 667, "__count_end": 2534.0, "__count_start": 1867.0, "bin_maxbins_60_review_length": 60.0, "bin_maxbins_60_review_length_end": 80.0, "rating": "2star"}, {"__count": 128, "__count_end": 320.0, "__count_start": 192.0, "bin_maxbins_60_review_length": 260.0, "bin_maxbins_60_review_length_end": 280.0, "rating": "3star"}, {"__count": 702, "__count_end": 3283.0, "__count_start": 2581.0, "bin_maxbins_60_review_length": 40.0, "bin_maxbins_60_review_length_end": 60.0, "rating": "1star"}, {"__count": 47, "__count_end": 47.0, "__count_start": 0.0, "bin_maxbins_60_review_length": 340.0, "bin_maxbins_60_review_length_end": 360.0, "rating": "5star"}, {"__count": 591, "__count_end": 2288.0, "__count_start": 1697.0, "bin_maxbins_60_review_length": 80.0, "bin_maxbins_60_review_length_end": 100.0, "rating": "2star"}, {"__count": 21, "__count_end": 91.0, "__count_start": 70.0, "bin_maxbins_60_review_length": 460.0, "bin_maxbins_60_review_length_end": 480.0, "rating": "1star"}, {"__count": 593, "__count_end": 2581.0, "__count_start": 1988.0, "bin_maxbins_60_review_length": 40.0, "bin_maxbins_60_review_length_end": 60.0, "rating": "2star"}, {"__count": 591, "__count_end": 1867.0, "__count_start": 1276.0, "bin_maxbins_60_review_length": 60.0, "bin_maxbins_60_review_length_end": 80.0, "rating": "3star"}, {"__count": 497, "__count_end": 2498.0, "__count_start": 2001.0, "bin_maxbins_60_review_length": 100.0, "bin_maxbins_60_review_length_end": 120.0, "rating": "1star"}, {"__count": 66, "__count_end": 331.0, "__count_start": 265.0, "bin_maxbins_60_review_length": 320.0, "bin_maxbins_60_review_length_end": 340.0, "rating": "1star"}, {"__count": 478, "__count_end": 1283.0, "__count_start": 805.0, "bin_maxbins_60_review_length": 120.0, "bin_maxbins_60_review_length_end": 140.0, "rating": "3star"}, {"__count": 48, "__count_end": 204.0, "__count_start": 156.0, "bin_maxbins_60_review_length": 360.0, "bin_maxbins_60_review_length_end": 380.0, "rating": "1star"}, {"__count": 674, "__count_end": 674.0, "__count_start": 0.0, "bin_maxbins_60_review_length": 60.0, "bin_maxbins_60_review_length_end": 80.0, "rating": "5star"}, {"__count": 69, "__count_end": 157.0, "__count_start": 88.0, "bin_maxbins_60_review_length": 340.0, "bin_maxbins_60_review_length_end": 360.0, "rating": "3star"}, {"__count": 250, "__count_end": 456.0, "__count_start": 206.0, "bin_maxbins_60_review_length": 180.0, "bin_maxbins_60_review_length_end": 200.0, "rating": "4star"}, {"__count": 331, "__count_end": 591.0, "__count_start": 260.0, "bin_maxbins_60_review_length": 160.0, "bin_maxbins_60_review_length_end": 180.0, "rating": "4star"}, {"__count": 279, "__count_end": 1210.0, "__count_start": 931.0, "bin_maxbins_60_review_length": 160.0, "bin_maxbins_60_review_length_end": 180.0, "rating": "2star"}, {"__count": 2, "__count_end": 2.0, "__count_start": 0.0, "bin_maxbins_60_review_length": 660.0, "bin_maxbins_60_review_length_end": 680.0, "rating": "5star"}, {"__count": 224, "__count_end": 591.0, "__count_start": 367.0, "bin_maxbins_60_review_length": 200.0, "bin_maxbins_60_review_length_end": 220.0, "rating": "3star"}, {"__count": 133, "__count_end": 388.0, "__count_start": 255.0, "bin_maxbins_60_review_length": 240.0, "bin_maxbins_60_review_length_end": 260.0, "rating": "3star"}, {"__count": 253, "__count_end": 974.0, "__count_start": 721.0, "bin_maxbins_60_review_length": 180.0, "bin_maxbins_60_review_length_end": 200.0, "rating": "2star"}, {"__count": 430, "__count_end": 805.0, "__count_start": 375.0, "bin_maxbins_60_review_length": 120.0, "bin_maxbins_60_review_length_end": 140.0, "rating": "4star"}, {"__count": 539, "__count_end": 2001.0, "__count_start": 1462.0, "bin_maxbins_60_review_length": 100.0, "bin_maxbins_60_review_length_end": 120.0, "rating": "2star"}, {"__count": 479, "__count_end": 944.0, "__count_start": 465.0, "bin_maxbins_60_review_length": 100.0, "bin_maxbins_60_review_length_end": 120.0, "rating": "4star"}, {"__count": 140, "__count_end": 890.0, "__count_start": 750.0, "bin_maxbins_60_review_length": 220.0, "bin_maxbins_60_review_length_end": 240.0, "rating": "1star"}, {"__count": 99, "__count_end": 99.0, "__count_start": 0.0, "bin_maxbins_60_review_length": 240.0, "bin_maxbins_60_review_length_end": 260.0, "rating": "5star"}, {"__count": 54, "__count_end": 211.0, "__count_start": 157.0, "bin_maxbins_60_review_length": 340.0, "bin_maxbins_60_review_length_end": 360.0, "rating": "2star"}, {"__count": 544, "__count_end": 1087.0, "__count_start": 543.0, "bin_maxbins_60_review_length": 80.0, "bin_maxbins_60_review_length_end": 100.0, "rating": "4star"}, {"__count": 392, "__count_end": 1094.0, "__count_start": 702.0, "bin_maxbins_60_review_length": 140.0, "bin_maxbins_60_review_length_end": 160.0, "rating": "3star"}, {"__count": 17, "__count_end": 41.0, "__count_start": 24.0, "bin_maxbins_60_review_length": 440.0, "bin_maxbins_60_review_length_end": 460.0, "rating": "3star"}, {"__count": 265, "__count_end": 721.0, "__count_start": 456.0, "bin_maxbins_60_review_length": 180.0, "bin_maxbins_60_review_length_end": 200.0, "rating": "3star"}, {"__count": 444, "__count_end": 2325.0, "__count_start": 1881.0, "bin_maxbins_60_review_length": 20.0, "bin_maxbins_60_review_length_end": 40.0, "rating": "2star"}, {"__count": 31, "__count_end": 119.0, "__count_start": 88.0, "bin_maxbins_60_review_length": 420.0, "bin_maxbins_60_review_length_end": 440.0, "rating": "1star"}, {"__count": 18, "__count_end": 58.0, "__count_start": 40.0, "bin_maxbins_60_review_length": 480.0, "bin_maxbins_60_review_length_end": 500.0, "rating": "2star"}, {"__count": 375, "__count_end": 375.0, "__count_start": 0.0, "bin_maxbins_60_review_length": 120.0, "bin_maxbins_60_review_length_end": 140.0, "rating": "5star"}, {"__count": 216, "__count_end": 367.0, "__count_start": 151.0, "bin_maxbins_60_review_length": 200.0, "bin_maxbins_60_review_length_end": 220.0, "rating": "4star"}, {"__count": 260, "__count_end": 260.0, "__count_start": 0.0, "bin_maxbins_60_review_length": 160.0, "bin_maxbins_60_review_length_end": 180.0, "rating": "5star"}, {"__count": 206, "__count_end": 206.0, "__count_start": 0.0, "bin_maxbins_60_review_length": 180.0, "bin_maxbins_60_review_length_end": 200.0, "rating": "5star"}, {"__count": 220, "__count_end": 1194.0, "__count_start": 974.0, "bin_maxbins_60_review_length": 180.0, "bin_maxbins_60_review_length_end": 200.0, "rating": "1star"}, {"__count": 214, "__count_end": 566.0, "__count_start": 352.0, "bin_maxbins_60_review_length": 220.0, "bin_maxbins_60_review_length_end": 240.0, "rating": "3star"}, {"__count": 12, "__count_end": 12.0, "__count_start": 0.0, "bin_maxbins_60_review_length": 420.0, "bin_maxbins_60_review_length_end": 440.0, "rating": "5star"}, {"__count": 41, "__count_end": 88.0, "__count_start": 47.0, "bin_maxbins_60_review_length": 340.0, "bin_maxbins_60_review_length_end": 360.0, "rating": "4star"}, {"__count": 184, "__count_end": 750.0, "__count_start": 566.0, "bin_maxbins_60_review_length": 220.0, "bin_maxbins_60_review_length_end": 240.0, "rating": "2star"}, {"__count": 141, "__count_end": 141.0, "__count_start": 0.0, "bin_maxbins_60_review_length": 220.0, "bin_maxbins_60_review_length_end": 240.0, "rating": "5star"}, {"__count": 75, "__count_end": 320.0, "__count_start": 245.0, "bin_maxbins_60_review_length": 300.0, "bin_maxbins_60_review_length_end": 320.0, "rating": "2star"}, {"__count": 93, "__count_end": 489.0, "__count_start": 396.0, "bin_maxbins_60_review_length": 280.0, "bin_maxbins_60_review_length_end": 300.0, "rating": "1star"}, {"__count": 34, "__count_end": 88.0, "__count_start": 54.0, "bin_maxbins_60_review_length": 420.0, "bin_maxbins_60_review_length_end": 440.0, "rating": "2star"}, {"__count": 156, "__count_end": 255.0, "__count_start": 99.0, "bin_maxbins_60_review_length": 240.0, "bin_maxbins_60_review_length_end": 260.0, "rating": "4star"}, {"__count": 39, "__count_end": 175.0, "__count_start": 136.0, "bin_maxbins_60_review_length": 380.0, "bin_maxbins_60_review_length_end": 400.0, "rating": "1star"}, {"__count": 85, "__count_end": 265.0, "__count_start": 180.0, "bin_maxbins_60_review_length": 320.0, "bin_maxbins_60_review_length_end": 340.0, "rating": "2star"}, {"__count": 46, "__count_end": 156.0, "__count_start": 110.0, "bin_maxbins_60_review_length": 360.0, "bin_maxbins_60_review_length_end": 380.0, "rating": "2star"}, {"__count": 3, "__count_end": 8.0, "__count_start": 5.0, "bin_maxbins_60_review_length": 680.0, "bin_maxbins_60_review_length_end": 700.0, "rating": "3star"}, {"__count": 12, "__count_end": 24.0, "__count_start": 12.0, "bin_maxbins_60_review_length": 520.0, "bin_maxbins_60_review_length_end": 540.0, "rating": "3star"}, {"__count": 94, "__count_end": 396.0, "__count_start": 302.0, "bin_maxbins_60_review_length": 280.0, "bin_maxbins_60_review_length_end": 300.0, "rating": "2star"}, {"__count": 16, "__count_end": 28.0, "__count_start": 12.0, "bin_maxbins_60_review_length": 420.0, "bin_maxbins_60_review_length_end": 440.0, "rating": "4star"}, {"__count": 148, "__count_end": 660.0, "__count_start": 512.0, "bin_maxbins_60_review_length": 0.0, "bin_maxbins_60_review_length_end": 20.0, "rating": "1star"}, {"__count": 97, "__count_end": 245.0, "__count_start": 148.0, "bin_maxbins_60_review_length": 300.0, "bin_maxbins_60_review_length_end": 320.0, "rating": "3star"}, {"__count": 38, "__count_end": 63.0, "__count_start": 25.0, "bin_maxbins_60_review_length": 360.0, "bin_maxbins_60_review_length_end": 380.0, "rating": "4star"}, {"__count": 73, "__count_end": 393.0, "__count_start": 320.0, "bin_maxbins_60_review_length": 300.0, "bin_maxbins_60_review_length_end": 320.0, "rating": "1star"}, {"__count": 7, "__count_end": 14.0, "__count_start": 7.0, "bin_maxbins_60_review_length": 720.0, "bin_maxbins_60_review_length_end": 740.0, "rating": "1star"}, {"__count": 78, "__count_end": 78.0, "__count_start": 0.0, "bin_maxbins_60_review_length": 280.0, "bin_maxbins_60_review_length_end": 300.0, "rating": "5star"}, {"__count": 12, "__count_end": 36.0, "__count_start": 24.0, "bin_maxbins_60_review_length": 540.0, "bin_maxbins_60_review_length_end": 560.0, "rating": "1star"}, {"__count": 69, "__count_end": 116.0, "__count_start": 47.0, "bin_maxbins_60_review_length": 320.0, "bin_maxbins_60_review_length_end": 340.0, "rating": "4star"}, {"__count": 79, "__count_end": 148.0, "__count_start": 69.0, "bin_maxbins_60_review_length": 300.0, "bin_maxbins_60_review_length_end": 320.0, "rating": "4star"}, {"__count": 6, "__count_end": 12.0, "__count_start": 6.0, "bin_maxbins_60_review_length": 520.0, "bin_maxbins_60_review_length_end": 540.0, "rating": "4star"}, {"__count": 64, "__count_end": 180.0, "__count_start": 116.0, "bin_maxbins_60_review_length": 320.0, "bin_maxbins_60_review_length_end": 340.0, "rating": "3star"}, {"__count": 57, "__count_end": 268.0, "__count_start": 211.0, "bin_maxbins_60_review_length": 340.0, "bin_maxbins_60_review_length_end": 360.0, "rating": "1star"}, {"__count": 151, "__count_end": 151.0, "__count_start": 0.0, "bin_maxbins_60_review_length": 200.0, "bin_maxbins_60_review_length_end": 220.0, "rating": "5star"}, {"__count": 105, "__count_end": 302.0, "__count_start": 197.0, "bin_maxbins_60_review_length": 280.0, "bin_maxbins_60_review_length_end": 300.0, "rating": "3star"}, {"__count": 23, "__count_end": 54.0, "__count_start": 31.0, "bin_maxbins_60_review_length": 460.0, "bin_maxbins_60_review_length_end": 480.0, "rating": "3star"}, {"__count": 16, "__count_end": 30.0, "__count_start": 14.0, "bin_maxbins_60_review_length": 500.0, "bin_maxbins_60_review_length_end": 520.0, "rating": "3star"}, {"__count": 16, "__count_end": 70.0, "__count_start": 54.0, "bin_maxbins_60_review_length": 460.0, "bin_maxbins_60_review_length_end": 480.0, "rating": "2star"}, {"__count": 119, "__count_end": 197.0, "__count_start": 78.0, "bin_maxbins_60_review_length": 280.0, "bin_maxbins_60_review_length_end": 300.0, "rating": "4star"}, {"__count": 11, "__count_end": 20.0, "__count_start": 9.0, "bin_maxbins_60_review_length": 600.0, "bin_maxbins_60_review_length_end": 620.0, "rating": "2star"}, {"__count": 126, "__count_end": 667.0, "__count_start": 541.0, "bin_maxbins_60_review_length": 240.0, "bin_maxbins_60_review_length_end": 260.0, "rating": "1star"}, {"__count": 14, "__count_end": 14.0, "__count_start": 0.0, "bin_maxbins_60_review_length": 460.0, "bin_maxbins_60_review_length_end": 480.0, "rating": "5star"}, {"__count": 19, "__count_end": 49.0, "__count_start": 30.0, "bin_maxbins_60_review_length": 560.0, "bin_maxbins_60_review_length_end": 580.0, "rating": "1star"}, {"__count": 28, "__count_end": 28.0, "__count_start": 0.0, "bin_maxbins_60_review_length": 400.0, "bin_maxbins_60_review_length_end": 420.0, "rating": "5star"}, {"__count": 81, "__count_end": 81.0, "__count_start": 0.0, "bin_maxbins_60_review_length": 260.0, "bin_maxbins_60_review_length_end": 280.0, "rating": "5star"}, {"__count": 94, "__count_end": 334.0, "__count_start": 240.0, "bin_maxbins_60_review_length": 0.0, "bin_maxbins_60_review_length_end": 20.0, "rating": "4star"}, {"__count": 47, "__count_end": 110.0, "__count_start": 63.0, "bin_maxbins_60_review_length": 360.0, "bin_maxbins_60_review_length_end": 380.0, "rating": "3star"}, {"__count": 19, "__count_end": 53.0, "__count_start": 34.0, "bin_maxbins_60_review_length": 520.0, "bin_maxbins_60_review_length_end": 540.0, "rating": "1star"}, {"__count": 136, "__count_end": 456.0, "__count_start": 320.0, "bin_maxbins_60_review_length": 260.0, "bin_maxbins_60_review_length_end": 280.0, "rating": "2star"}, {"__count": 47, "__count_end": 47.0, "__count_start": 0.0, "bin_maxbins_60_review_length": 320.0, "bin_maxbins_60_review_length_end": 340.0, "rating": "5star"}, {"__count": 26, "__count_end": 54.0, "__count_start": 28.0, "bin_maxbins_60_review_length": 420.0, "bin_maxbins_60_review_length_end": 440.0, "rating": "3star"}, {"__count": 2, "__count_end": 2.0, "__count_start": 0.0, "bin_maxbins_60_review_length": 940.0, "bin_maxbins_60_review_length_end": 960.0, "rating": "5star"}, {"__count": 2, "__count_end": 2.0, "__count_start": 0.0, "bin_maxbins_60_review_length": 740.0, "bin_maxbins_60_review_length_end": 760.0, "rating": "5star"}, {"__count": 18, "__count_end": 76.0, "__count_start": 58.0, "bin_maxbins_60_review_length": 480.0, "bin_maxbins_60_review_length_end": 500.0, "rating": "1star"}, {"__count": 29, "__count_end": 91.0, "__count_start": 62.0, "bin_maxbins_60_review_length": 400.0, "bin_maxbins_60_review_length_end": 420.0, "rating": "3star"}, {"__count": 5, "__count_end": 20.0, "__count_start": 15.0, "bin_maxbins_60_review_length": 540.0, "bin_maxbins_60_review_length_end": 560.0, "rating": "3star"}, {"__count": 88, "__count_end": 422.0, "__count_start": 334.0, "bin_maxbins_60_review_length": 0.0, "bin_maxbins_60_review_length_end": 20.0, "rating": "3star"}, {"__count": 121, "__count_end": 577.0, "__count_start": 456.0, "bin_maxbins_60_review_length": 260.0, "bin_maxbins_60_review_length_end": 280.0, "rating": "1star"}, {"__count": 19, "__count_end": 74.0, "__count_start": 55.0, "bin_maxbins_60_review_length": 500.0, "bin_maxbins_60_review_length_end": 520.0, "rating": "1star"}, {"__count": 4, "__count_end": 4.0, "__count_start": 0.0, "bin_maxbins_60_review_length": 640.0, "bin_maxbins_60_review_length_end": 660.0, "rating": "5star"}, {"__count": 49, "__count_end": 136.0, "__count_start": 87.0, "bin_maxbins_60_review_length": 380.0, "bin_maxbins_60_review_length_end": 400.0, "rating": "2star"}, {"__count": 3, "__count_end": 9.0, "__count_start": 6.0, "bin_maxbins_60_review_length": 660.0, "bin_maxbins_60_review_length_end": 680.0, "rating": "3star"}, {"__count": 10, "__count_end": 34.0, "__count_start": 24.0, "bin_maxbins_60_review_length": 520.0, "bin_maxbins_60_review_length_end": 540.0, "rating": "2star"}, {"__count": 1, "__count_end": 4.0, "__count_start": 3.0, "bin_maxbins_60_review_length": 920.0, "bin_maxbins_60_review_length_end": 940.0, "rating": "2star"}, {"__count": 3, "__count_end": 3.0, "__count_start": 0.0, "bin_maxbins_60_review_length": 700.0, "bin_maxbins_60_review_length_end": 720.0, "rating": "5star"}, {"__count": 29, "__count_end": 87.0, "__count_start": 58.0, "bin_maxbins_60_review_length": 380.0, "bin_maxbins_60_review_length_end": 400.0, "rating": "3star"}, {"__count": 21, "__count_end": 62.0, "__count_start": 41.0, "bin_maxbins_60_review_length": 440.0, "bin_maxbins_60_review_length_end": 460.0, "rating": "2star"}, {"__count": 28, "__count_end": 119.0, "__count_start": 91.0, "bin_maxbins_60_review_length": 400.0, "bin_maxbins_60_review_length_end": 420.0, "rating": "2star"}, {"__count": 4, "__count_end": 11.0, "__count_start": 7.0, "bin_maxbins_60_review_length": 700.0, "bin_maxbins_60_review_length_end": 720.0, "rating": "2star"}, {"__count": 17, "__count_end": 24.0, "__count_start": 7.0, "bin_maxbins_60_review_length": 440.0, "bin_maxbins_60_review_length_end": 460.0, "rating": "4star"}, {"__count": 69, "__count_end": 69.0, "__count_start": 0.0, "bin_maxbins_60_review_length": 300.0, "bin_maxbins_60_review_length_end": 320.0, "rating": "5star"}, {"__count": 9, "__count_end": 25.0, "__count_start": 16.0, "bin_maxbins_60_review_length": 580.0, "bin_maxbins_60_review_length_end": 600.0, "rating": "2star"}, {"__count": 11, "__count_end": 30.0, "__count_start": 19.0, "bin_maxbins_60_review_length": 560.0, "bin_maxbins_60_review_length_end": 580.0, "rating": "2star"}, {"__count": 10, "__count_end": 35.0, "__count_start": 25.0, "bin_maxbins_60_review_length": 580.0, "bin_maxbins_60_review_length_end": 600.0, "rating": "1star"}, {"__count": 7, "__count_end": 7.0, "__count_start": 0.0, "bin_maxbins_60_review_length": 500.0, "bin_maxbins_60_review_length_end": 520.0, "rating": "5star"}, {"__count": 4, "__count_end": 4.0, "__count_start": 0.0, "bin_maxbins_60_review_length": 600.0, "bin_maxbins_60_review_length_end": 620.0, "rating": "5star"}, {"__count": 26, "__count_end": 26.0, "__count_start": 0.0, "bin_maxbins_60_review_length": 380.0, "bin_maxbins_60_review_length_end": 400.0, "rating": "5star"}, {"__count": 6, "__count_end": 6.0, "__count_start": 0.0, "bin_maxbins_60_review_length": 540.0, "bin_maxbins_60_review_length_end": 560.0, "rating": "5star"}, {"__count": 13, "__count_end": 13.0, "__count_start": 0.0, "bin_maxbins_60_review_length": 480.0, "bin_maxbins_60_review_length_end": 500.0, "rating": "5star"}, {"__count": 4, "__count_end": 24.0, "__count_start": 20.0, "bin_maxbins_60_review_length": 540.0, "bin_maxbins_60_review_length_end": 560.0, "rating": "2star"}, {"__count": 25, "__count_end": 25.0, "__count_start": 0.0, "bin_maxbins_60_review_length": 360.0, "bin_maxbins_60_review_length_end": 380.0, "rating": "5star"}, {"__count": 1, "__count_end": 2.0, "__count_start": 1.0, "bin_maxbins_60_review_length": 840.0, "bin_maxbins_60_review_length_end": 860.0, "rating": "4star"}, {"__count": 7, "__count_end": 7.0, "__count_start": 0.0, "bin_maxbins_60_review_length": 620.0, "bin_maxbins_60_review_length_end": 640.0, "rating": "5star"}, {"__count": 16, "__count_end": 29.0, "__count_start": 13.0, "bin_maxbins_60_review_length": 480.0, "bin_maxbins_60_review_length_end": 500.0, "rating": "4star"}, {"__count": 7, "__count_end": 23.0, "__count_start": 16.0, "bin_maxbins_60_review_length": 620.0, "bin_maxbins_60_review_length_end": 640.0, "rating": "1star"}, {"__count": 9, "__count_end": 15.0, "__count_start": 6.0, "bin_maxbins_60_review_length": 540.0, "bin_maxbins_60_review_length_end": 560.0, "rating": "4star"}, {"__count": 17, "__count_end": 31.0, "__count_start": 14.0, "bin_maxbins_60_review_length": 460.0, "bin_maxbins_60_review_length_end": 480.0, "rating": "4star"}, {"__count": 2, "__count_end": 3.0, "__count_start": 1.0, "bin_maxbins_60_review_length": 780.0, "bin_maxbins_60_review_length_end": 800.0, "rating": "3star"}, {"__count": 7, "__count_end": 21.0, "__count_start": 14.0, "bin_maxbins_60_review_length": 640.0, "bin_maxbins_60_review_length_end": 660.0, "rating": "1star"}, {"__count": 6, "__count_end": 11.0, "__count_start": 5.0, "bin_maxbins_60_review_length": 560.0, "bin_maxbins_60_review_length_end": 580.0, "rating": "4star"}, {"__count": 6, "__count_end": 15.0, "__count_start": 9.0, "bin_maxbins_60_review_length": 660.0, "bin_maxbins_60_review_length_end": 680.0, "rating": "2star"}, {"__count": 7, "__count_end": 7.0, "__count_start": 0.0, "bin_maxbins_60_review_length": 440.0, "bin_maxbins_60_review_length_end": 460.0, "rating": "5star"}, {"__count": 32, "__count_end": 58.0, "__count_start": 26.0, "bin_maxbins_60_review_length": 380.0, "bin_maxbins_60_review_length_end": 400.0, "rating": "4star"}, {"__count": 2, "__count_end": 4.0, "__count_start": 2.0, "bin_maxbins_60_review_length": 800.0, "bin_maxbins_60_review_length_end": 820.0, "rating": "3star"}, {"__count": 6, "__count_end": 14.0, "__count_start": 8.0, "bin_maxbins_60_review_length": 640.0, "bin_maxbins_60_review_length_end": 660.0, "rating": "2star"}, {"__count": 4, "__count_end": 16.0, "__count_start": 12.0, "bin_maxbins_60_review_length": 620.0, "bin_maxbins_60_review_length_end": 640.0, "rating": "2star"}, {"__count": 3, "__count_end": 8.0, "__count_start": 5.0, "bin_maxbins_60_review_length": 800.0, "bin_maxbins_60_review_length_end": 820.0, "rating": "1star"}, {"__count": 14, "__count_end": 76.0, "__count_start": 62.0, "bin_maxbins_60_review_length": 440.0, "bin_maxbins_60_review_length_end": 460.0, "rating": "1star"}, {"__count": 33, "__count_end": 152.0, "__count_start": 119.0, "bin_maxbins_60_review_length": 400.0, "bin_maxbins_60_review_length_end": 420.0, "rating": "1star"}, {"__count": 3, "__count_end": 7.0, "__count_start": 4.0, "bin_maxbins_60_review_length": 920.0, "bin_maxbins_60_review_length_end": 940.0, "rating": "1star"}, {"__count": 1, "__count_end": 3.0, "__count_start": 2.0, "bin_maxbins_60_review_length": 740.0, "bin_maxbins_60_review_length_end": 760.0, "rating": "4star"}, {"__count": 3, "__count_end": 7.0, "__count_start": 4.0, "bin_maxbins_60_review_length": 700.0, "bin_maxbins_60_review_length_end": 720.0, "rating": "3star"}, {"__count": 8, "__count_end": 19.0, "__count_start": 11.0, "bin_maxbins_60_review_length": 560.0, "bin_maxbins_60_review_length_end": 580.0, "rating": "3star"}, {"__count": 2, "__count_end": 12.0, "__count_start": 10.0, "bin_maxbins_60_review_length": 620.0, "bin_maxbins_60_review_length_end": 640.0, "rating": "3star"}, {"__count": 2, "__count_end": 17.0, "__count_start": 15.0, "bin_maxbins_60_review_length": 660.0, "bin_maxbins_60_review_length_end": 680.0, "rating": "1star"}, {"__count": 7, "__count_end": 14.0, "__count_start": 7.0, "bin_maxbins_60_review_length": 500.0, "bin_maxbins_60_review_length_end": 520.0, "rating": "4star"}, {"__count": 7, "__count_end": 16.0, "__count_start": 9.0, "bin_maxbins_60_review_length": 580.0, "bin_maxbins_60_review_length_end": 600.0, "rating": "3star"}, {"__count": 1, "__count_end": 1.0, "__count_start": 0.0, "bin_maxbins_60_review_length": 820.0, "bin_maxbins_60_review_length_end": 840.0, "rating": "5star"}, {"__count": 6, "__count_end": 6.0, "__count_start": 0.0, "bin_maxbins_60_review_length": 520.0, "bin_maxbins_60_review_length_end": 540.0, "rating": "5star"}, {"__count": 2, "__count_end": 4.0, "__count_start": 2.0, "bin_maxbins_60_review_length": 900.0, "bin_maxbins_60_review_length_end": 920.0, "rating": "2star"}, {"__count": 2, "__count_end": 2.0, "__count_start": 0.0, "bin_maxbins_60_review_length": 860.0, "bin_maxbins_60_review_length_end": 880.0, "rating": "2star"}, {"__count": 2, "__count_end": 2.0, "__count_start": 0.0, "bin_maxbins_60_review_length": 800.0, "bin_maxbins_60_review_length_end": 820.0, "rating": "5star"}, {"__count": 2, "__count_end": 10.0, "__count_start": 8.0, "bin_maxbins_60_review_length": 680.0, "bin_maxbins_60_review_length_end": 700.0, "rating": "2star"}, {"__count": 5, "__count_end": 5.0, "__count_start": 0.0, "bin_maxbins_60_review_length": 560.0, "bin_maxbins_60_review_length_end": 580.0, "rating": "5star"}, {"__count": 7, "__count_end": 17.0, "__count_start": 10.0, "bin_maxbins_60_review_length": 680.0, "bin_maxbins_60_review_length_end": 700.0, "rating": "1star"}, {"__count": 1, "__count_end": 1.0, "__count_start": 0.0, "bin_maxbins_60_review_length": 900.0, "bin_maxbins_60_review_length_end": 920.0, "rating": "5star"}, {"__count": 4, "__count_end": 7.0, "__count_start": 3.0, "bin_maxbins_60_review_length": 820.0, "bin_maxbins_60_review_length_end": 840.0, "rating": "1star"}, {"__count": 4, "__count_end": 6.0, "__count_start": 2.0, "bin_maxbins_60_review_length": 660.0, "bin_maxbins_60_review_length_end": 680.0, "rating": "4star"}, {"__count": 2, "__count_end": 2.0, "__count_start": 0.0, "bin_maxbins_60_review_length": 880.0, "bin_maxbins_60_review_length_end": 900.0, "rating": "2star"}, {"__count": 11, "__count_end": 40.0, "__count_start": 29.0, "bin_maxbins_60_review_length": 480.0, "bin_maxbins_60_review_length_end": 500.0, "rating": "3star"}, {"__count": 4, "__count_end": 5.0, "__count_start": 1.0, "bin_maxbins_60_review_length": 720.0, "bin_maxbins_60_review_length_end": 740.0, "rating": "3star"}, {"__count": 7, "__count_end": 27.0, "__count_start": 20.0, "bin_maxbins_60_review_length": 600.0, "bin_maxbins_60_review_length_end": 620.0, "rating": "1star"}, {"__count": 4, "__count_end": 5.0, "__count_start": 1.0, "bin_maxbins_60_review_length": 960.0, "bin_maxbins_60_review_length_end": 980.0, "rating": "1star"}, {"__count": 3, "__count_end": 3.0, "__count_start": 0.0, "bin_maxbins_60_review_length": 920.0, "bin_maxbins_60_review_length_end": 940.0, "rating": "4star"}, {"__count": 1, "__count_end": 5.0, "__count_start": 4.0, "bin_maxbins_60_review_length": 780.0, "bin_maxbins_60_review_length_end": 800.0, "rating": "1star"}, {"__count": 2, "__count_end": 2.0, "__count_start": 0.0, "bin_maxbins_60_review_length": 680.0, "bin_maxbins_60_review_length_end": 700.0, "rating": "5star"}, {"__count": 1, "__count_end": 4.0, "__count_start": 3.0, "bin_maxbins_60_review_length": 700.0, "bin_maxbins_60_review_length_end": 720.0, "rating": "4star"}, {"__count": 3, "__count_end": 8.0, "__count_start": 5.0, "bin_maxbins_60_review_length": 840.0, "bin_maxbins_60_review_length_end": 860.0, "rating": "1star"}, {"__count": 3, "__count_end": 5.0, "__count_start": 2.0, "bin_maxbins_60_review_length": 940.0, "bin_maxbins_60_review_length_end": 960.0, "rating": "1star"}, {"__count": 3, "__count_end": 9.0, "__count_start": 6.0, "bin_maxbins_60_review_length": 600.0, "bin_maxbins_60_review_length_end": 620.0, "rating": "3star"}, {"__count": 2, "__count_end": 6.0, "__count_start": 4.0, "bin_maxbins_60_review_length": 640.0, "bin_maxbins_60_review_length_end": 660.0, "rating": "4star"}, {"__count": 1, "__count_end": 1.0, "__count_start": 0.0, "bin_maxbins_60_review_length": 960.0, "bin_maxbins_60_review_length_end": 980.0, "rating": "5star"}, {"__count": 3, "__count_end": 10.0, "__count_start": 7.0, "bin_maxbins_60_review_length": 620.0, "bin_maxbins_60_review_length_end": 640.0, "rating": "4star"}, {"__count": 3, "__count_end": 6.0, "__count_start": 3.0, "bin_maxbins_60_review_length": 760.0, "bin_maxbins_60_review_length_end": 780.0, "rating": "2star"}, {"__count": 1, "__count_end": 1.0, "__count_start": 0.0, "bin_maxbins_60_review_length": 720.0, "bin_maxbins_60_review_length_end": 740.0, "rating": "4star"}, {"__count": 3, "__count_end": 5.0, "__count_start": 2.0, "bin_maxbins_60_review_length": 680.0, "bin_maxbins_60_review_length_end": 700.0, "rating": "4star"}, {"__count": 2, "__count_end": 3.0, "__count_start": 1.0, "bin_maxbins_60_review_length": 760.0, "bin_maxbins_60_review_length_end": 780.0, "rating": "3star"}, {"__count": 2, "__count_end": 6.0, "__count_start": 4.0, "bin_maxbins_60_review_length": 900.0, "bin_maxbins_60_review_length_end": 920.0, "rating": "1star"}, {"__count": 4, "__count_end": 15.0, "__count_start": 11.0, "bin_maxbins_60_review_length": 700.0, "bin_maxbins_60_review_length_end": 720.0, "rating": "1star"}, {"__count": 1, "__count_end": 4.0, "__count_start": 3.0, "bin_maxbins_60_review_length": 780.0, "bin_maxbins_60_review_length_end": 800.0, "rating": "2star"}, {"__count": 1, "__count_end": 6.0, "__count_start": 5.0, "bin_maxbins_60_review_length": 740.0, "bin_maxbins_60_review_length_end": 760.0, "rating": "1star"}, {"__count": 2, "__count_end": 8.0, "__count_start": 6.0, "bin_maxbins_60_review_length": 640.0, "bin_maxbins_60_review_length_end": 660.0, "rating": "3star"}, {"__count": 2, "__count_end": 7.0, "__count_start": 5.0, "bin_maxbins_60_review_length": 720.0, "bin_maxbins_60_review_length_end": 740.0, "rating": "2star"}, {"__count": 4, "__count_end": 6.0, "__count_start": 2.0, "bin_maxbins_60_review_length": 880.0, "bin_maxbins_60_review_length_end": 900.0, "rating": "1star"}, {"__count": 3, "__count_end": 5.0, "__count_start": 2.0, "bin_maxbins_60_review_length": 840.0, "bin_maxbins_60_review_length_end": 860.0, "rating": "2star"}, {"__count": 2, "__count_end": 2.0, "__count_start": 0.0, "bin_maxbins_60_review_length": 580.0, "bin_maxbins_60_review_length_end": 600.0, "rating": "5star"}, {"__count": 2, "__count_end": 4.0, "__count_start": 2.0, "bin_maxbins_60_review_length": 860.0, "bin_maxbins_60_review_length_end": 880.0, "rating": "1star"}, {"__count": 1, "__count_end": 5.0, "__count_start": 4.0, "bin_maxbins_60_review_length": 740.0, "bin_maxbins_60_review_length_end": 760.0, "rating": "2star"}, {"__count": 1, "__count_end": 2.0, "__count_start": 1.0, "bin_maxbins_60_review_length": 900.0, "bin_maxbins_60_review_length_end": 920.0, "rating": "3star"}, {"__count": 2, "__count_end": 6.0, "__count_start": 4.0, "bin_maxbins_60_review_length": 600.0, "bin_maxbins_60_review_length_end": 620.0, "rating": "4star"}, {"__count": 1, "__count_end": 2.0, "__count_start": 1.0, "bin_maxbins_60_review_length": 820.0, "bin_maxbins_60_review_length_end": 840.0, "rating": "4star"}, {"__count": 1, "__count_end": 3.0, "__count_start": 2.0, "bin_maxbins_60_review_length": 820.0, "bin_maxbins_60_review_length_end": 840.0, "rating": "2star"}, {"__count": 1, "__count_end": 5.0, "__count_start": 4.0, "bin_maxbins_60_review_length": 800.0, "bin_maxbins_60_review_length_end": 820.0, "rating": "2star"}, {"__count": 1, "__count_end": 1.0, "__count_start": 0.0, "bin_maxbins_60_review_length": 840.0, "bin_maxbins_60_review_length_end": 860.0, "rating": "5star"}, {"__count": 1, "__count_end": 4.0, "__count_start": 3.0, "bin_maxbins_60_review_length": 740.0, "bin_maxbins_60_review_length_end": 760.0, "rating": "3star"}, {"__count": 1, "__count_end": 1.0, "__count_start": 0.0, "bin_maxbins_60_review_length": 760.0, "bin_maxbins_60_review_length_end": 780.0, "rating": "4star"}, {"__count": 1, "__count_end": 1.0, "__count_start": 0.0, "bin_maxbins_60_review_length": 780.0, "bin_maxbins_60_review_length_end": 800.0, "rating": "4star"}, {"__count": 1, "__count_end": 7.0, "__count_start": 6.0, "bin_maxbins_60_review_length": 760.0, "bin_maxbins_60_review_length_end": 780.0, "rating": "1star"}]}, {"name": "data_1_color_domain_rating_0", "values": [{"rating": "4star"}, {"rating": "1star"}, {"rating": "2star"}, {"rating": "5star"}, {"rating": "3star"}]}, {"name": "data_2_color_domain_rating_1", "values": [{"rating": "4star"}, {"rating": "1star"}, {"rating": "2star"}, {"rating": "5star"}, {"rating": "3star"}]}, {"name": "data_0_concat_0_x_domain_rating", "values": [{"rating": "4star", "sort_field": 3.0}, {"rating": "1star", "sort_field": 0.0}, {"rating": "2star", "sort_field": 1.0}, {"rating": "5star", "sort_field": 4.0}, {"rating": "3star", "sort_field": 2.0}]}, {"name": "data_1_concat_0_y_domain___count", "values": [{"min": 5531, "max": 5651}]}], "signals": [{"name": "concat_1_bin_maxbins_60_review_length_bins", "value": {"fields": ["review_length"], "fname": "bin_review_length", "start": 0.0, "step": 20.0, "stop": 980.0}}, {"name": "concat_0_width", "value": 300}, {"name": "concat_1_width", "value": 400}], "marks": [{"type": "group", "name": "concat_0_group", "encode": {"update": {"height": {"signal": "height"}, "width": {"signal": "concat_0_width"}}}, "marks": [{"type": "rect", "name": "concat_0_marks", "from": {"data": "data_1"}, "encode": {"update": {"fill": {"field": "rating", "scale": "color"}, "x": {"field": "rating", "scale": "concat_0_x"}, "y": {"field": "__count", "scale": "concat_0_y"}, "tooltip": {"signal": "{\"rating\": isValid(datum[\"rating\"]) ? datum[\"rating\"] : \"\"+datum[\"rating\"], \"Count of Records\": format(datum[\"__count\"], \"\")}"}, "width": {"signal": "max(0.25, bandwidth('concat_0_x'))"}, "y2": {"value": 0, "scale": "concat_0_y"}}}, "style": ["bar"]}], "axes": [{"scale": "concat_0_y", "aria": false, "tickCount": {"signal": "ceil(height/40)"}, "orient": "left", "gridScale": "concat_0_x", "maxExtent": 0, "domain": false, "zindex": 0, "labels": false, "ticks": false, "grid": true, "minExtent": 0}, {"scale": "concat_0_x", "labelAlign": "right", "title": "Rating", "labelAngle": 270, "labelBaseline": "middle", "zindex": 0, "grid": false, "orient": "bottom"}, {"scale": "concat_0_y", "orient": "left", "title": "Number of Reviews", "labelOverlap": true, "tickCount": {"signal": "ceil(height/40)"}, "zindex": 0, "grid": false}], "title": {"text": "Distribution of Ratings", "frame": "group"}, "style": "cell"}, {"type": "group", "name": "concat_1_group", "encode": {"update": {"width": {"signal": "concat_1_width"}, "height": {"signal": "height"}}}, "marks": [{"type": "rect", "name": "concat_1_marks", "from": {"data": "data_2"}, "encode": {"update": {"x2": {"field": "bin_maxbins_60_review_length", "scale": "concat_1_x", "offset": {"signal": "0.5 + (abs(scale(\"concat_1_x\", datum[\"bin_maxbins_60_review_length_end\"]) - scale(\"concat_1_x\", datum[\"bin_maxbins_60_review_length\"])) < 0.25 ? -0.5 * (0.25 - (abs(scale(\"concat_1_x\", datum[\"bin_maxbins_60_review_length_end\"]) - scale(\"concat_1_x\", datum[\"bin_maxbins_60_review_length\"])))) : 0.5)"}}, "y2": {"field": "__count_start", "scale": "concat_1_y"}, "y": {"field": "__count_end", "scale": "concat_1_y"}, "fill": {"field": "rating", "scale": "color"}, "tooltip": {"signal": "{\"Count of Records\": format(datum[\"__count\"], \"\")}"}, "x": {"field": "bin_maxbins_60_review_length_end", "scale": "concat_1_x", "offset": {"signal": "0.5 + (abs(scale(\"concat_1_x\", datum[\"bin_maxbins_60_review_length_end\"]) - scale(\"concat_1_x\", datum[\"bin_maxbins_60_review_length\"])) < 0.25 ? 0.5 * (0.25 - (abs(scale(\"concat_1_x\", datum[\"bin_maxbins_60_review_length_end\"]) - scale(\"concat_1_x\", datum[\"bin_maxbins_60_review_length\"])))) : -0.5)"}}}}, "style": ["bar"]}], "axes": [{"scale": "concat_1_y", "zindex": 0, "ticks": false, "gridScale": "concat_1_x", "maxExtent": 0, "aria": false, "grid": true, "orient": "left", "tickCount": {"signal": "ceil(height/40)"}, "labels": false, "domain": false, "minExtent": 0}, {"scale": "concat_1_x", "labelFlush": true, "title": "Word Count per Review", "tickCount": {"signal": "ceil(concat_1_width/10)"}, "orient": "bottom", "zindex": 0, "labelOverlap": true, "grid": false}, {"scale": "concat_1_y", "zindex": 0, "grid": false, "orient": "left", "title": "Frequency", "labelOverlap": true, "tickCount": {"signal": "ceil(height/40)"}}], "title": {"text": "Distribution of Review Lengths", "frame": "group"}, "style": "cell"}], "scales": [{"name": "color", "type": "ordinal", "domain": {"fields": [{"data": "data_1_color_domain_rating_0", "field": "rating"}, {"data": "data_2_color_domain_rating_1", "field": "rating"}], "sort": true}, "range": "category"}, {"name": "concat_0_x", "type": "band", "domain": {"data": "data_0_concat_0_x_domain_rating", "field": "rating", "sort": {"op": "max", "field": "sort_field"}}, "range": [0, {"signal": "concat_0_width"}], "paddingOuter": 0.05, "paddingInner": 0.1}, {"name": "concat_0_y", "type": "linear", "domain": [{"signal": "(data(\"data_1_concat_0_y_domain___count\")[0] || {}).min"}, {"signal": "(data(\"data_1_concat_0_y_domain___count\")[0] || {}).max"}], "range": [{"signal": "height"}, 0], "zero": true, "nice": true}, {"name": "concat_1_x", "type": "linear", "domain": {"signal": "[concat_1_bin_maxbins_60_review_length_bins.start, concat_1_bin_maxbins_60_review_length_bins.stop]"}, "range": [0, {"signal": "concat_1_width"}], "bins": {"signal": "concat_1_bin_maxbins_60_review_length_bins"}, "zero": false}, {"name": "concat_1_y", "type": "linear", "domain": {"data": "data_2", "fields": ["__count_start", "__count_end"]}, "range": [{"signal": "height"}, 0], "zero": true, "nice": true}], "background": "white", "layout": {"padding": 20, "bounds": "full", "align": "each"}, "padding": 5, "height": 300}, {"mode": "vega"});
+</script>
+</div>
+</div>
+<p>From EDA, we know that the classes are balanced, and it seems like all the ratings are in proportion to the length of the comments.</p>
+</section>
+<section id="baseline" class="level1">
+<h1>Baseline</h1>
+<p>For baseline, I will use tfidf vectorizer and logistic regression, it is fast and provide a decent standard baseline score for my further models.</p>
+<p>The baseline Macro F1 Score = 59.36%</p>
+<div id="cell-12" class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co">### baseline</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="co">## import</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.feature_extraction.text <span class="im">import</span> TfidfVectorizer</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LogisticRegression</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> classification_report, f1_score</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.pipeline <span class="im">import</span> make_pipeline</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="cell-13" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:0}}" data-outputid="22f87c5d-7817-4b3c-8e21-8b86cb4ffb41" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co">## data split</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>X_train <span class="op">=</span> train_set[<span class="st">'content'</span>]</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>y_train <span class="op">=</span> train_set[<span class="st">'rating'</span>]</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>X_dev <span class="op">=</span> dev_set[<span class="st">'content'</span>]</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>y_dev <span class="op">=</span> dev_set[<span class="st">'rating'</span>]</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">len</span>(X_train), <span class="bu">len</span>(X_dev))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>28000 3500</code></pre>
+</div>
+</div>
+<div id="cell-14" class="cell" data-execution_count="10">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co">## Pipeline</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>baseline <span class="op">=</span> make_pipeline(</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>    TfidfVectorizer(</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>        stop_words <span class="op">=</span> <span class="st">'english'</span>,</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>        ngram_range <span class="op">=</span> (<span class="dv">1</span>, <span class="dv">2</span>)</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>    LogisticRegression(</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>        solver <span class="op">=</span> <span class="st">'liblinear'</span>,</span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>        C <span class="op">=</span> <span class="fl">1.0</span></span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a><span class="co"># baseline train &amp; pred</span></span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>baseline.fit(X_train, y_train)</span>
+<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a>y_pred_baseline <span class="op">=</span> baseline.predict(X_dev)</span>
+<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a><span class="co"># calculate macro f1</span></span>
+<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a>f1_baseline <span class="op">=</span> f1_score(y_dev, y_pred_baseline, average <span class="op">=</span> <span class="st">'macro'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="cell-15" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:0}}" data-outputid="ccd41535-b36f-475f-c0e5-91043b05bf8c" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'The Macro F1 score of baseline with tfidf and logistic is: </span><span class="sc">{</span>f1_baseline<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>The Macro F1 score of baseline with tfidf and logistic is: 0.5936185962662195</code></pre>
+</div>
+</div>
+</section>
+<section id="cbow" class="level1">
+<h1>CBOW</h1>
+<div id="cell-17" class="cell" data-execution_count="12">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Preprocessing</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> LabelEncoder</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>label_encoder <span class="op">=</span> LabelEncoder()</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>label_encoder.fit(train_set.rating)</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>train_y <span class="op">=</span> label_encoder.transform(train_set.rating)</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>dev_y <span class="op">=</span> label_encoder.transform(dev_set.rating)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="cell-18" class="cell" data-execution_count="13">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Vocabulary</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> collections <span class="im">import</span> defaultdict, Counter</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>vocabulary <span class="op">=</span> Counter()</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> sentence <span class="kw">in</span> train_set.content:</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>    tokens <span class="op">=</span> sentence.lower().split()</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>    vocabulary.update(tokens)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="cell-19" class="cell" data-execution_count="14">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> collections <span class="im">import</span> defaultdict, Counter</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="co">## Create a w2i</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> BuildWord2i(contents):</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>    counter <span class="op">=</span> Counter()</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> content <span class="kw">in</span> contents:</span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>        tokens <span class="op">=</span> <span class="bu">str</span>(content).lower().split()</span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>        counter.update(tokens)</span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>    word2i <span class="op">=</span> {}</span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>    word2i[<span class="st">'&lt;PAD&gt;'</span>] <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a>    word2i[<span class="st">'&lt;UNK&gt;'</span>] <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a>    idx <span class="op">=</span> <span class="dv">2</span></span>
+<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> word, count <span class="kw">in</span> counter.items():</span>
+<span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a>        word2i[word] <span class="op">=</span> idx</span>
+<span id="cb22-18"><a href="#cb22-18" aria-hidden="true" tabindex="-1"></a>        idx <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb22-19"><a href="#cb22-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-20"><a href="#cb22-20" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> word2i</span>
+<span id="cb22-21"><a href="#cb22-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-22"><a href="#cb22-22" aria-hidden="true" tabindex="-1"></a><span class="co">## get w2i</span></span>
+<span id="cb22-23"><a href="#cb22-23" aria-hidden="true" tabindex="-1"></a>w2i <span class="op">=</span> BuildWord2i(train_set[<span class="st">'content'</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="cell-20" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:0}}" data-outputid="7f9ee7e3-cfaa-41dd-def1-f937c8974b91" data-execution_count="15">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co">## Get the embedding matrix from spacy</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> BuildEmbeddingMatrix(word2i, vocab_size, emb_dim <span class="op">=</span> <span class="dv">300</span>):</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>    weights_matrix <span class="op">=</span> np.random.normal(scale <span class="op">=</span> <span class="fl">0.6</span>, size <span class="op">=</span> (vocab_size, emb_dim))</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>    weights_matrix[w2i[<span class="st">'&lt;PAD&gt;'</span>]] <span class="op">=</span> np.zeros((emb_dim,))</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>    count <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> word, i <span class="kw">in</span> w2i.items():</span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> word <span class="kw">in</span> nlp.vocab <span class="kw">and</span> nlp.vocab[word].has_vector:</span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>            weights_matrix[i] <span class="op">=</span> nlp.vocab[word].vector</span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>            found_count <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> torch.tensor(weights_matrix, dtype <span class="op">=</span> torch.float32)</span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a><span class="co">## create embedding weights from spacy</span></span>
+<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a>EMBEDDING_DIM <span class="op">=</span> <span class="dv">300</span></span>
+<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a>embedding_weights <span class="op">=</span> BuildEmbeddingMatrix(w2i, <span class="bu">len</span>(w2i), EMBEDDING_DIM)</span>
+<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a>embedding_weights.shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="15">
+<pre><code>torch.Size([106121, 300])</code></pre>
+</div>
+</div>
+<div id="cell-21" class="cell" data-execution_count="16">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> torch.utils.data <span class="im">import</span> TensorDataset, DataLoader</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> torch.nn.utils.rnn <span class="im">import</span> pad_sequence</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> create_data_loader(df, y, w2i, batch_size<span class="op">=</span><span class="dv">32</span>, shuffle<span class="op">=</span><span class="va">True</span>):</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>    pad_token_id <span class="op">=</span> w2i.get(<span class="st">'&lt;PAD&gt;'</span>, <span class="dv">0</span>)</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>    unk_token_id <span class="op">=</span> w2i.get(<span class="st">'&lt;UNK&gt;'</span>, <span class="dv">0</span>)</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> text_to_indices(text):</span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>        tokens <span class="op">=</span> text.split()</span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> [w2i.get(token, unk_token_id) <span class="cf">for</span> token <span class="kw">in</span> tokens]</span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>    indices_list <span class="op">=</span> [torch.tensor(text_to_indices(text)) <span class="cf">for</span> text <span class="kw">in</span> df[<span class="st">'content'</span>]]</span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a>    padded_inputs <span class="op">=</span> pad_sequence(indices_list, batch_first<span class="op">=</span><span class="va">True</span>, padding_value<span class="op">=</span>pad_token_id)</span>
+<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a>    labels <span class="op">=</span> torch.tensor(y, dtype<span class="op">=</span>torch.<span class="bu">long</span>)</span>
+<span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-16"><a href="#cb25-16" aria-hidden="true" tabindex="-1"></a>    dataset <span class="op">=</span> TensorDataset(padded_inputs, labels)</span>
+<span id="cb25-17"><a href="#cb25-17" aria-hidden="true" tabindex="-1"></a>    loader <span class="op">=</span> DataLoader(dataset, batch_size<span class="op">=</span>batch_size, shuffle<span class="op">=</span>shuffle)</span>
+<span id="cb25-18"><a href="#cb25-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-19"><a href="#cb25-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> loader</span>
+<span id="cb25-20"><a href="#cb25-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-21"><a href="#cb25-21" aria-hidden="true" tabindex="-1"></a>BATCH_SIZE <span class="op">=</span> <span class="dv">64</span></span>
+<span id="cb25-22"><a href="#cb25-22" aria-hidden="true" tabindex="-1"></a>train_loader <span class="op">=</span> create_data_loader(train_set, train_y, w2i, batch_size<span class="op">=</span>BATCH_SIZE, shuffle<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb25-23"><a href="#cb25-23" aria-hidden="true" tabindex="-1"></a>dev_loader <span class="op">=</span> create_data_loader(dev_set, dev_y,  w2i, batch_size<span class="op">=</span>BATCH_SIZE, shuffle<span class="op">=</span><span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="cell-22" class="cell" data-execution_count="17">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># CBOW originated from lab 3</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>HIDDEN_SIZE <span class="op">=</span> <span class="dv">100</span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> CBOW(nn.Module):</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, weights_matrix, num_classes, dropout_prob, padding_idx):</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>        <span class="bu">super</span>().<span class="fu">__init__</span>()</span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.embedding <span class="op">=</span> nn.Embedding.from_pretrained(weights_matrix, padding_idx <span class="op">=</span> padding_idx)</span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.embedding_dim <span class="op">=</span> weights_matrix.shape[<span class="dv">1</span>]</span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.linear1 <span class="op">=</span> nn.Linear(<span class="va">self</span>.embedding_dim, HIDDEN_SIZE)</span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.dropout <span class="op">=</span> nn.Dropout(p <span class="op">=</span> dropout_prob)</span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.relu <span class="op">=</span> nn.ReLU()</span>
+<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.linear2 <span class="op">=</span> nn.Linear(HIDDEN_SIZE, num_classes)</span>
+<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.padding_idx <span class="op">=</span> padding_idx</span>
+<span id="cb26-15"><a href="#cb26-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-16"><a href="#cb26-16" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> forward(<span class="va">self</span>, x):</span>
+<span id="cb26-17"><a href="#cb26-17" aria-hidden="true" tabindex="-1"></a>            non_pad_mask <span class="op">=</span> (x <span class="op">!=</span> <span class="va">self</span>.padding_idx)</span>
+<span id="cb26-18"><a href="#cb26-18" aria-hidden="true" tabindex="-1"></a>            lengths <span class="op">=</span> non_pad_mask.<span class="bu">sum</span>(dim<span class="op">=</span><span class="dv">1</span>).<span class="bu">float</span>().clamp(<span class="bu">min</span><span class="op">=</span><span class="dv">1</span>).unsqueeze(<span class="dv">1</span>)</span>
+<span id="cb26-19"><a href="#cb26-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-20"><a href="#cb26-20" aria-hidden="true" tabindex="-1"></a>            embedded <span class="op">=</span> <span class="va">self</span>.embedding(x)</span>
+<span id="cb26-21"><a href="#cb26-21" aria-hidden="true" tabindex="-1"></a>            x <span class="op">=</span> torch.<span class="bu">sum</span>(embedded, dim<span class="op">=</span><span class="dv">1</span>) <span class="op">/</span> lengths</span>
+<span id="cb26-22"><a href="#cb26-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-23"><a href="#cb26-23" aria-hidden="true" tabindex="-1"></a>            x <span class="op">=</span> <span class="va">self</span>.linear1(x)</span>
+<span id="cb26-24"><a href="#cb26-24" aria-hidden="true" tabindex="-1"></a>            x <span class="op">=</span> <span class="va">self</span>.dropout(x)</span>
+<span id="cb26-25"><a href="#cb26-25" aria-hidden="true" tabindex="-1"></a>            x <span class="op">=</span> <span class="va">self</span>.relu(x)</span>
+<span id="cb26-26"><a href="#cb26-26" aria-hidden="true" tabindex="-1"></a>            x <span class="op">=</span> <span class="va">self</span>.linear2(x)</span>
+<span id="cb26-27"><a href="#cb26-27" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> x</span>
+<span id="cb26-28"><a href="#cb26-28" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="cell-23" class="cell" data-execution_count="18">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>pad_idx <span class="op">=</span> w2i[<span class="st">'&lt;PAD&gt;'</span>]</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> CBOW(</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>    weights_matrix <span class="op">=</span> embedding_weights,</span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>    num_classes <span class="op">=</span> <span class="dv">5</span>,</span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>    dropout_prob <span class="op">=</span> <span class="fl">0.5</span>,</span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>    padding_idx <span class="op">=</span> pad_idx</span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>).to(device)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="cell-24" class="cell" data-execution_count="19">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>optimizer <span class="op">=</span> torch.optim.Adam(model.parameters(), lr <span class="op">=</span> <span class="fl">0.01</span>)</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>criterion <span class="op">=</span> nn.CrossEntropyLoss()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="cell-25" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:0}}" data-outputid="cc7f651d-bb52-42c5-fa56-c64a3e7f07f9" data-execution_count="20">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>NUM_EPOCHS <span class="op">=</span> <span class="dv">3</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> epoch <span class="kw">in</span> <span class="bu">range</span>(NUM_EPOCHS):</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>    model.train()</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>    total_loss <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> inputs, labels <span class="kw">in</span> train_loader:</span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>        inputs, labels <span class="op">=</span> inputs.to(device), labels.to(device)</span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a>        optimizer.zero_grad()</span>
+<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a>        outputs <span class="op">=</span> model(inputs)</span>
+<span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-13"><a href="#cb29-13" aria-hidden="true" tabindex="-1"></a>        loss <span class="op">=</span> criterion(outputs, labels)</span>
+<span id="cb29-14"><a href="#cb29-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-15"><a href="#cb29-15" aria-hidden="true" tabindex="-1"></a>        loss.backward()</span>
+<span id="cb29-16"><a href="#cb29-16" aria-hidden="true" tabindex="-1"></a>        optimizer.step()</span>
+<span id="cb29-17"><a href="#cb29-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-18"><a href="#cb29-18" aria-hidden="true" tabindex="-1"></a>        total_loss <span class="op">+=</span> loss.item()</span>
+<span id="cb29-19"><a href="#cb29-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-20"><a href="#cb29-20" aria-hidden="true" tabindex="-1"></a>    avg_train_loss <span class="op">=</span> total_loss <span class="op">/</span> <span class="bu">len</span>(train_loader)</span>
+<span id="cb29-21"><a href="#cb29-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-22"><a href="#cb29-22" aria-hidden="true" tabindex="-1"></a>    model.<span class="bu">eval</span>()</span>
+<span id="cb29-23"><a href="#cb29-23" aria-hidden="true" tabindex="-1"></a>    correct <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb29-24"><a href="#cb29-24" aria-hidden="true" tabindex="-1"></a>    total <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb29-25"><a href="#cb29-25" aria-hidden="true" tabindex="-1"></a>    val_loss <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb29-26"><a href="#cb29-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-27"><a href="#cb29-27" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> torch.no_grad():</span>
+<span id="cb29-28"><a href="#cb29-28" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> inputs, labels <span class="kw">in</span> dev_loader:</span>
+<span id="cb29-29"><a href="#cb29-29" aria-hidden="true" tabindex="-1"></a>            inputs, labels <span class="op">=</span> inputs.to(device), labels.to(device)</span>
+<span id="cb29-30"><a href="#cb29-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-31"><a href="#cb29-31" aria-hidden="true" tabindex="-1"></a>            outputs <span class="op">=</span> model(inputs)</span>
+<span id="cb29-32"><a href="#cb29-32" aria-hidden="true" tabindex="-1"></a>            loss <span class="op">=</span> criterion(outputs, labels)</span>
+<span id="cb29-33"><a href="#cb29-33" aria-hidden="true" tabindex="-1"></a>            val_loss <span class="op">+=</span> loss.item()</span>
+<span id="cb29-34"><a href="#cb29-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-35"><a href="#cb29-35" aria-hidden="true" tabindex="-1"></a>            _, predicted <span class="op">=</span> torch.<span class="bu">max</span>(outputs.data, <span class="dv">1</span>)</span>
+<span id="cb29-36"><a href="#cb29-36" aria-hidden="true" tabindex="-1"></a>            total <span class="op">+=</span> labels.size(<span class="dv">0</span>)</span>
+<span id="cb29-37"><a href="#cb29-37" aria-hidden="true" tabindex="-1"></a>            correct <span class="op">+=</span> (predicted <span class="op">==</span> labels).<span class="bu">sum</span>().item()</span>
+<span id="cb29-38"><a href="#cb29-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-39"><a href="#cb29-39" aria-hidden="true" tabindex="-1"></a>    avg_val_loss <span class="op">=</span> val_loss <span class="op">/</span> <span class="bu">len</span>(dev_loader)</span>
+<span id="cb29-40"><a href="#cb29-40" aria-hidden="true" tabindex="-1"></a>    val_accuracy <span class="op">=</span> <span class="dv">100</span> <span class="op">*</span> correct <span class="op">/</span> total</span>
+<span id="cb29-41"><a href="#cb29-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-42"><a href="#cb29-42" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f'Epoch [</span><span class="sc">{</span>epoch<span class="op">+</span><span class="dv">1</span><span class="sc">}</span><span class="ss">/</span><span class="sc">{</span>NUM_EPOCHS<span class="sc">}</span><span class="ss">], '</span></span>
+<span id="cb29-43"><a href="#cb29-43" aria-hidden="true" tabindex="-1"></a>          <span class="ss">f'Train Loss: </span><span class="sc">{</span>avg_train_loss<span class="sc">:.4f}</span><span class="ss">, '</span></span>
+<span id="cb29-44"><a href="#cb29-44" aria-hidden="true" tabindex="-1"></a>          <span class="ss">f'Val Loss: </span><span class="sc">{</span>avg_val_loss<span class="sc">:.4f}</span><span class="ss">, '</span></span>
+<span id="cb29-45"><a href="#cb29-45" aria-hidden="true" tabindex="-1"></a>          <span class="ss">f'Val Acc: </span><span class="sc">{</span>val_accuracy<span class="sc">:.2f}</span><span class="ss">%'</span>)</span>
+<span id="cb29-46"><a href="#cb29-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-47"><a href="#cb29-47" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Finish processing"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Epoch [1/3], Train Loss: 1.4408, Val Loss: 1.3469, Val Acc: 41.74%
+Epoch [2/3], Train Loss: 1.3760, Val Loss: 1.3383, Val Acc: 42.23%
+Epoch [3/3], Train Loss: 1.3639, Val Loss: 1.3268, Val Acc: 42.54%
+Finish processing</code></pre>
+</div>
+</div>
+</section>
+<section id="lstm" class="level1">
+<h1>LSTM</h1>
+<div id="cell-27" class="cell" data-execution_count="21">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> torch.nn.utils.rnn <span class="im">import</span> pack_padded_sequence, pad_packed_sequence</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> LSTM(nn.Module):</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, weights_matrix, num_classes, hidden_size <span class="op">=</span> <span class="dv">256</span>, num_layers <span class="op">=</span> <span class="dv">1</span>, dropout_prob <span class="op">=</span> <span class="fl">0.5</span>, padding_idx <span class="op">=</span> <span class="dv">0</span>):</span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>        <span class="bu">super</span>().<span class="fu">__init__</span>()</span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>        weights_tensor <span class="op">=</span> torch.tensor(weights_matrix, dtype<span class="op">=</span>torch.<span class="bu">float</span>)</span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.embedding <span class="op">=</span> nn.Embedding.from_pretrained(</span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a>            weights_tensor,</span>
+<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a>            padding_idx<span class="op">=</span>padding_idx</span>
+<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb31-11"><a href="#cb31-11" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.emb_dim <span class="op">=</span> weights_matrix.shape[<span class="dv">1</span>]</span>
+<span id="cb31-12"><a href="#cb31-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-13"><a href="#cb31-13" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.lstm <span class="op">=</span> nn.LSTM(</span>
+<span id="cb31-14"><a href="#cb31-14" aria-hidden="true" tabindex="-1"></a>            input_size<span class="op">=</span><span class="va">self</span>.emb_dim,</span>
+<span id="cb31-15"><a href="#cb31-15" aria-hidden="true" tabindex="-1"></a>            hidden_size<span class="op">=</span>hidden_size,</span>
+<span id="cb31-16"><a href="#cb31-16" aria-hidden="true" tabindex="-1"></a>            num_layers<span class="op">=</span>num_layers,</span>
+<span id="cb31-17"><a href="#cb31-17" aria-hidden="true" tabindex="-1"></a>            batch_first<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb31-18"><a href="#cb31-18" aria-hidden="true" tabindex="-1"></a>            bidirectional<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb31-19"><a href="#cb31-19" aria-hidden="true" tabindex="-1"></a>            dropout<span class="op">=</span>dropout_prob <span class="cf">if</span> num_layers <span class="op">&gt;</span> <span class="dv">1</span> <span class="cf">else</span> <span class="dv">0</span></span>
+<span id="cb31-20"><a href="#cb31-20" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb31-21"><a href="#cb31-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-22"><a href="#cb31-22" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.fc <span class="op">=</span> nn.Linear(hidden_size <span class="op">*</span> <span class="dv">2</span>, num_classes)</span>
+<span id="cb31-23"><a href="#cb31-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-24"><a href="#cb31-24" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.dropout <span class="op">=</span> nn.Dropout(dropout_prob)</span>
+<span id="cb31-25"><a href="#cb31-25" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.padding_idx <span class="op">=</span> padding_idx</span>
+<span id="cb31-26"><a href="#cb31-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-27"><a href="#cb31-27" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> forward(<span class="va">self</span>, x):</span>
+<span id="cb31-28"><a href="#cb31-28" aria-hidden="true" tabindex="-1"></a>        lengths <span class="op">=</span> (x <span class="op">!=</span> <span class="va">self</span>.padding_idx).<span class="bu">sum</span>(dim<span class="op">=</span><span class="dv">1</span>).cpu()</span>
+<span id="cb31-29"><a href="#cb31-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-30"><a href="#cb31-30" aria-hidden="true" tabindex="-1"></a>        embeds <span class="op">=</span> <span class="va">self</span>.embedding(x) <span class="co"># [Batch, Seq, Emb]</span></span>
+<span id="cb31-31"><a href="#cb31-31" aria-hidden="true" tabindex="-1"></a>        packed_input <span class="op">=</span> pack_padded_sequence(embeds, lengths, batch_first<span class="op">=</span><span class="va">True</span>, enforce_sorted<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb31-32"><a href="#cb31-32" aria-hidden="true" tabindex="-1"></a>        packed_output, (hidden, cell) <span class="op">=</span> <span class="va">self</span>.lstm(packed_input)</span>
+<span id="cb31-33"><a href="#cb31-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-34"><a href="#cb31-34" aria-hidden="true" tabindex="-1"></a>        cat_hidden <span class="op">=</span> torch.cat((hidden[<span class="op">-</span><span class="dv">2</span>,:,:], hidden[<span class="op">-</span><span class="dv">1</span>,:,:]), dim<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb31-35"><a href="#cb31-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-36"><a href="#cb31-36" aria-hidden="true" tabindex="-1"></a>        output <span class="op">=</span> <span class="va">self</span>.dropout(cat_hidden)</span>
+<span id="cb31-37"><a href="#cb31-37" aria-hidden="true" tabindex="-1"></a>        output <span class="op">=</span> <span class="va">self</span>.fc(output)</span>
+<span id="cb31-38"><a href="#cb31-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-39"><a href="#cb31-39" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> output</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="cell-28" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:0}}" data-outputid="dbd4483a-cda9-44d5-e99a-3fe39058a2ff" data-execution_count="22">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>HIDDEN_SIZE <span class="op">=</span> <span class="dv">128</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>NUM_LAYERS <span class="op">=</span> <span class="dv">2</span></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>DROPOUT <span class="op">=</span> <span class="fl">0.5</span></span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>PAD_IDX <span class="op">=</span> w2i[<span class="st">'&lt;PAD&gt;'</span>]</span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>NUM_CLASSES <span class="op">=</span> <span class="dv">5</span></span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> LSTM(</span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a>    weights_matrix<span class="op">=</span>embedding_weights,</span>
+<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a>    num_classes<span class="op">=</span>NUM_CLASSES,</span>
+<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a>    hidden_size<span class="op">=</span>HIDDEN_SIZE,</span>
+<span id="cb32-11"><a href="#cb32-11" aria-hidden="true" tabindex="-1"></a>    num_layers<span class="op">=</span>NUM_LAYERS,</span>
+<span id="cb32-12"><a href="#cb32-12" aria-hidden="true" tabindex="-1"></a>    dropout_prob<span class="op">=</span>DROPOUT,</span>
+<span id="cb32-13"><a href="#cb32-13" aria-hidden="true" tabindex="-1"></a>    padding_idx<span class="op">=</span>PAD_IDX</span>
+<span id="cb32-14"><a href="#cb32-14" aria-hidden="true" tabindex="-1"></a>).to(device)</span>
+<span id="cb32-15"><a href="#cb32-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-16"><a href="#cb32-16" aria-hidden="true" tabindex="-1"></a>optimizer <span class="op">=</span> torch.optim.Adam(model.parameters(), lr <span class="op">=</span> <span class="fl">0.001</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>/tmp/ipython-input-2886251409.py:6: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.detach().clone() or sourceTensor.detach().clone().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  weights_tensor = torch.tensor(weights_matrix, dtype=torch.float)</code></pre>
+</div>
+</div>
+<div id="cell-29" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:0}}" data-outputid="8e4b1a21-cd18-4a00-b8a1-69b5608a267a" data-execution_count="23">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>train_loss <span class="op">=</span> <span class="bu">float</span>(<span class="st">'inf'</span>)</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>best_val_loss <span class="op">=</span> <span class="bu">float</span>(<span class="st">'inf'</span>)</span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>patience <span class="op">=</span> <span class="dv">3</span></span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>trigger_times <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>epoch <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>THRESHOLD <span class="op">=</span> <span class="fl">0.01</span></span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a>MAX_EPOCHS <span class="op">=</span> <span class="dv">100</span></span>
+<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> train_loss <span class="op">&gt;</span> THRESHOLD <span class="kw">and</span> epoch <span class="op">&lt;</span> MAX_EPOCHS:</span>
+<span id="cb34-10"><a href="#cb34-10" aria-hidden="true" tabindex="-1"></a>    epoch <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb34-11"><a href="#cb34-11" aria-hidden="true" tabindex="-1"></a>    model.train()</span>
+<span id="cb34-12"><a href="#cb34-12" aria-hidden="true" tabindex="-1"></a>    total_loss <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb34-13"><a href="#cb34-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-14"><a href="#cb34-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> inputs, labels <span class="kw">in</span> train_loader:</span>
+<span id="cb34-15"><a href="#cb34-15" aria-hidden="true" tabindex="-1"></a>        inputs, labels <span class="op">=</span> inputs.to(device), labels.to(device)</span>
+<span id="cb34-16"><a href="#cb34-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-17"><a href="#cb34-17" aria-hidden="true" tabindex="-1"></a>        optimizer.zero_grad()</span>
+<span id="cb34-18"><a href="#cb34-18" aria-hidden="true" tabindex="-1"></a>        outputs <span class="op">=</span> model(inputs)</span>
+<span id="cb34-19"><a href="#cb34-19" aria-hidden="true" tabindex="-1"></a>        loss <span class="op">=</span> criterion(outputs, labels)</span>
+<span id="cb34-20"><a href="#cb34-20" aria-hidden="true" tabindex="-1"></a>        loss.backward()</span>
+<span id="cb34-21"><a href="#cb34-21" aria-hidden="true" tabindex="-1"></a>        optimizer.step()</span>
+<span id="cb34-22"><a href="#cb34-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-23"><a href="#cb34-23" aria-hidden="true" tabindex="-1"></a>        total_loss <span class="op">+=</span> loss.item()</span>
+<span id="cb34-24"><a href="#cb34-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-25"><a href="#cb34-25" aria-hidden="true" tabindex="-1"></a>    avg_train_loss <span class="op">=</span> total_loss <span class="op">/</span> <span class="bu">len</span>(train_loader)</span>
+<span id="cb34-26"><a href="#cb34-26" aria-hidden="true" tabindex="-1"></a>    train_loss <span class="op">=</span> avg_train_loss</span>
+<span id="cb34-27"><a href="#cb34-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-28"><a href="#cb34-28" aria-hidden="true" tabindex="-1"></a>    model.<span class="bu">eval</span>()</span>
+<span id="cb34-29"><a href="#cb34-29" aria-hidden="true" tabindex="-1"></a>    val_loss <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb34-30"><a href="#cb34-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-31"><a href="#cb34-31" aria-hidden="true" tabindex="-1"></a>    all_preds <span class="op">=</span> []</span>
+<span id="cb34-32"><a href="#cb34-32" aria-hidden="true" tabindex="-1"></a>    all_labels <span class="op">=</span> []</span>
+<span id="cb34-33"><a href="#cb34-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-34"><a href="#cb34-34" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> torch.no_grad():</span>
+<span id="cb34-35"><a href="#cb34-35" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> inputs, labels <span class="kw">in</span> dev_loader:</span>
+<span id="cb34-36"><a href="#cb34-36" aria-hidden="true" tabindex="-1"></a>            inputs, labels <span class="op">=</span> inputs.to(device), labels.to(device)</span>
+<span id="cb34-37"><a href="#cb34-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-38"><a href="#cb34-38" aria-hidden="true" tabindex="-1"></a>            outputs <span class="op">=</span> model(inputs)</span>
+<span id="cb34-39"><a href="#cb34-39" aria-hidden="true" tabindex="-1"></a>            loss <span class="op">=</span> criterion(outputs, labels)</span>
+<span id="cb34-40"><a href="#cb34-40" aria-hidden="true" tabindex="-1"></a>            val_loss <span class="op">+=</span> loss.item()</span>
+<span id="cb34-41"><a href="#cb34-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-42"><a href="#cb34-42" aria-hidden="true" tabindex="-1"></a>            _, predicted <span class="op">=</span> torch.<span class="bu">max</span>(outputs.data, <span class="dv">1</span>)</span>
+<span id="cb34-43"><a href="#cb34-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-44"><a href="#cb34-44" aria-hidden="true" tabindex="-1"></a>            all_preds.extend(predicted.cpu().numpy())</span>
+<span id="cb34-45"><a href="#cb34-45" aria-hidden="true" tabindex="-1"></a>            all_labels.extend(labels.cpu().numpy())</span>
+<span id="cb34-46"><a href="#cb34-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-47"><a href="#cb34-47" aria-hidden="true" tabindex="-1"></a>    avg_val_loss <span class="op">=</span> val_loss <span class="op">/</span> <span class="bu">len</span>(dev_loader)</span>
+<span id="cb34-48"><a href="#cb34-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-49"><a href="#cb34-49" aria-hidden="true" tabindex="-1"></a>    val_f1 <span class="op">=</span> f1_score(all_labels, all_preds, average<span class="op">=</span><span class="st">'macro'</span>)</span>
+<span id="cb34-50"><a href="#cb34-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-51"><a href="#cb34-51" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> avg_val_loss <span class="op">&lt;</span> best_val_loss:</span>
+<span id="cb34-52"><a href="#cb34-52" aria-hidden="true" tabindex="-1"></a>        best_val_loss <span class="op">=</span> avg_val_loss</span>
+<span id="cb34-53"><a href="#cb34-53" aria-hidden="true" tabindex="-1"></a>        torch.save(model.state_dict(), <span class="st">'best_model.pth'</span>)</span>
+<span id="cb34-54"><a href="#cb34-54" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f"Save best model (F1: </span><span class="sc">{</span>val_f1<span class="sc">:.4f}</span><span class="ss">)"</span>)</span>
+<span id="cb34-55"><a href="#cb34-55" aria-hidden="true" tabindex="-1"></a>        trigger_times <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb34-56"><a href="#cb34-56" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb34-57"><a href="#cb34-57" aria-hidden="true" tabindex="-1"></a>        trigger_times <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb34-58"><a href="#cb34-58" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f"Val Loss (</span><span class="sc">{</span>trigger_times<span class="sc">}</span><span class="ss">/</span><span class="sc">{</span>patience<span class="sc">}</span><span class="ss">)"</span>)</span>
+<span id="cb34-59"><a href="#cb34-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-60"><a href="#cb34-60" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> trigger_times <span class="op">&gt;=</span> patience:</span>
+<span id="cb34-61"><a href="#cb34-61" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(<span class="st">"Early stop triggers"</span>)</span>
+<span id="cb34-62"><a href="#cb34-62" aria-hidden="true" tabindex="-1"></a>            <span class="cf">break</span></span>
+<span id="cb34-63"><a href="#cb34-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-64"><a href="#cb34-64" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f'Epoch [</span><span class="sc">{</span>epoch<span class="sc">}</span><span class="ss">], '</span></span>
+<span id="cb34-65"><a href="#cb34-65" aria-hidden="true" tabindex="-1"></a>          <span class="ss">f'Train Loss: </span><span class="sc">{</span>avg_train_loss<span class="sc">:.4f}</span><span class="ss">, '</span></span>
+<span id="cb34-66"><a href="#cb34-66" aria-hidden="true" tabindex="-1"></a>          <span class="ss">f'Val Loss: </span><span class="sc">{</span>avg_val_loss<span class="sc">:.4f}</span><span class="ss">, '</span></span>
+<span id="cb34-67"><a href="#cb34-67" aria-hidden="true" tabindex="-1"></a>          <span class="ss">f'Val F1 (Macro): </span><span class="sc">{</span>val_f1<span class="sc">:.4f}</span><span class="ss">'</span>)</span>
+<span id="cb34-68"><a href="#cb34-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-69"><a href="#cb34-69" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Finish training"</span>)</span>
+<span id="cb34-70"><a href="#cb34-70" aria-hidden="true" tabindex="-1"></a>model.load_state_dict(torch.load(<span class="st">'best_model.pth'</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Save best model (F1: 0.4521)
+Epoch [1], Train Loss: 1.4031, Val Loss: 1.2327, Val F1 (Macro): 0.4521
+Val Loss (1/3)
+Epoch [2], Train Loss: 1.2334, Val Loss: 1.2392, Val F1 (Macro): 0.4346
+Save best model (F1: 0.4686)
+Epoch [3], Train Loss: 1.1421, Val Loss: 1.1874, Val F1 (Macro): 0.4686
+Save best model (F1: 0.5289)
+Epoch [4], Train Loss: 1.0361, Val Loss: 1.0636, Val F1 (Macro): 0.5289
+Save best model (F1: 0.5310)
+Epoch [5], Train Loss: 0.9297, Val Loss: 1.0446, Val F1 (Macro): 0.5310
+Val Loss (1/3)
+Epoch [6], Train Loss: 0.8368, Val Loss: 1.0540, Val F1 (Macro): 0.5501
+Val Loss (2/3)
+Epoch [7], Train Loss: 0.7459, Val Loss: 1.0646, Val F1 (Macro): 0.5570
+Val Loss (3/3)
+Early stop triggers
+Finish training</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="23">
+<pre><code>&lt;All keys matched successfully&gt;</code></pre>
+</div>
+</div>
+<div id="cell-30" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:0}}" data-outputid="d03763b3-95d8-4a1b-db0b-abf50752c52c" data-execution_count="24">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Hyper parameter tunning</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>HIDDEN_SIZE <span class="op">=</span> <span class="dv">256</span></span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>NUM_LAYERS <span class="op">=</span> <span class="dv">3</span></span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>DROPOUT <span class="op">=</span> <span class="fl">0.5</span></span>
+<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a>PAD_IDX <span class="op">=</span> w2i[<span class="st">'&lt;PAD&gt;'</span>]</span>
+<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a>NUM_CLASSES <span class="op">=</span> <span class="dv">5</span></span>
+<span id="cb37-8"><a href="#cb37-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-9"><a href="#cb37-9" aria-hidden="true" tabindex="-1"></a>model_tuned <span class="op">=</span> LSTM(</span>
+<span id="cb37-10"><a href="#cb37-10" aria-hidden="true" tabindex="-1"></a>    weights_matrix<span class="op">=</span>embedding_weights,</span>
+<span id="cb37-11"><a href="#cb37-11" aria-hidden="true" tabindex="-1"></a>    num_classes<span class="op">=</span>NUM_CLASSES,</span>
+<span id="cb37-12"><a href="#cb37-12" aria-hidden="true" tabindex="-1"></a>    hidden_size<span class="op">=</span>HIDDEN_SIZE,</span>
+<span id="cb37-13"><a href="#cb37-13" aria-hidden="true" tabindex="-1"></a>    num_layers<span class="op">=</span>NUM_LAYERS,</span>
+<span id="cb37-14"><a href="#cb37-14" aria-hidden="true" tabindex="-1"></a>    dropout_prob<span class="op">=</span>DROPOUT,</span>
+<span id="cb37-15"><a href="#cb37-15" aria-hidden="true" tabindex="-1"></a>    padding_idx<span class="op">=</span>PAD_IDX</span>
+<span id="cb37-16"><a href="#cb37-16" aria-hidden="true" tabindex="-1"></a>).to(device)</span>
+<span id="cb37-17"><a href="#cb37-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-18"><a href="#cb37-18" aria-hidden="true" tabindex="-1"></a>optimizer <span class="op">=</span> torch.optim.Adam(model_tuned.parameters(), lr <span class="op">=</span> <span class="fl">0.001</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>/tmp/ipython-input-2886251409.py:6: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.detach().clone() or sourceTensor.detach().clone().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  weights_tensor = torch.tensor(weights_matrix, dtype=torch.float)</code></pre>
+</div>
+</div>
+<div id="cell-31" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:0}}" data-outputid="6970f897-d1ab-4c52-ba96-845cd1a60c48" data-execution_count="25">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>train_loss <span class="op">=</span> <span class="bu">float</span>(<span class="st">'inf'</span>)</span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>best_val_loss <span class="op">=</span> <span class="bu">float</span>(<span class="st">'inf'</span>)</span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>patience <span class="op">=</span> <span class="dv">3</span></span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>trigger_times <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a>epoch <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a>THRESHOLD <span class="op">=</span> <span class="fl">0.01</span></span>
+<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a>MAX_EPOCHS <span class="op">=</span> <span class="dv">100</span></span>
+<span id="cb39-8"><a href="#cb39-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-9"><a href="#cb39-9" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> train_loss <span class="op">&gt;</span> THRESHOLD <span class="kw">and</span> epoch <span class="op">&lt;</span> MAX_EPOCHS:</span>
+<span id="cb39-10"><a href="#cb39-10" aria-hidden="true" tabindex="-1"></a>    epoch <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb39-11"><a href="#cb39-11" aria-hidden="true" tabindex="-1"></a>    model_tuned.train()</span>
+<span id="cb39-12"><a href="#cb39-12" aria-hidden="true" tabindex="-1"></a>    total_loss <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb39-13"><a href="#cb39-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-14"><a href="#cb39-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> inputs, labels <span class="kw">in</span> train_loader:</span>
+<span id="cb39-15"><a href="#cb39-15" aria-hidden="true" tabindex="-1"></a>        inputs, labels <span class="op">=</span> inputs.to(device), labels.to(device)</span>
+<span id="cb39-16"><a href="#cb39-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-17"><a href="#cb39-17" aria-hidden="true" tabindex="-1"></a>        optimizer.zero_grad()</span>
+<span id="cb39-18"><a href="#cb39-18" aria-hidden="true" tabindex="-1"></a>        outputs <span class="op">=</span> model_tuned(inputs)</span>
+<span id="cb39-19"><a href="#cb39-19" aria-hidden="true" tabindex="-1"></a>        loss <span class="op">=</span> criterion(outputs, labels)</span>
+<span id="cb39-20"><a href="#cb39-20" aria-hidden="true" tabindex="-1"></a>        loss.backward()</span>
+<span id="cb39-21"><a href="#cb39-21" aria-hidden="true" tabindex="-1"></a>        optimizer.step()</span>
+<span id="cb39-22"><a href="#cb39-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-23"><a href="#cb39-23" aria-hidden="true" tabindex="-1"></a>        total_loss <span class="op">+=</span> loss.item()</span>
+<span id="cb39-24"><a href="#cb39-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-25"><a href="#cb39-25" aria-hidden="true" tabindex="-1"></a>    avg_train_loss <span class="op">=</span> total_loss <span class="op">/</span> <span class="bu">len</span>(train_loader)</span>
+<span id="cb39-26"><a href="#cb39-26" aria-hidden="true" tabindex="-1"></a>    train_loss <span class="op">=</span> avg_train_loss</span>
+<span id="cb39-27"><a href="#cb39-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-28"><a href="#cb39-28" aria-hidden="true" tabindex="-1"></a>    model_tuned.<span class="bu">eval</span>()</span>
+<span id="cb39-29"><a href="#cb39-29" aria-hidden="true" tabindex="-1"></a>    val_loss <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb39-30"><a href="#cb39-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-31"><a href="#cb39-31" aria-hidden="true" tabindex="-1"></a>    all_preds <span class="op">=</span> []</span>
+<span id="cb39-32"><a href="#cb39-32" aria-hidden="true" tabindex="-1"></a>    all_labels <span class="op">=</span> []</span>
+<span id="cb39-33"><a href="#cb39-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-34"><a href="#cb39-34" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> torch.no_grad():</span>
+<span id="cb39-35"><a href="#cb39-35" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> inputs, labels <span class="kw">in</span> dev_loader:</span>
+<span id="cb39-36"><a href="#cb39-36" aria-hidden="true" tabindex="-1"></a>            inputs, labels <span class="op">=</span> inputs.to(device), labels.to(device)</span>
+<span id="cb39-37"><a href="#cb39-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-38"><a href="#cb39-38" aria-hidden="true" tabindex="-1"></a>            outputs <span class="op">=</span> model_tuned(inputs)</span>
+<span id="cb39-39"><a href="#cb39-39" aria-hidden="true" tabindex="-1"></a>            loss <span class="op">=</span> criterion(outputs, labels)</span>
+<span id="cb39-40"><a href="#cb39-40" aria-hidden="true" tabindex="-1"></a>            val_loss <span class="op">+=</span> loss.item()</span>
+<span id="cb39-41"><a href="#cb39-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-42"><a href="#cb39-42" aria-hidden="true" tabindex="-1"></a>            _, predicted <span class="op">=</span> torch.<span class="bu">max</span>(outputs.data, <span class="dv">1</span>)</span>
+<span id="cb39-43"><a href="#cb39-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-44"><a href="#cb39-44" aria-hidden="true" tabindex="-1"></a>            all_preds.extend(predicted.cpu().numpy())</span>
+<span id="cb39-45"><a href="#cb39-45" aria-hidden="true" tabindex="-1"></a>            all_labels.extend(labels.cpu().numpy())</span>
+<span id="cb39-46"><a href="#cb39-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-47"><a href="#cb39-47" aria-hidden="true" tabindex="-1"></a>    avg_val_loss <span class="op">=</span> val_loss <span class="op">/</span> <span class="bu">len</span>(dev_loader)</span>
+<span id="cb39-48"><a href="#cb39-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-49"><a href="#cb39-49" aria-hidden="true" tabindex="-1"></a>    val_f1 <span class="op">=</span> f1_score(all_labels, all_preds, average<span class="op">=</span><span class="st">'macro'</span>)</span>
+<span id="cb39-50"><a href="#cb39-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-51"><a href="#cb39-51" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> avg_val_loss <span class="op">&lt;</span> best_val_loss:</span>
+<span id="cb39-52"><a href="#cb39-52" aria-hidden="true" tabindex="-1"></a>        best_val_loss <span class="op">=</span> avg_val_loss</span>
+<span id="cb39-53"><a href="#cb39-53" aria-hidden="true" tabindex="-1"></a>        torch.save(model_tuned.state_dict(), <span class="st">'best_model_tuned.pth'</span>)</span>
+<span id="cb39-54"><a href="#cb39-54" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f"Save best model_tuned (F1: </span><span class="sc">{</span>val_f1<span class="sc">:.4f}</span><span class="ss">)"</span>)</span>
+<span id="cb39-55"><a href="#cb39-55" aria-hidden="true" tabindex="-1"></a>        trigger_times <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb39-56"><a href="#cb39-56" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb39-57"><a href="#cb39-57" aria-hidden="true" tabindex="-1"></a>        trigger_times <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb39-58"><a href="#cb39-58" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f"Val Loss (</span><span class="sc">{</span>trigger_times<span class="sc">}</span><span class="ss">/</span><span class="sc">{</span>patience<span class="sc">}</span><span class="ss">)"</span>)</span>
+<span id="cb39-59"><a href="#cb39-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-60"><a href="#cb39-60" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> trigger_times <span class="op">&gt;=</span> patience:</span>
+<span id="cb39-61"><a href="#cb39-61" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(<span class="st">"Early stop triggers"</span>)</span>
+<span id="cb39-62"><a href="#cb39-62" aria-hidden="true" tabindex="-1"></a>            <span class="cf">break</span></span>
+<span id="cb39-63"><a href="#cb39-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-64"><a href="#cb39-64" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f'Epoch [</span><span class="sc">{</span>epoch<span class="sc">}</span><span class="ss">], '</span></span>
+<span id="cb39-65"><a href="#cb39-65" aria-hidden="true" tabindex="-1"></a>          <span class="ss">f'Train Loss: </span><span class="sc">{</span>avg_train_loss<span class="sc">:.4f}</span><span class="ss">, '</span></span>
+<span id="cb39-66"><a href="#cb39-66" aria-hidden="true" tabindex="-1"></a>          <span class="ss">f'Val Loss: </span><span class="sc">{</span>avg_val_loss<span class="sc">:.4f}</span><span class="ss">, '</span></span>
+<span id="cb39-67"><a href="#cb39-67" aria-hidden="true" tabindex="-1"></a>          <span class="ss">f'Val F1 (Macro): </span><span class="sc">{</span>val_f1<span class="sc">:.4f}</span><span class="ss">'</span>)</span>
+<span id="cb39-68"><a href="#cb39-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-69"><a href="#cb39-69" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Finish training"</span>)</span>
+<span id="cb39-70"><a href="#cb39-70" aria-hidden="true" tabindex="-1"></a>model_tuned.load_state_dict(torch.load(<span class="st">'best_model_tuned.pth'</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Save best model_tuned (F1: 0.3612)
+Epoch [1], Train Loss: 1.4040, Val Loss: 1.2835, Val F1 (Macro): 0.3612
+Save best model_tuned (F1: 0.4822)
+Epoch [2], Train Loss: 1.2019, Val Loss: 1.1576, Val F1 (Macro): 0.4822
+Save best model_tuned (F1: 0.5128)
+Epoch [3], Train Loss: 1.0639, Val Loss: 1.0784, Val F1 (Macro): 0.5128
+Save best model_tuned (F1: 0.5407)
+Epoch [4], Train Loss: 0.9518, Val Loss: 1.0268, Val F1 (Macro): 0.5407
+Val Loss (1/3)
+Epoch [5], Train Loss: 0.8555, Val Loss: 1.0524, Val F1 (Macro): 0.5452
+Val Loss (2/3)
+Epoch [6], Train Loss: 0.7450, Val Loss: 1.0955, Val F1 (Macro): 0.5398
+Val Loss (3/3)
+Early stop triggers
+Finish training</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="25">
+<pre><code>&lt;All keys matched successfully&gt;</code></pre>
+</div>
+</div>
+</section>
+<section id="predict-on-the-test-set" class="level1">
+<h1>predict on the test set</h1>
+<div id="cell-33" class="cell" data-execution_count="26">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>test_set[<span class="st">'rating'</span>] <span class="op">=</span> <span class="st">'1star'</span></span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>test_loader <span class="op">=</span> create_data_loader(test_set, w2i <span class="op">=</span> w2i, y <span class="op">=</span> label_encoder.transform(test_set.rating), batch_size <span class="op">=</span> <span class="dv">64</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="cell-34" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:0}}" data-outputid="32bc1e6c-a7b2-4ea9-c549-5036339c789d" data-execution_count="27">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_preds(model, loader):</span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>    model.<span class="bu">eval</span>()</span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>    all_preds <span class="op">=</span> []</span>
+<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> torch.no_grad():</span>
+<span id="cb43-6"><a href="#cb43-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> inputs, labels <span class="kw">in</span> loader:</span>
+<span id="cb43-7"><a href="#cb43-7" aria-hidden="true" tabindex="-1"></a>            inputs <span class="op">=</span> inputs.to(device)</span>
+<span id="cb43-8"><a href="#cb43-8" aria-hidden="true" tabindex="-1"></a>            outputs <span class="op">=</span> model(inputs)</span>
+<span id="cb43-9"><a href="#cb43-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-10"><a href="#cb43-10" aria-hidden="true" tabindex="-1"></a>            _, predicted <span class="op">=</span> torch.<span class="bu">max</span>(outputs.data, <span class="dv">1</span>)</span>
+<span id="cb43-11"><a href="#cb43-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-12"><a href="#cb43-12" aria-hidden="true" tabindex="-1"></a>            preds <span class="op">=</span> predicted.cpu().numpy()</span>
+<span id="cb43-13"><a href="#cb43-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-14"><a href="#cb43-14" aria-hidden="true" tabindex="-1"></a>            all_preds.extend([<span class="st">'star'</span> <span class="op">+</span> <span class="bu">str</span>(x) <span class="cf">for</span> x <span class="kw">in</span> preds])</span>
+<span id="cb43-15"><a href="#cb43-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-16"><a href="#cb43-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> all_preds</span>
+<span id="cb43-17"><a href="#cb43-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-18"><a href="#cb43-18" aria-hidden="true" tabindex="-1"></a>test_preds <span class="op">=</span> get_preds(model_tuned, test_loader)</span>
+<span id="cb43-19"><a href="#cb43-19" aria-hidden="true" tabindex="-1"></a>test_preds</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="27">
+<pre><code>['star3',
+ 'star2',
+ 'star2',
+ 'star2',
+ 'star2',
+ 'star0',
+ 'star3',
+ 'star1',
+ 'star0',
+ 'star0',
+ 'star0',
+ 'star1',
+ 'star3',
+ 'star4',
+ 'star3',
+ 'star3',
+ 'star2',
+ 'star2',
+ 'star3',
+ 'star2',
+ 'star3',
+ 'star4',
+ 'star2',
+ 'star4',
+ 'star1',
+ 'star3',
+ 'star4',
+ 'star1',
+ 'star4',
+ 'star0',
+ 'star0',
+ 'star4',
+ 'star4',
+ 'star3',
+ 'star3',
+ 'star3',
+ 'star2',
+ 'star2',
+ 'star0',
+ 'star4',
+ 'star2',
+ 'star4',
+ 'star1',
+ 'star3',
+ 'star4',
+ 'star2',
+ 'star0',
+ 'star0',
+ 'star0',
+ 'star0',
+ 'star4',
+ 'star3',
+ 'star3',
+ 'star2',
+ 'star1',
+ 'star4',
+ 'star1',
+ 'star2',
+ 'star1',
+ 'star1',
+ 'star1',
+ 'star0',
+ 'star1',
+ 'star1',
+ 'star1',
+ 'star1',
+ 'star1',
+ 'star2',
+ 'star3',
+ 'star4',
+ 'star2',
+ 'star1',
+ 'star1',
+ 'star1',
+ 'star0',
+ 'star4',
+ 'star2',
+ 'star1',
+ 'star4',
+ 'star1',
+ 'star0',
+ 'star1',
+ 'star2',
+ 'star1',
+ 'star4',
+ 'star0',
+ 'star1',
+ 'star0',
+ 'star3',
+ 'star3',
+ 'star4',
+ 'star0',
+ 'star3',
+ 'star0',
+ 'star1',
+ 'star0',
+ 'star4',
+ 'star3',
+ 'star0',
+ 'star0',
+ 'star4',
+ 'star1',
+ 'star1',
+ 'star3',
+ 'star1',
+ 'star0',
+ 'star1',
+ 'star2',
+ 'star1',
+ 'star3',
+ 'star4',
+ 'star0',
+ 'star4',
+ 'star2',
+ 'star4',
+ 'star3',
+ 'star1',
+ 'star3',
+ 'star4',
+ 'star2',
+ 'star0',
+ 'star1',
+ 'star4',
+ 'star1',
+ 'star3',
+ 'star0',
+ 'star4',
+ 'star2',
+ 'star4',
+ 'star2',
+ 'star3',
+ 'star1',
+ 'star4',
+ 'star2',
+ 'star4',
+ 'star3',
+ 'star0',
+ 'star4',
+ 'star3',
+ 'star2',
+ 'star3',
+ 'star2',
+ 'star3',
+ 'star1',
+ 'star3',
+ 'star2',
+ 'star4',
+ 'star0',
+ 'star0',
+ 'star2',
+ 'star4',
+ 'star3',
+ 'star3',
+ 'star4',
+ 'star0',
+ 'star2',
+ 'star4',
+ 'star3',
+ 'star4',
+ 'star4',
+ 'star1',
+ 'star4',
+ 'star3',
+ 'star4',
+ 'star3',
+ 'star1',
+ 'star3',
+ 'star1',
+ 'star4',
+ 'star3',
+ 'star4',
+ 'star0',
+ 'star2',
+ 'star3',
+ 'star1',
+ 'star1',
+ 'star2',
+ 'star3',
+ 'star1',
+ 'star1',
+ 'star1',
+ 'star2',
+ 'star4',
+ 'star4',
+ 'star2',
+ 'star4',
+ 'star1',
+ 'star2',
+ 'star2',
+ 'star0',
+ 'star1',
+ 'star1',
+ 'star3',
+ 'star3',
+ 'star4',
+ 'star2',
+ 'star0',
+ 'star1',
+ 'star1',
+ 'star1',
+ 'star1',
+ 'star2',
+ 'star4',
+ 'star0',
+ 'star2',
+ 'star3',
+ 'star3',
+ 'star0',
+ 'star4',
+ 'star1',
+ 'star1',
+ 'star1',
+ 'star0',
+ 'star2',
+ 'star3',
+ 'star0',
+ 'star1',
+ 'star3',
+ 'star1',
+ 'star3',
+ 'star3',
+ 'star3',
+ 'star1',
+ 'star1',
+ 'star2',
+ 'star1',
+ 'star4',
+ 'star3',
+ 'star4',
+ 'star4',
+ 'star4',
+ 'star0',
+ 'star0',
+ 'star2',
+ 'star3',
+ 'star0',
+ 'star4',
+ 'star0',
+ 'star4',
+ 'star3',
+ 'star4',
+ 'star0',
+ 'star1',
+ 'star4',
+ 'star1',
+ 'star2',
+ 'star1',
+ 'star0',
+ 'star3',
+ 'star1',
+ 'star1',
+ 'star2',
+ 'star3',
+ 'star3',
+ 'star1',
+ 'star0',
+ 'star4',
+ 'star1',
+ 'star0',
+ 'star3',
+ 'star2',
+ 'star0',
+ 'star4',
+ 'star2',
+ 'star4',
+ 'star4',
+ 'star1',
+ 'star1',
+ 'star2',
+ 'star1',
+ 'star4',
+ 'star1',
+ 'star2',
+ 'star4',
+ 'star4',
+ 'star1',
+ 'star4',
+ 'star4',
+ 'star2',
+ 'star4',
+ 'star2',
+ 'star3',
+ 'star0',
+ 'star3',
+ 'star0',
+ 'star2',
+ 'star4',
+ 'star4',
+ 'star3',
+ 'star2',
+ 'star1',
+ 'star3',
+ 'star0',
+ 'star4',
+ 'star1',
+ 'star1',
+ 'star2',
+ 'star4',
+ 'star4',
+ 'star2',
+ 'star2',
+ 'star4',
+ 'star2',
+ 'star2',
+ 'star3',
+ 'star2',
+ 'star2',
+ 'star3',
+ 'star1',
+ 'star2',
+ 'star3',
+ 'star1',
+ 'star3',
+ 'star4',
+ 'star3',
+ 'star2',
+ 'star1',
+ 'star0',
+ 'star1',
+ 'star0',
+ 'star0',
+ 'star0',
+ 'star1',
+ 'star0',
+ 'star1',
+ 'star1',
+ 'star3',
+ 'star1',
+ 'star3',
+ 'star1',
+ 'star0',
+ 'star2',
+ 'star0',
+ 'star3',
+ 'star3',
+ 'star0',
+ 'star1',
+ 'star2',
+ 'star4',
+ 'star2',
+ 'star0',
+ 'star2',
+ 'star4',
+ 'star3',
+ 'star0',
+ 'star3',
+ 'star3',
+ 'star3',
+ 'star2',
+ 'star2',
+ 'star0',
+ 'star0',
+ 'star3',
+ 'star4',
+ 'star4',
+ 'star2',
+ 'star4',
+ 'star1',
+ 'star1',
+ 'star4',
+ 'star0',
+ 'star3',
+ 'star4',
+ 'star2',
+ 'star2',
+ 'star0',
+ 'star4',
+ 'star1',
+ 'star3',
+ 'star0',
+ 'star3',
+ 'star1',
+ 'star0',
+ 'star4',
+ 'star3',
+ 'star3',
+ 'star0',
+ 'star1',
+ 'star2',
+ 'star1',
+ 'star2',
+ 'star2',
+ 'star0',
+ 'star2',
+ 'star1',
+ 'star4',
+ 'star0',
+ 'star1',
+ 'star0',
+ 'star0',
+ 'star4',
+ 'star0',
+ 'star1',
+ 'star4',
+ 'star4',
+ 'star2',
+ 'star2',
+ 'star3',
+ 'star2',
+ 'star2',
+ 'star3',
+ 'star0',
+ 'star3',
+ 'star1',
+ 'star0',
+ 'star0',
+ 'star2',
+ 'star2',
+ 'star4',
+ 'star2',
+ 'star1',
+ 'star2',
+ 'star1',
+ 'star3',
+ 'star4',
+ 'star4',
+ 'star3',
+ 'star1',
+ 'star0',
+ 'star4',
+ 'star0',
+ 'star0',
+ 'star1',
+ 'star4',
+ 'star1',
+ 'star2',
+ 'star1',
+ 'star4',
+ 'star3',
+ 'star3',
+ 'star0',
+ 'star4',
+ 'star2',
+ 'star3',
+ 'star0',
+ 'star3',
+ 'star4',
+ 'star2',
+ 'star3',
+ 'star0',
+ 'star1',
+ 'star1',
+ 'star3',
+ 'star0',
+ 'star1',
+ 'star3',
+ 'star2',
+ 'star2',
+ 'star0',
+ 'star4',
+ 'star4',
+ 'star2',
+ 'star2',
+ 'star3',
+ 'star0',
+ 'star3',
+ 'star0',
+ 'star3',
+ 'star2',
+ 'star0',
+ 'star3',
+ 'star1',
+ 'star3',
+ 'star4',
+ 'star3',
+ 'star1',
+ 'star0',
+ 'star2',
+ 'star4',
+ 'star3',
+ 'star4',
+ 'star0',
+ 'star3',
+ 'star2',
+ 'star3',
+ 'star2',
+ 'star4',
+ 'star4',
+ 'star3',
+ 'star3',
+ 'star1',
+ 'star1',
+ 'star2',
+ 'star0',
+ 'star3',
+ 'star2',
+ 'star0',
+ 'star2',
+ 'star4',
+ 'star1',
+ 'star1',
+ 'star4',
+ 'star1',
+ 'star0',
+ 'star4',
+ 'star2',
+ 'star1',
+ 'star0',
+ 'star3',
+ 'star3',
+ 'star2',
+ 'star1',
+ 'star2',
+ 'star3',
+ 'star0',
+ 'star4',
+ 'star3',
+ 'star2',
+ 'star1',
+ 'star3',
+ 'star2',
+ 'star2',
+ 'star1',
+ 'star3',
+ 'star1',
+ 'star0',
+ 'star1',
+ 'star0',
+ 'star3',
+ 'star0',
+ 'star1',
+ 'star3',
+ 'star4',
+ 'star2',
+ 'star2',
+ 'star3',
+ 'star1',
+ 'star0',
+ 'star1',
+ 'star0',
+ 'star2',
+ 'star1',
+ 'star0',
+ 'star0',
+ 'star4',
+ 'star0',
+ 'star1',
+ 'star3',
+ 'star1',
+ 'star2',
+ 'star2',
+ 'star4',
+ 'star2',
+ 'star1',
+ 'star3',
+ 'star4',
+ 'star3',
+ 'star2',
+ 'star3',
+ 'star1',
+ 'star1',
+ 'star2',
+ 'star3',
+ 'star3',
+ 'star0',
+ 'star0',
+ 'star4',
+ 'star1',
+ 'star0',
+ 'star2',
+ 'star1',
+ 'star0',
+ 'star0',
+ 'star3',
+ 'star3',
+ 'star3',
+ 'star3',
+ 'star3',
+ 'star1',
+ 'star3',
+ 'star2',
+ 'star1',
+ 'star2',
+ 'star3',
+ 'star2',
+ 'star1',
+ 'star3',
+ 'star3',
+ 'star0',
+ 'star2',
+ 'star0',
+ 'star2',
+ 'star2',
+ 'star1',
+ 'star1',
+ 'star2',
+ 'star3',
+ 'star2',
+ 'star0',
+ 'star3',
+ 'star3',
+ 'star0',
+ 'star2',
+ 'star4',
+ 'star1',
+ 'star4',
+ 'star4',
+ 'star4',
+ 'star2',
+ 'star1',
+ 'star2',
+ 'star4',
+ 'star0',
+ 'star0',
+ 'star0',
+ 'star0',
+ 'star4',
+ 'star1',
+ 'star4',
+ 'star0',
+ 'star0',
+ 'star4',
+ 'star4',
+ 'star1',
+ 'star0',
+ 'star3',
+ 'star4',
+ 'star0',
+ 'star3',
+ 'star3',
+ 'star3',
+ 'star0',
+ 'star3',
+ 'star3',
+ 'star3',
+ 'star3',
+ 'star3',
+ 'star4',
+ 'star3',
+ 'star2',
+ 'star3',
+ 'star1',
+ 'star4',
+ 'star2',
+ 'star2',
+ 'star1',
+ 'star0',
+ 'star1',
+ 'star1',
+ 'star1',
+ 'star0',
+ 'star3',
+ 'star1',
+ 'star2',
+ 'star1',
+ 'star0',
+ 'star2',
+ 'star2',
+ 'star2',
+ 'star1',
+ 'star1',
+ 'star3',
+ 'star1',
+ 'star1',
+ 'star4',
+ 'star4',
+ 'star0',
+ 'star3',
+ 'star4',
+ 'star1',
+ 'star0',
+ 'star1',
+ 'star4',
+ 'star4',
+ 'star3',
+ 'star0',
+ 'star4',
+ 'star3',
+ 'star1',
+ 'star4',
+ 'star1',
+ 'star2',
+ 'star2',
+ 'star3',
+ 'star4',
+ 'star3',
+ 'star0',
+ 'star0',
+ 'star0',
+ 'star1',
+ 'star2',
+ 'star3',
+ 'star2',
+ 'star2',
+ 'star3',
+ 'star2',
+ 'star4',
+ 'star1',
+ 'star4',
+ 'star4',
+ 'star4',
+ 'star2',
+ 'star4',
+ 'star3',
+ 'star1',
+ 'star2',
+ 'star2',
+ 'star0',
+ 'star1',
+ 'star2',
+ 'star1',
+ 'star4',
+ 'star1',
+ 'star2',
+ 'star1',
+ 'star0',
+ 'star3',
+ 'star4',
+ 'star4',
+ 'star3',
+ 'star4',
+ 'star4',
+ 'star1',
+ 'star1',
+ 'star1',
+ 'star1',
+ 'star3',
+ 'star1',
+ 'star4',
+ 'star0',
+ 'star3',
+ 'star1',
+ 'star3',
+ 'star0',
+ 'star2',
+ 'star1',
+ 'star1',
+ 'star1',
+ 'star3',
+ 'star0',
+ 'star1',
+ 'star1',
+ 'star1',
+ 'star1',
+ 'star3',
+ 'star4',
+ 'star1',
+ 'star1',
+ 'star1',
+ 'star3',
+ 'star2',
+ 'star3',
+ 'star1',
+ 'star2',
+ 'star0',
+ 'star4',
+ 'star1',
+ 'star0',
+ 'star4',
+ 'star0',
+ 'star3',
+ 'star4',
+ 'star1',
+ 'star1',
+ 'star4',
+ 'star3',
+ 'star2',
+ 'star3',
+ 'star4',
+ 'star2',
+ 'star3',
+ 'star4',
+ 'star2',
+ 'star3',
+ 'star2',
+ 'star3',
+ 'star3',
+ 'star2',
+ 'star2',
+ 'star3',
+ 'star3',
+ 'star4',
+ 'star2',
+ 'star1',
+ 'star4',
+ 'star1',
+ 'star4',
+ 'star0',
+ 'star1',
+ 'star4',
+ 'star0',
+ 'star4',
+ 'star0',
+ 'star1',
+ 'star3',
+ 'star4',
+ 'star1',
+ 'star3',
+ 'star0',
+ 'star2',
+ 'star4',
+ 'star1',
+ 'star1',
+ 'star3',
+ 'star4',
+ 'star3',
+ 'star4',
+ 'star4',
+ 'star2',
+ 'star3',
+ 'star2',
+ 'star3',
+ 'star2',
+ 'star3',
+ 'star3',
+ 'star0',
+ 'star1',
+ 'star1',
+ 'star1',
+ 'star3',
+ 'star1',
+ 'star0',
+ 'star3',
+ 'star3',
+ 'star1',
+ 'star2',
+ 'star3',
+ 'star1',
+ 'star1',
+ 'star1',
+ 'star4',
+ 'star2',
+ 'star0',
+ 'star3',
+ 'star0',
+ 'star3',
+ 'star0',
+ 'star1',
+ 'star4',
+ 'star4',
+ 'star4',
+ 'star0',
+ 'star0',
+ 'star4',
+ 'star3',
+ 'star2',
+ 'star2',
+ 'star4',
+ 'star1',
+ 'star1',
+ 'star3',
+ 'star0',
+ 'star2',
+ 'star4',
+ 'star1',
+ 'star3',
+ 'star4',
+ 'star2',
+ 'star3',
+ 'star2',
+ 'star3',
+ 'star2',
+ 'star0',
+ 'star3',
+ 'star1',
+ 'star3',
+ 'star1',
+ 'star3',
+ 'star0',
+ 'star3',
+ 'star4',
+ 'star1',
+ 'star1',
+ 'star2',
+ 'star4',
+ 'star3',
+ 'star0',
+ 'star3',
+ 'star3',
+ 'star0',
+ 'star1',
+ 'star2',
+ 'star1',
+ 'star3',
+ 'star4',
+ 'star4',
+ 'star3',
+ 'star2',
+ 'star1',
+ 'star4',
+ 'star1',
+ 'star4',
+ 'star1',
+ 'star0',
+ 'star4',
+ 'star0',
+ 'star2',
+ 'star2',
+ 'star4',
+ 'star1',
+ 'star4',
+ 'star1',
+ 'star4',
+ 'star3',
+ 'star3',
+ 'star3',
+ 'star2',
+ 'star1',
+ 'star1',
+ 'star4',
+ 'star3',
+ 'star3',
+ 'star0',
+ 'star2',
+ 'star2',
+ 'star4',
+ 'star1',
+ 'star1',
+ 'star0',
+ 'star2',
+ 'star4',
+ 'star3',
+ 'star2',
+ 'star1',
+ 'star3',
+ 'star2',
+ 'star1',
+ 'star1',
+ 'star1',
+ 'star3',
+ 'star2',
+ 'star3',
+ 'star0',
+ 'star4',
+ 'star3',
+ 'star2',
+ 'star1',
+ 'star4',
+ 'star3',
+ 'star2',
+ 'star2',
+ 'star4',
+ 'star4',
+ 'star4',
+ 'star1',
+ 'star2',
+ 'star3',
+ 'star4',
+ 'star0',
+ 'star4',
+ 'star3',
+ 'star1',
+ 'star3',
+ 'star2',
+ 'star4',
+ 'star2',
+ 'star1',
+ 'star3',
+ 'star2',
+ 'star1',
+ 'star4',
+ 'star3',
+ 'star2',
+ 'star3',
+ 'star1',
+ 'star1',
+ 'star3',
+ 'star3',
+ 'star3',
+ 'star3',
+ 'star4',
+ 'star1',
+ 'star2',
+ 'star1',
+ 'star3',
+ 'star1',
+ 'star2',
+ 'star0',
+ 'star1',
+ 'star2',
+ 'star0',
+ 'star2',
+ 'star0',
+ 'star4',
+ 'star2',
+ 'star2',
+ 'star4',
+ 'star4',
+ 'star0',
+ 'star3',
+ 'star0',
+ 'star4',
+ 'star3',
+ 'star4',
+ 'star4',
+ 'star4',
+ 'star3',
+ 'star4',
+ 'star3',
+ 'star0',
+ 'star2',
+ 'star2',
+ 'star1',
+ 'star4',
+ 'star2',
+ 'star1',
+ 'star3',
+ 'star0',
+ 'star1',
+ 'star3',
+ ...]</code></pre>
+</div>
+</div>
+<div id="cell-35" class="cell" data-execution_count="28">
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>out_prediction(<span class="st">'Tianhao'</span>, <span class="st">'Cao'</span>, test_preds)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="cell-36" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:71}}" data-outputid="e1643cfe-3f9d-4e0b-8e8a-127e8ce2edbd" data-execution_count="29">
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> google.colab <span class="im">import</span> files</span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>filenames <span class="op">=</span> [<span class="st">'best_model.pth'</span>, <span class="st">'best_model_tuned.pth'</span>, <span class="st">'Tianhao_Cao_PRED.txt'</span>]</span>
+<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-5"><a href="#cb46-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> fname <span class="kw">in</span> filenames:</span>
+<span id="cb46-6"><a href="#cb46-6" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"downloading </span><span class="sc">{</span>fname<span class="sc">}</span><span class="ss">..."</span>)</span>
+<span id="cb46-7"><a href="#cb46-7" aria-hidden="true" tabindex="-1"></a>    files.download(fname)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>downloading best_model.pth...</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<script type="application/javascript">
+
+    async function download(id, filename, size) {
+      if (!google.colab.kernel.accessAllowed) {
+        return;
+      }
+      const div = document.createElement('div');
+      const label = document.createElement('label');
+      label.textContent = `Downloading "${filename}": `;
+      div.appendChild(label);
+      const progress = document.createElement('progress');
+      progress.max = size;
+      div.appendChild(progress);
+      document.body.appendChild(div);
+
+      const buffers = [];
+      let downloaded = 0;
+
+      const channel = await google.colab.kernel.comms.open(id);
+      // Send a message to notify the kernel that we're ready.
+      channel.send({})
+
+      for await (const message of channel.messages) {
+        // Send a message to notify the kernel that we're ready.
+        channel.send({})
+        if (message.buffers) {
+          for (const buffer of message.buffers) {
+            buffers.push(buffer);
+            downloaded += buffer.byteLength;
+            progress.value = downloaded;
+          }
+        }
+      }
+      const blob = new Blob(buffers, {type: 'application/binary'});
+      const a = document.createElement('a');
+      a.href = window.URL.createObjectURL(blob);
+      a.download = filename;
+      div.appendChild(a);
+      a.click();
+      div.remove();
+    }
+  
+</script>
+</div>
+<div class="cell-output cell-output-display">
+<script type="application/javascript">
+download("download_1faa1012-0a1d-44f7-95e3-a5f244e35385", "best_model.pth", 130696571)
+</script>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>downloading best_model_tuned.pth...</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<script type="application/javascript">
+
+    async function download(id, filename, size) {
+      if (!google.colab.kernel.accessAllowed) {
+        return;
+      }
+      const div = document.createElement('div');
+      const label = document.createElement('label');
+      label.textContent = `Downloading "${filename}": `;
+      div.appendChild(label);
+      const progress = document.createElement('progress');
+      progress.max = size;
+      div.appendChild(progress);
+      document.body.appendChild(div);
+
+      const buffers = [];
+      let downloaded = 0;
+
+      const channel = await google.colab.kernel.comms.open(id);
+      // Send a message to notify the kernel that we're ready.
+      channel.send({})
+
+      for await (const message of channel.messages) {
+        // Send a message to notify the kernel that we're ready.
+        channel.send({})
+        if (message.buffers) {
+          for (const buffer of message.buffers) {
+            buffers.push(buffer);
+            downloaded += buffer.byteLength;
+            progress.value = downloaded;
+          }
+        }
+      }
+      const blob = new Blob(buffers, {type: 'application/binary'});
+      const a = document.createElement('a');
+      a.href = window.URL.createObjectURL(blob);
+      a.download = filename;
+      div.appendChild(a);
+      a.click();
+      div.remove();
+    }
+  
+</script>
+</div>
+<div class="cell-output cell-output-display">
+<script type="application/javascript">
+download("download_5c35d151-ab34-4897-a4db-ab3ebb333572", "best_model_tuned.pth", 144546999)
+</script>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>downloading Tianhao_Cao_PRED.txt...</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<script type="application/javascript">
+
+    async function download(id, filename, size) {
+      if (!google.colab.kernel.accessAllowed) {
+        return;
+      }
+      const div = document.createElement('div');
+      const label = document.createElement('label');
+      label.textContent = `Downloading "${filename}": `;
+      div.appendChild(label);
+      const progress = document.createElement('progress');
+      progress.max = size;
+      div.appendChild(progress);
+      document.body.appendChild(div);
+
+      const buffers = [];
+      let downloaded = 0;
+
+      const channel = await google.colab.kernel.comms.open(id);
+      // Send a message to notify the kernel that we're ready.
+      channel.send({})
+
+      for await (const message of channel.messages) {
+        // Send a message to notify the kernel that we're ready.
+        channel.send({})
+        if (message.buffers) {
+          for (const buffer of message.buffers) {
+            buffers.push(buffer);
+            downloaded += buffer.byteLength;
+            progress.value = downloaded;
+          }
+        }
+      }
+      const blob = new Blob(buffers, {type: 'application/binary'});
+      const a = document.createElement('a');
+      a.href = window.URL.createObjectURL(blob);
+      a.download = filename;
+      div.appendChild(a);
+      a.click();
+      div.remove();
+    }
+  
+</script>
+</div>
+<div class="cell-output cell-output-display">
+<script type="application/javascript">
+download("download_f62b97a6-859a-4e85-9dc3-29c40cc9191a", "Tianhao_Cao_PRED.txt", 21006)
+</script>
+</div>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

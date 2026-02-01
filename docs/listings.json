@@ -2,6 +2,7 @@
   {
     "listing": "/projects.html",
     "items": [
+      "/posts/sentiment analysis.html",
       "/posts/credit card default analysis.html",
       "/posts/weather insurance purchasing prediction.html",
       "/posts/covid19 did analysis.html"

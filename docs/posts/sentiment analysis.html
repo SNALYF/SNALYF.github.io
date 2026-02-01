@@ -6,8 +6,11 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Tianhao Cao">
+<meta name="dcterms.date" content="2026-02-01">
+<meta name="description" content="Comparative analysis of CBOW and LSTM models for sentiment classification on Yelp reviews">
 
-<title>Resume – Tianhao Cao</title>
+<title>Sentiment Analysis on Yelp Reviews – Tianhao Cao</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,23 +26,23 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-bc185b5c5bdbcb35c2eb49d8a876ef70.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-c09f7992e7ad36c4a4c784d127ab2153.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-bc185b5c5bdbcb35c2eb49d8a876ef70.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-c09f7992e7ad36c4a4c784d127ab2153.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -89,7 +92,7 @@ ul.task-list li input[type="checkbox"] {
 </script>
 
 
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="../styles.css">
 </head>
 
 <body class="nav-fixed quarto-light">
@@ -99,7 +102,7 @@ ul.task-list li input[type="checkbox"] {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">Tianhao Cao</span>
     </a>
   </div>
@@ -110,19 +113,19 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./index.html"> 
+    <a class="nav-link" href="../index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./projects.html"> 
+    <a class="nav-link" href="../projects.html"> 
 <span class="menu-text">Projects</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="./resume.html" aria-current="page"> 
+    <a class="nav-link" href="../resume.html"> 
 <span class="menu-text">Resume</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./about.html"> 
+    <a class="nav-link" href="../about.html"> 
 <span class="menu-text">About</span></a>
   </li>  
 </ul>
@@ -158,10 +161,12 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#education" id="toc-education" class="nav-link active" data-scroll-target="#education">Education</a></li>
-  <li><a href="#technical-skills" id="toc-technical-skills" class="nav-link" data-scroll-target="#technical-skills">Technical Skills</a></li>
-  <li><a href="#experience" id="toc-experience" class="nav-link" data-scroll-target="#experience">Experience</a></li>
-  <li><a href="#capstone" id="toc-capstone" class="nav-link" data-scroll-target="#capstone">Capstone</a></li>
+  <li><a href="#project-overview" id="toc-project-overview" class="nav-link active" data-scroll-target="#project-overview">Project Overview</a>
+  <ul class="collapse">
+  <li><a href="#key-concepts-applied" id="toc-key-concepts-applied" class="nav-link" data-scroll-target="#key-concepts-applied">Key Concepts Applied</a></li>
+  </ul></li>
+  <li><a href="#paper-preview" id="toc-paper-preview" class="nav-link" data-scroll-target="#paper-preview">Paper Preview</a></li>
+  <li><a href="#link-to-repo" id="toc-link-to-repo" class="nav-link" data-scroll-target="#link-to-repo">Link to repo</a></li>
   </ul>
 </nav>
     </div>
@@ -170,14 +175,37 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Resume</h1>
-</div>
+<h1 class="title">Sentiment Analysis on Yelp Reviews</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">Natural Language Processing</div>
+    <div class="quarto-category">Pytorch</div>
+    <div class="quarto-category">LSTM</div>
+    <div class="quarto-category">Deep Learning</div>
+  </div>
+  </div>
 
+<div>
+  <div class="description">
+    Comparative analysis of CBOW and LSTM models for sentiment classification on Yelp reviews
+  </div>
+</div>
 
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Tianhao Cao </p>
+          </div>
+  </div>
     
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">February 1, 2026</p>
+    </div>
+  </div>
   
     
   </div>
@@ -187,75 +215,35 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<div class="text-center" style="margin-bottom: 2rem;">
-<p><a href="resume/Resume.pdf" class="btn btn-outline-primary btn-lg" target="_blank" role="button"> <i class="bi bi-file-earmark-pdf"></i> Download PDF Version </a></p>
-</div>
-<section id="education" class="level2">
-<h2 class="anchored" data-anchor-id="education">Education</h2>
-<p><strong>University of British Columbia (UBC)</strong> | Vancouver, BC<br>
-<em>M.S. in Data Science, Computational Linguistics</em> | <em>Aug 2025 - Present</em></p>
+<section id="project-overview" class="level2">
+<h2 class="anchored" data-anchor-id="project-overview">Project Overview</h2>
+<p>This project focuses on performing sentiment analysis on the Yelp Review dataset, classifying reviews into 1 to 5 stars. The analysis explores various modeling approaches, ranging from traditional machine learning baselines to deep learning architectures.</p>
+<p>By implementing and comparing TF-IDF with Logistic Regression, Continuous Bag of Words (CBOW), and Bidirectional LSTM models, the study evaluates the effectiveness of different techniques in handling text classification tasks.</p>
+<section id="key-concepts-applied" class="level3">
+<h3 class="anchored" data-anchor-id="key-concepts-applied">Key Concepts Applied</h3>
 <ul>
-<li><strong>Relevant Coursework</strong>: Supervised Learning, Unsupervised Learning, Natural Language Processing, Machine Learning, Statistics.</li>
-<li><strong>Academic Focus</strong>: Examine the patterns in data and build models to predict the future.</li>
-</ul>
-<p><strong>University of California, Santa Cruz (UCSC)</strong> | Santa Cruz, CA<br>
-<em>B.A. in Business Management Economics</em> | <em>Sep 2019 - June 2022</em></p>
+<li><strong>Exploratory Data Analysis (EDA)</strong>: Analyzed the distribution of ratings and review lengths using Altair. The dataset was found to be balanced across different rating classes.</li>
+<li><strong>Baseline Modeling</strong>: Established a baseline using <strong>TF-IDF Vectorization</strong> and <strong>Logistic Regression</strong>, achieving a Macro F1 score of <strong>0.5936</strong>, setting a strong benchmark for subsequent models.</li>
+<li><strong>Deep Learning Architectures</strong>:
 <ul>
-<li><strong>Relevant Coursework</strong>: Advanced Quantitative Analysis, Machine Learning Economics, Statistics, Security Market.</li>
-<li><strong>Academic Focus</strong>: Digging into the Economical patterns by using Machine Learning and Statistics.</li>
+<li><strong>CBOW (Continuous Bag of Words)</strong>: Implemented a custom CBOW model using Spacy word embeddings.</li>
+<li><strong>Bi-LSTM (Bidirectional Long Short-Term Memory)</strong>: Constructed a Bi-LSTM model to capture sequential dependencies in the text. The model outperformed the CBOW approach, achieving a Validation F1 score of approximately <strong>0.557</strong>.</li>
+</ul></li>
+<li><strong>Hyperparameter Tuning</strong>: Conducted experiments with different architectures (e.g., varying hidden sizes and number of layers) to optimize the LSTM model performance.</li>
 </ul>
-<hr>
 </section>
-<section id="technical-skills" class="level2">
-<h2 class="anchored" data-anchor-id="technical-skills">Technical Skills</h2>
-<table class="caption-top table">
-<colgroup>
-<col style="width: 55%">
-<col style="width: 44%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Category</th>
-<th>Skills</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><strong>Languages</strong></td>
-<td>Python (Advanced), R, SQL, Bash</td>
-</tr>
-<tr class="even">
-<td><strong>Data Science</strong></td>
-<td>Pandas, NumPy, Scikit-Learn, PyTorch, HuggingFace</td>
-</tr>
-<tr class="odd">
-<td><strong>NLP</strong></td>
-<td>Word Embeddings, N-gram Models, Parsing Algorithms, NLTK, Spacy</td>
-</tr>
-<tr class="even">
-<td><strong>Tools</strong></td>
-<td>Git/GitHub, VS Code, Jupyter, Quarto, LaTeX</td>
-</tr>
-<tr class="odd">
-<td><strong>Platforms</strong></td>
-<td>macOS, Windows</td>
-</tr>
-</tbody>
-</table>
-<hr>
 </section>
-<section id="experience" class="level2">
-<h2 class="anchored" data-anchor-id="experience">Experience</h2>
-<p><strong>Career Mentorship Program</strong> | <em>Mentee</em> <em>Jan 2026 - Present</em></p>
-<ul>
-<li>Selected for a professional mentorship program under industry veteran Jacob Oh.</li>
-<li>Focusing on software engineering best practices, career development in tech, and bridging academic concepts to industry standards.</li>
-</ul>
-<hr>
+<section id="paper-preview" class="level2">
+<h2 class="anchored" data-anchor-id="paper-preview">Paper Preview</h2>
+<object data="pdfs/sentiment analysis.pdf" type="application/pdf" width="100%" height="800px">
+<p>
+Unable to display PDF file. <a href="pdfs/sentiment analysis.pdf">Download</a> instead.
+</p>
+</object>
 </section>
-<section id="capstone" class="level2">
-<h2 class="anchored" data-anchor-id="capstone">Capstone</h2>
-<p><strong>TBD</strong></p>
+<section id="link-to-repo" class="level2">
+<h2 class="anchored" data-anchor-id="link-to-repo">Link to repo</h2>
+<p><a href="https://github.com/SNALYF/Sentiment-Analysis/tree/main">Github Repository</a></p>
 
 
 </section>

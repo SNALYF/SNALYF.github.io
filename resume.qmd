@@ -17,7 +17,7 @@ layout: full
 * **Relevant Coursework**: Supervised Learning, Unsupervised Learning, Natural Language Processing, Machine Learning, Statistics.
 * **Academic Focus**: Examine the patterns in data and build models to predict the future.
 
-**University of California, Santa Cruz(UCSC)** | Santa Cruz, CA  
+**University of California, Santa Cruz (UCSC)** | Santa Cruz, CA  
 *B.A. in Business Management Economics* | *Sep 2019 - June 2022*
 
 * **Relevant Coursework**: Advanced Quantitative Analysis, Machine Learning Economics, Statistics, Security Market.
@@ -30,10 +30,10 @@ layout: full
 | Category | Skills |
 |----------|--------|
 | **Languages** | Python (Advanced), R, SQL, Bash |
-| **Data Science** | Pandas, NumPy, Scikit-Learn, PyTorch |
-| **NLP** | Word Embeddings, N-gram Models, Parsing Algorithms |
+| **Data Science** | Pandas, NumPy, Scikit-Learn, PyTorch, HuggingFace |
+| **NLP** | Word Embeddings, N-gram Models, Parsing Algorithms, NLTK, Spacy |
 | **Tools** | Git/GitHub, VS Code, Jupyter, Quarto, LaTeX |
-| **Platforms** | macOS, Linux/Unix Environment |
+| **Platforms** | macOS, Windows |
 
 ---
 

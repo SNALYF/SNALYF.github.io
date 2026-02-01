@@ -1,0 +1,32 @@
+---
+title: "Sentiment Analysis on Yelp Reviews"
+description: "Comparative analysis of CBOW and LSTM models for sentiment classification on Yelp reviews"
+author: "Tianhao Cao"
+date: "2026-02-01"
+categories: [Natural Language Processing, Pytorch, LSTM, Deep Learning]
+image: ../img/sentiment.png
+---
+
+## Project Overview
+
+This project focuses on performing sentiment analysis on the Yelp Review dataset, classifying reviews into 1 to 5 stars. The analysis explores various modeling approaches, ranging from traditional machine learning baselines to deep learning architectures.
+
+By implementing and comparing TF-IDF with Logistic Regression, Continuous Bag of Words (CBOW), and Bidirectional LSTM models, the study evaluates the effectiveness of different techniques in handling text classification tasks.
+
+### Key Concepts Applied
+
+* **Exploratory Data Analysis (EDA)**: Analyzed the distribution of ratings and review lengths using Altair. The dataset was found to be balanced across different rating classes.
+* **Baseline Modeling**: Established a baseline using **TF-IDF Vectorization** and **Logistic Regression**, achieving a Macro F1 score of **0.5936**, setting a strong benchmark for subsequent models.
+* **Deep Learning Architectures**:
+    * **CBOW (Continuous Bag of Words)**: Implemented a custom CBOW model using Spacy word embeddings.
+    * **Bi-LSTM (Bidirectional Long Short-Term Memory)**: Constructed a Bi-LSTM model to capture sequential dependencies in the text. The model outperformed the CBOW approach, achieving a Validation F1 score of approximately **0.557**.
+* **Hyperparameter Tuning**: Conducted experiments with different architectures (e.g., varying hidden sizes and number of layers) to optimize the LSTM model performance.
+
+## Paper Preview
+
+<object data="pdfs/sentiment analysis.pdf" type="application/pdf" width="100%" height="800px">
+    <p>Unable to display PDF file. <a href="pdfs/sentiment analysis.pdf">Download</a> instead.</p>
+</object>
+
+## Link to repo
+[Github Repository](https://github.com/SNALYF/Sentiment-Analysis/tree/main)
