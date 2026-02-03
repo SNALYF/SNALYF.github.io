@@ -48,3 +48,4 @@ format:
               });
             });
           </script>
+    include-after-body: scripts/translate.html
