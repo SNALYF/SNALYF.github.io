@@ -15,13 +15,13 @@ layout: full
 *M.S. in Data Science, Computational Linguistics* | *Aug 2025 - Present*
 
 * **Relevant Coursework**: Supervised Learning, Unsupervised Learning, Natural Language Processing, Machine Learning, Statistics.
-* **Academic Focus**: Examine the patterns in data and build models to predict the future.
+* **Academic Focus**: Examining data patterns and building models to predict the future.
 
 **University of California, Santa Cruz (UCSC)** | Santa Cruz, CA  
 *B.A. in Business Management Economics* | *Sep 2019 - June 2022*
 
 * **Relevant Coursework**: Advanced Quantitative Analysis, Machine Learning Economics, Statistics, Security Market.
-* **Academic Focus**: Digging into the Economical patterns by using Machine Learning and Statistics.
+* **Academic Focus**: Analyzing economic patterns using Machine Learning and Statistics.
 
 ---
 

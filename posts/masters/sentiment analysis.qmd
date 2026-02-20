@@ -4,7 +4,7 @@ description: "Comparative analysis of CBOW and LSTM models for sentiment classif
 author: "Tianhao Cao"
 date: "2026-02-01"
 categories: [Natural Language Processing, Pytorch, LSTM, Deep Learning]
-image: ../img/sentiment.png
+image: ../../img/sentiment.png
 ---
 
 ## Project Overview
@@ -24,8 +24,8 @@ By implementing and comparing TF-IDF with Logistic Regression, Continuous Bag of
 
 ## Paper Preview
 
-<object data="pdfs/sentiment analysis.pdf" type="application/pdf" width="100%" height="800px">
-    <p>Unable to display PDF file. <a href="pdfs/sentiment analysis.pdf">Download</a> instead.</p>
+<object data="../pdfs/sentiment analysis.pdf" type="application/pdf" width="100%" height="800px">
+    <p>Unable to display PDF file. <a href="../pdfs/sentiment analysis.pdf">Download</a> instead.</p>
 </object>
 
 ## Link to repo

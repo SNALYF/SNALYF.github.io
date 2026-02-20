@@ -4,7 +4,7 @@ description: "Predicting farmers' insurance buying behavior using Lasso and Rand
 author: "Tianhao Cao"
 date: "2022-06-05"
 categories: [Lasso, Random Forest, Cross-Validation, Econometrics]
-image: ../img/weather.png
+image: ../../img/weather.png
 ---
 
 ## Project Overview
@@ -22,8 +22,8 @@ By implementing Lasso Cross-Validation and Random Forest algorithms, the project
 
 ## Paper Preview
 
-<object data="papers/weather insurance.pdf" type="application/pdf" width="100%" height="800px">
-    <p>Unable to display PDF file. <a href="papers/weather insurance.pdf">Download</a> instead.</p>
+<object data="../papers/weather insurance.pdf" type="application/pdf" width="100%" height="800px">
+    <p>Unable to display PDF file. <a href="../papers/weather insurance.pdf">Download</a> instead.</p>
 </object>
 
 ## Link to repo

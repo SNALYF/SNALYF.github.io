@@ -7,10 +7,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Tianhao Cao">
-<meta name="dcterms.date" content="2025-12-11">
-<meta name="description" content="Using XGBoosting to predict credit card defaults">
+<meta name="dcterms.date" content="2026-02-01">
+<meta name="description" content="Comparative analysis of CBOW and LSTM models for sentiment classification on Yelp reviews">
 
-<title>Credit Card Default Analysis – Tianhao Cao</title>
+<title>Sentiment Analysis on Yelp Reviews – Tianhao Cao</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -26,23 +26,23 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../site_libs/quarto-nav/headroom.min.js"></script>
-<script src="../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../">
-<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="../site_libs/quarto-html/popper.min.js"></script>
-<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-bc185b5c5bdbcb35c2eb49d8a876ef70.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-c09f7992e7ad36c4a4c784d127ab2153.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-bc185b5c5bdbcb35c2eb49d8a876ef70.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-c09f7992e7ad36c4a4c784d127ab2153.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -92,7 +92,7 @@ ul.task-list li input[type="checkbox"] {
 </script>
 
 
-<link rel="stylesheet" href="../styles.css">
+<link rel="stylesheet" href="../../styles.css">
 </head>
 
 <body class="nav-fixed quarto-light">
@@ -102,7 +102,7 @@ ul.task-list li input[type="checkbox"] {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="../index.html">
+    <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">Tianhao Cao</span>
     </a>
   </div>
@@ -113,19 +113,19 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../index.html"> 
+    <a class="nav-link" href="../../index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../projects.html"> 
+    <a class="nav-link" href="../../projects.html"> 
 <span class="menu-text">Projects</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../resume.html"> 
+    <a class="nav-link" href="../../resume.html"> 
 <span class="menu-text">Resume</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../about.html"> 
+    <a class="nav-link" href="../../about.html"> 
 <span class="menu-text">About</span></a>
   </li>  
 </ul>
@@ -175,21 +175,18 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Credit Card Default Analysis</h1>
+<h1 class="title">Sentiment Analysis on Yelp Reviews</h1>
   <div class="quarto-categories">
-    <div class="quarto-category">Master's</div>
-    <div class="quarto-category">Python</div>
-    <div class="quarto-category">SVC</div>
-    <div class="quarto-category">Logistic Regression</div>
-    <div class="quarto-category">Random Forest</div>
-    <div class="quarto-category">HistGradientBoosting</div>
-    <div class="quarto-category">XGBoosting</div>
+    <div class="quarto-category">Natural Language Processing</div>
+    <div class="quarto-category">Pytorch</div>
+    <div class="quarto-category">LSTM</div>
+    <div class="quarto-category">Deep Learning</div>
   </div>
   </div>
 
 <div>
   <div class="description">
-    Using XGBoosting to predict credit card defaults
+    Comparative analysis of CBOW and LSTM models for sentiment classification on Yelp reviews
   </div>
 </div>
 
@@ -206,7 +203,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">December 11, 2025</p>
+      <p class="date">February 1, 2026</p>
     </div>
   </div>
   
@@ -220,29 +217,33 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="project-overview" class="level2">
 <h2 class="anchored" data-anchor-id="project-overview">Project Overview</h2>
-<p>A project of credit card default analysis and corresponding prediction.</p>
-<p><a href="URL">https://github.com/SNALYF/Credit-Card-Default-Analysis</a></p>
+<p>This project focuses on performing sentiment analysis on the Yelp Review dataset, classifying reviews into 1 to 5 stars. The analysis explores various modeling approaches, ranging from traditional machine learning baselines to deep learning architectures.</p>
+<p>By implementing and comparing TF-IDF with Logistic Regression, Continuous Bag of Words (CBOW), and Bidirectional LSTM models, the study evaluates the effectiveness of different techniques in handling text classification tasks.</p>
 <section id="key-concepts-applied" class="level3">
 <h3 class="anchored" data-anchor-id="key-concepts-applied">Key Concepts Applied</h3>
 <ul>
-<li><strong>EDA</strong>: Cleaned and implemented EDA to dataset, navigated on the correlations between numerical features and categorical features</li>
-<li><strong>Model Selection</strong>: Conducted logistic model (Test F1-score: 0.530), SVC model (Test F1-score: 0.532), HistGradientBoosting (0.534), and XGBoosting model(0.507).</li>
-<li><strong>Hyperparameter Optimization</strong>: Implemented Randomized Search Cross-Validation on SVC, HistGradientBoosting, and XGBoosting model to obtain the highest F1-score.</li>
-<li><strong>Shap Interpretation</strong>: Analyzed SHAP plot to interpret black-box model decisions, identified most important feature.</li>
+<li><strong>Exploratory Data Analysis (EDA)</strong>: Analyzed the distribution of ratings and review lengths using Altair. The dataset was found to be balanced across different rating classes.</li>
+<li><strong>Baseline Modeling</strong>: Established a baseline using <strong>TF-IDF Vectorization</strong> and <strong>Logistic Regression</strong>, achieving a Macro F1 score of <strong>0.5936</strong>, setting a strong benchmark for subsequent models.</li>
+<li><strong>Deep Learning Architectures</strong>:
+<ul>
+<li><strong>CBOW (Continuous Bag of Words)</strong>: Implemented a custom CBOW model using Spacy word embeddings.</li>
+<li><strong>Bi-LSTM (Bidirectional Long Short-Term Memory)</strong>: Constructed a Bi-LSTM model to capture sequential dependencies in the text. The model outperformed the CBOW approach, achieving a Validation F1 score of approximately <strong>0.557</strong>.</li>
+</ul></li>
+<li><strong>Hyperparameter Tuning</strong>: Conducted experiments with different architectures (e.g., varying hidden sizes and number of layers) to optimize the LSTM model performance.</li>
 </ul>
 </section>
 </section>
 <section id="paper-preview" class="level2">
 <h2 class="anchored" data-anchor-id="paper-preview">Paper Preview</h2>
-<object data="pdfs/credit card default.pdf" type="application/pdf" width="100%" height="800px">
+<object data="../pdfs/sentiment analysis.pdf" type="application/pdf" width="100%" height="800px">
 <p>
-Unable to display PDF file. <a href="pdfs/credit card default.pdf">Download</a> instead.
+Unable to display PDF file. <a href="../pdfs/sentiment analysis.pdf">Download</a> instead.
 </p>
 </object>
 </section>
 <section id="link-to-repo" class="level2">
 <h2 class="anchored" data-anchor-id="link-to-repo">Link to repo</h2>
-<p><a href="https://github.com/SNALYF/Credit-Card-Default-Analysis">Github Repository</a></p>
+<p><a href="https://github.com/SNALYF/Sentiment-Analysis/tree/main">Github Repository</a></p>
 
 
 </section>

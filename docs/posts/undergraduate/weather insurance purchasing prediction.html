@@ -7,10 +7,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Tianhao Cao">
-<meta name="dcterms.date" content="2025-12-11">
-<meta name="description" content="Using XGBoosting to predict credit card defaults">
+<meta name="dcterms.date" content="2022-06-05">
+<meta name="description" content="Predicting farmers’ insurance buying behavior using Lasso and Random Forest">
 
-<title>Credit Card Default Analysis – Tianhao Cao</title>
+<title>Weather Insurance Purchasing Prediction – Tianhao Cao</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -26,23 +26,23 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../site_libs/quarto-nav/headroom.min.js"></script>
-<script src="../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../">
-<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="../site_libs/quarto-html/popper.min.js"></script>
-<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-bc185b5c5bdbcb35c2eb49d8a876ef70.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-c09f7992e7ad36c4a4c784d127ab2153.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-bc185b5c5bdbcb35c2eb49d8a876ef70.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-c09f7992e7ad36c4a4c784d127ab2153.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -91,8 +91,37 @@ ul.task-list li input[type="checkbox"] {
   });
 </script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
-<link rel="stylesheet" href="../styles.css">
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../../styles.css">
 </head>
 
 <body class="nav-fixed quarto-light">
@@ -102,7 +131,7 @@ ul.task-list li input[type="checkbox"] {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="../index.html">
+    <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">Tianhao Cao</span>
     </a>
   </div>
@@ -113,19 +142,19 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../index.html"> 
+    <a class="nav-link" href="../../index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../projects.html"> 
+    <a class="nav-link" href="../../projects.html"> 
 <span class="menu-text">Projects</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../resume.html"> 
+    <a class="nav-link" href="../../resume.html"> 
 <span class="menu-text">Resume</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../about.html"> 
+    <a class="nav-link" href="../../about.html"> 
 <span class="menu-text">About</span></a>
   </li>  
 </ul>
@@ -175,21 +204,18 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Credit Card Default Analysis</h1>
+<h1 class="title">Weather Insurance Purchasing Prediction</h1>
   <div class="quarto-categories">
-    <div class="quarto-category">Master's</div>
-    <div class="quarto-category">Python</div>
-    <div class="quarto-category">SVC</div>
-    <div class="quarto-category">Logistic Regression</div>
+    <div class="quarto-category">Lasso</div>
     <div class="quarto-category">Random Forest</div>
-    <div class="quarto-category">HistGradientBoosting</div>
-    <div class="quarto-category">XGBoosting</div>
+    <div class="quarto-category">Cross-Validation</div>
+    <div class="quarto-category">Econometrics</div>
   </div>
   </div>
 
 <div>
   <div class="description">
-    Using XGBoosting to predict credit card defaults
+    Predicting farmers’ insurance buying behavior using Lasso and Random Forest
   </div>
 </div>
 
@@ -206,7 +232,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">December 11, 2025</p>
+      <p class="date">June 5, 2022</p>
     </div>
   </div>
   
@@ -220,29 +246,29 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="project-overview" class="level2">
 <h2 class="anchored" data-anchor-id="project-overview">Project Overview</h2>
-<p>A project of credit card default analysis and corresponding prediction.</p>
-<p><a href="URL">https://github.com/SNALYF/Credit-Card-Default-Analysis</a></p>
+<p>This project focuses on quantifying factors influencing Chinese farmers’ decisions to purchase weather insurance and predicting their purchasing probabilities. Using a dataset from Jiangxi, China, which includes 4,902 observations and 59 variables[cite: 30], the study navigates the challenges of predicting human economic behavior in a low-dimensional setting.</p>
+<p>By implementing Lasso Cross-Validation and Random Forest algorithms, the project contrasts linear regularization methods with non-linear tree-based methods to identify significant determinants such as “Understanding” and “Social Network”.</p>
 <section id="key-concepts-applied" class="level3">
 <h3 class="anchored" data-anchor-id="key-concepts-applied">Key Concepts Applied</h3>
 <ul>
-<li><strong>EDA</strong>: Cleaned and implemented EDA to dataset, navigated on the correlations between numerical features and categorical features</li>
-<li><strong>Model Selection</strong>: Conducted logistic model (Test F1-score: 0.530), SVC model (Test F1-score: 0.532), HistGradientBoosting (0.534), and XGBoosting model(0.507).</li>
-<li><strong>Hyperparameter Optimization</strong>: Implemented Randomized Search Cross-Validation on SVC, HistGradientBoosting, and XGBoosting model to obtain the highest F1-score.</li>
-<li><strong>Shap Interpretation</strong>: Analyzed SHAP plot to interpret black-box model decisions, identified most important feature.</li>
+<li><strong>Variable Selection with Lasso</strong>: Utilized Lasso regularization to handle the bias-variance trade-off. The optimal <span class="math inline">\(\lambda\)</span> zeroed out 14 regressors, highlighting “Understanding” and “Network-related” variables as the most significant predictors.</li>
+<li><strong>Ensemble Learning (Random Forest)</strong>: Constructed a Random Forest model with 300 trees to capture non-linear relationships. Results revealed that unlike in the Lasso model, “Age” played a considerable role in purchasing decisions, while “Risk Averse” traits were surprisingly less important.</li>
+<li><strong>Performance Evaluation</strong>: Evaluated models using ROC Curves, Sensitivity/Specificity trade-offs, and <span class="math inline">\(R^2\)</span>. While the Lasso model achieved ~64% prediction correctness, the low <span class="math inline">\(R^2\)</span> (&lt; 0.1) across both models highlighted the complexity of behavioral prediction and potential unobserved variables.</li>
+<li><strong>Data Cleaning &amp; Bias Analysis</strong>: Processed raw data by handling NA values and removing variables with &gt;1000 missing entries. Conducted a critical analysis of data limitations, acknowledging potential biases from omitted variables like modern technology adoption.</li>
 </ul>
 </section>
 </section>
 <section id="paper-preview" class="level2">
 <h2 class="anchored" data-anchor-id="paper-preview">Paper Preview</h2>
-<object data="pdfs/credit card default.pdf" type="application/pdf" width="100%" height="800px">
+<object data="../papers/weather insurance.pdf" type="application/pdf" width="100%" height="800px">
 <p>
-Unable to display PDF file. <a href="pdfs/credit card default.pdf">Download</a> instead.
+Unable to display PDF file. <a href="../papers/weather insurance.pdf">Download</a> instead.
 </p>
 </object>
 </section>
 <section id="link-to-repo" class="level2">
 <h2 class="anchored" data-anchor-id="link-to-repo">Link to repo</h2>
-<p><a href="https://github.com/SNALYF/Credit-Card-Default-Analysis">Github Repository</a></p>
+<p><a href="https://github.com/SNALYF/Weather-Insurance-Purchase-Prediction">Github Repository</a></p>
 
 
 </section>

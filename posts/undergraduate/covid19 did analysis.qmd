@@ -4,7 +4,7 @@ description: "Identifying the influences of Early-Policies to the COVID-19 trans
 author: "Tianhao Cao"
 date: "2022-03-18"
 categories: [Difference-in-Difference, Linear Regression]
-image: ../img/covid.png
+image: ../../img/covid.png
 ---
 
 ## Project Overview
@@ -24,8 +24,8 @@ Two different Difference-in-Difference models were implemented to estimate the e
 
 ## Paper Preview
 
-<object data="papers/covid19 did.pdf" type="application/pdf" width="100%" height="800px">
-    <p>Unable to display PDF file. <a href="papers/covid19 did.pdf">Download</a> instead.</p>
+<object data="../papers/covid19 did.pdf" type="application/pdf" width="100%" height="800px">
+    <p>Unable to display PDF file. <a href="../papers/covid19 did.pdf">Download</a> instead.</p>
 </object>
 
 ## Link to repo

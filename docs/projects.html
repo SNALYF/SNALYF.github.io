@@ -72,7 +72,7 @@ ul.task-list li input[type="checkbox"] {
 <script>
 
   window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-listing .list');
+    const listingTargetEl = window.document.querySelector('#listing-masters .list');
     if (!listingTargetEl) {
       // No listing discovered, do not attach.
       return; 
@@ -85,7 +85,35 @@ ul.task-list li input[type="checkbox"] {
     };
 
     window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
+    window['quarto-listings']['listing-masters'] = new List('listing-masters', options);
+
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  });
+
+  window.addEventListener('hashchange',() => {
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  })
+  
+
+  window.document.addEventListener("DOMContentLoaded", function (_event) {
+    const listingTargetEl = window.document.querySelector('#listing-undergrad .list');
+    if (!listingTargetEl) {
+      // No listing discovered, do not attach.
+      return; 
+    }
+
+    const options = {
+      valueNames: ['listing-title','listing-author','listing-date','listing-image','listing-description','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
+      
+      searchColumns: ["listing-title","listing-author","listing-date","listing-image","listing-description","listing-categories"],
+    };
+
+    window['quarto-listings'] = window['quarto-listings'] || {};
+    window['quarto-listings']['listing-undergrad'] = new List('listing-undergrad', options);
 
     if (window['quarto-listing-loaded']) {
       window['quarto-listing-loaded']();
@@ -231,7 +259,14 @@ window.Quarto = {
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#masters" id="toc-masters" class="nav-link active" data-scroll-target="#masters">Master’s</a></li>
+  <li><a href="#undergraduate" id="toc-undergraduate" class="nav-link" data-scroll-target="#undergraduate">Undergraduate</a></li>
+  </ul>
+</nav>
     <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(4)</span></div><div class="category" data-category="Q3Jvc3MtVmFsaWRhdGlvbg==">Cross-Validation <span class="quarto-category-count">(1)</span></div><div class="category" data-category="RGVlcCUyMExlYXJuaW5n">Deep Learning <span class="quarto-category-count">(1)</span></div><div class="category" data-category="RGlmZmVyZW5jZS1pbi1EaWZmZXJlbmNl">Difference-in-Difference <span class="quarto-category-count">(1)</span></div><div class="category" data-category="RWNvbm9tZXRyaWNz">Econometrics <span class="quarto-category-count">(1)</span></div><div class="category" data-category="SGlzdEdyYWRpZW50Qm9vc3Rpbmc=">HistGradientBoosting <span class="quarto-category-count">(1)</span></div><div class="category" data-category="TGFzc28=">Lasso <span class="quarto-category-count">(1)</span></div><div class="category" data-category="TGluZWFyJTIwUmVncmVzc2lvbg==">Linear Regression <span class="quarto-category-count">(1)</span></div><div class="category" data-category="TG9naXN0aWMlMjBSZWdyZXNzaW9u">Logistic Regression <span class="quarto-category-count">(1)</span></div><div class="category" data-category="TFNUTQ==">LSTM <span class="quarto-category-count">(1)</span></div><div class="category" data-category="TmF0dXJhbCUyMExhbmd1YWdlJTIwUHJvY2Vzc2luZw==">Natural Language Processing <span class="quarto-category-count">(1)</span></div><div class="category" data-category="UHl0aG9u">Python <span class="quarto-category-count">(1)</span></div><div class="category" data-category="UHl0b3JjaA==">Pytorch <span class="quarto-category-count">(1)</span></div><div class="category" data-category="UmFuZG9tJTIwRm9yZXN0">Random Forest <span class="quarto-category-count">(2)</span></div><div class="category" data-category="U1ZD">SVC <span class="quarto-category-count">(1)</span></div><div class="category" data-category="WEdCb29zdGluZw==">XGBoosting <span class="quarto-category-count">(1)</span></div></div></div>
 <!-- main -->
 <main class="content quarto-banner-title-block column-page-left" id="quarto-document-content">
@@ -240,14 +275,13 @@ window.Quarto = {
 
 
 
-
-
-
-
-<div class="quarto-listing quarto-listing-container-grid" id="listing-listing">
+<section id="masters" class="level2">
+<h2 class="anchored" data-anchor-id="masters">Master’s</h2>
+<p><em>Focusing on advanced machine learning and NLP research.</em></p>
+<div id="listing-masters" class="quarto-listing quarto-listing-container-grid">
 <div class="list grid quarto-listing-cols-3">
-<div class="g-col-1" data-index="0" data-categories="TmF0dXJhbCUyMExhbmd1YWdlJTIwUHJvY2Vzc2luZyUyQ1B5dG9yY2glMkNMU1RNJTJDRGVlcCUyMExlYXJuaW5n" data-listing-date-sort="1769932800000" data-listing-file-modified-sort="1769944703924" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="216">
-<a href="./posts/sentiment analysis.html" class="quarto-grid-link">
+<div class="g-col-1" data-index="0" data-categories="TmF0dXJhbCUyMExhbmd1YWdlJTIwUHJvY2Vzc2luZyUyQ1B5dG9yY2glMkNMU1RNJTJDRGVlcCUyMExlYXJuaW5n" data-listing-date-sort="1769932800000" data-listing-file-modified-sort="1770408288255" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="216">
+<a href="./posts/masters/sentiment analysis.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
 <p class="card-img-top">
 <img loading="lazy" src="./img/sentiment.png" class="thumbnail-image card-img" style="height: 150px;">
@@ -281,8 +315,8 @@ Feb 1, 2026
 </div>
 </div></a>
 </div>
-<div class="g-col-1" data-index="1" data-categories="UHl0aG9uJTJDU1ZDJTJDTG9naXN0aWMlMjBSZWdyZXNzaW9uJTJDUmFuZG9tJTIwRm9yZXN0JTJDSGlzdEdyYWRpZW50Qm9vc3RpbmclMkNYR0Jvb3N0aW5n" data-listing-date-sort="1765440000000" data-listing-file-modified-sort="1769944549222" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="105">
-<a href="./posts/credit card default analysis.html" class="quarto-grid-link">
+<div class="g-col-1" data-index="1" data-categories="UHl0aG9uJTJDU1ZDJTJDTG9naXN0aWMlMjBSZWdyZXNzaW9uJTJDUmFuZG9tJTIwRm9yZXN0JTJDSGlzdEdyYWRpZW50Qm9vc3RpbmclMkNYR0Jvb3N0aW5n" data-listing-date-sort="1765440000000" data-listing-file-modified-sort="1770408288255" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="105">
+<a href="./posts/masters/credit card default analysis.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
 <p class="card-img-top">
 <img loading="lazy" src="./img/creditcard.png" class="thumbnail-image card-img" style="height: 150px;">
@@ -320,8 +354,17 @@ Dec 11, 2025
 </div>
 </div></a>
 </div>
-<div class="g-col-1" data-index="2" data-categories="TGFzc28lMkNSYW5kb20lMjBGb3Jlc3QlMkNDcm9zcy1WYWxpZGF0aW9uJTJDRWNvbm9tZXRyaWNz" data-listing-date-sort="1654412400000" data-listing-file-modified-sort="1769665010206" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="242">
-<a href="./posts/weather insurance purchasing prediction.html" class="quarto-grid-link">
+</div>
+<div class="listing-no-matching d-none">No matching items</div>
+</div>
+</section>
+<section id="undergraduate" class="level2">
+<h2 class="anchored" data-anchor-id="undergraduate">Undergraduate</h2>
+<p><em>Foundational projects in data science and economics.</em></p>
+<div id="listing-undergrad" class="quarto-listing quarto-listing-container-grid">
+<div class="list grid quarto-listing-cols-3">
+<div class="g-col-1" data-index="0" data-categories="TGFzc28lMkNSYW5kb20lMjBGb3Jlc3QlMkNDcm9zcy1WYWxpZGF0aW9uJTJDRWNvbm9tZXRyaWNz" data-listing-date-sort="1654412400000" data-listing-file-modified-sort="1770408288256" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="242">
+<a href="./posts/undergraduate/weather insurance purchasing prediction.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
 <p class="card-img-top">
 <img loading="lazy" src="./img/weather.png" class="thumbnail-image card-img" style="height: 150px;">
@@ -355,8 +398,8 @@ Jun 5, 2022
 </div>
 </div></a>
 </div>
-<div class="g-col-1" data-index="3" data-categories="RGlmZmVyZW5jZS1pbi1EaWZmZXJlbmNlJTJDTGluZWFyJTIwUmVncmVzc2lvbg==" data-listing-date-sort="1647586800000" data-listing-file-modified-sort="1769665053905" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="210">
-<a href="./posts/covid19 did analysis.html" class="quarto-grid-link">
+<div class="g-col-1" data-index="1" data-categories="RGlmZmVyZW5jZS1pbi1EaWZmZXJlbmNlJTJDTGluZWFyJTIwUmVncmVzc2lvbg==" data-listing-date-sort="1647586800000" data-listing-file-modified-sort="1770408288256" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="210">
+<a href="./posts/undergraduate/covid19 did analysis.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
 <p class="card-img-top">
 <img loading="lazy" src="./img/covid.png" class="thumbnail-image card-img" style="height: 150px;">
@@ -388,7 +431,13 @@ Mar 18, 2022
 </div>
 </div>
 <div class="listing-no-matching d-none">No matching items</div>
-</div></main> <!-- /main -->
+</div>
+
+
+
+</section>
+
+</main> <!-- /main -->
 <style>
 /* Custom styling for the Google Translate widget */
 #google_translate_element {

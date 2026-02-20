@@ -6,10 +6,10 @@ about:
   links:
     - icon: linkedin
       text: LinkedIn
-      href: https://linkedin.com
+      href: https://www.linkedin.com/in/tianhao-cao-mds/
     - icon: github
       text: Github
-      href: snalyf.github.io
+      href: https://github.com/SNALYF
 ---
 
 ## My Journey
