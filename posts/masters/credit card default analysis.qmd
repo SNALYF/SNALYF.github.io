@@ -3,7 +3,7 @@ title: "Credit Card Default Analysis"
 description: "Using XGBoosting to predict credit card defaults"
 author: "Tianhao Cao"
 date: "2025-12-11"
-categories: [Python, SVC, Logistic Regression, Random Forest, HistGradientBoosting, XGBoosting]
+categories: [Python, Machine Learning, Classification, Ensemble Methods, Explainability]
 image: ../../img/creditcard.png
 ---
 

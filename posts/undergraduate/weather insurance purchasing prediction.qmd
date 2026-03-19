@@ -3,7 +3,7 @@ title: "Weather Insurance Purchasing Prediction"
 description: "Predicting farmers' insurance buying behavior using Lasso and Random Forest"
 author: "Tianhao Cao"
 date: "2022-06-05"
-categories: [Lasso, Random Forest, Cross-Validation, Econometrics]
+categories: [R, Machine Learning, Regression, Econometrics]
 image: ../../img/weather.png
 ---
 

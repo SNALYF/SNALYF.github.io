@@ -3,7 +3,7 @@ title: "Covid-19 DiD Analysis"
 description: "Identifying the influences of Early-Policies to the COVID-19 transmission and Deaths"
 author: "Tianhao Cao"
 date: "2022-03-18"
-categories: [Difference-in-Difference, Linear Regression]
+categories: [R, Causal Inference, Regression, Econometrics]
 image: ../../img/covid.png
 ---
 

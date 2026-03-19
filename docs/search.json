@@ -39,175 +39,21 @@
     "href": "projects.html",
     "title": "Projects",
     "section": "",
-    "text": "Focusing on advanced machine learning and NLP research.\n\n\n\n\n\n\n\n\n\n\n\n\nNatural Language Processing\n\nPytorch\n\nLSTM\n\nDeep Learning\n\n\n\nComparative analysis of CBOW and LSTM models for sentiment classification on Yelp reviews\n\n\n\nTianhao Cao\n\n\nFeb 1, 2026\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPython\n\nSVC\n\nLogistic Regression\n\nRandom Forest\n\nHistGradientBoosting\n\nXGBoosting\n\n\n\nUsing XGBoosting to predict credit card defaults\n\n\n\nTianhao Cao\n\n\nDec 11, 2025\n\n\n\n\n\n\nNo matching items"
-  },
-  {
-    "objectID": "posts/covid19 did analysis.html",
-    "href": "posts/covid19 did analysis.html",
-    "title": "Covid-19 DiD Analysis",
-    "section": "",
-    "text": "This project estimates the early policy effects on COVID-19 transmission and damages through four dependent variables: daily new cases, cumulative cases, daily deaths, and cumulative deaths. The data is provided by the World Health Organization and Our World in Data.\nTwo different Difference-in-Difference models were implemented to estimate the effects of Mandatory policies, Optional policies, and no-control policies. The analysis found that mandatory policies had the most significant impact on limiting and decreasing COVID-19 transmission and damages, followed by optional policies, while no-control policies were the least effective.\n\n\n\nDifference-in-Difference (DiD): Utilized DiD models to compare the impact of different policy stringency levels on infection and death rates over time.\nPolicy Categorization: Countries were categorized into three groups based on early policy stringency:\n\nMandatory Countries (e.g., China): Strict travel restrictions and enforced preventive measures.\nOptional Countries (e.g., Canada, Japan, UK): Advised but not strictly enforced measures.\nNo-control Countries (e.g., USA, India): Limited restrictions and guidance.\n\nStatistical Analysis: Analyzed the effects on new cases, cumulative cases, new deaths, and cumulative deaths using empiricial statistical methods."
-  },
-  {
-    "objectID": "posts/covid19 did analysis.html#project-overview",
-    "href": "posts/covid19 did analysis.html#project-overview",
-    "title": "Covid-19 DiD Analysis",
-    "section": "",
-    "text": "This project estimates the early policy effects on COVID-19 transmission and damages through four dependent variables: daily new cases, cumulative cases, daily deaths, and cumulative deaths. The data is provided by the World Health Organization and Our World in Data.\nTwo different Difference-in-Difference models were implemented to estimate the effects of Mandatory policies, Optional policies, and no-control policies. The analysis found that mandatory policies had the most significant impact on limiting and decreasing COVID-19 transmission and damages, followed by optional policies, while no-control policies were the least effective.\n\n\n\nDifference-in-Difference (DiD): Utilized DiD models to compare the impact of different policy stringency levels on infection and death rates over time.\nPolicy Categorization: Countries were categorized into three groups based on early policy stringency:\n\nMandatory Countries (e.g., China): Strict travel restrictions and enforced preventive measures.\nOptional Countries (e.g., Canada, Japan, UK): Advised but not strictly enforced measures.\nNo-control Countries (e.g., USA, India): Limited restrictions and guidance.\n\nStatistical Analysis: Analyzed the effects on new cases, cumulative cases, new deaths, and cumulative deaths using empiricial statistical methods."
-  },
-  {
-    "objectID": "posts/covid19 did analysis.html#paper-preview",
-    "href": "posts/covid19 did analysis.html#paper-preview",
-    "title": "Covid-19 DiD Analysis",
-    "section": "Paper Preview",
-    "text": "Paper Preview\n\n\nUnable to display PDF file. Download instead."
-  },
-  {
-    "objectID": "posts/covid19 did analysis.html#link-to-repo",
-    "href": "posts/covid19 did analysis.html#link-to-repo",
-    "title": "Covid-19 DiD Analysis",
-    "section": "Link to repo",
-    "text": "Link to repo\nGithub Repository"
-  },
-  {
-    "objectID": "posts/weather insurance purchasing prediction.html",
-    "href": "posts/weather insurance purchasing prediction.html",
-    "title": "Weather Insurance Purchasing Prediction",
-    "section": "",
-    "text": "This project focuses on quantifying factors influencing Chinese farmers’ decisions to purchase weather insurance and predicting their purchasing probabilities. Using a dataset from Jiangxi, China, which includes 4,902 observations and 59 variables[cite: 30], the study navigates the challenges of predicting human economic behavior in a low-dimensional setting.\nBy implementing Lasso Cross-Validation and Random Forest algorithms, the project contrasts linear regularization methods with non-linear tree-based methods to identify significant determinants such as “Understanding” and “Social Network”.\n\n\n\nVariable Selection with Lasso: Utilized Lasso regularization to handle the bias-variance trade-off. The optimal \\(\\lambda\\) zeroed out 14 regressors, highlighting “Understanding” and “Network-related” variables as the most significant predictors.\nEnsemble Learning (Random Forest): Constructed a Random Forest model with 300 trees to capture non-linear relationships. Results revealed that unlike in the Lasso model, “Age” played a considerable role in purchasing decisions, while “Risk Averse” traits were surprisingly less important.\nPerformance Evaluation: Evaluated models using ROC Curves, Sensitivity/Specificity trade-offs, and \\(R^2\\). While the Lasso model achieved ~64% prediction correctness, the low \\(R^2\\) (&lt; 0.1) across both models highlighted the complexity of behavioral prediction and potential unobserved variables.\nData Cleaning & Bias Analysis: Processed raw data by handling NA values and removing variables with &gt;1000 missing entries. Conducted a critical analysis of data limitations, acknowledging potential biases from omitted variables like modern technology adoption."
-  },
-  {
-    "objectID": "posts/weather insurance purchasing prediction.html#project-overview",
-    "href": "posts/weather insurance purchasing prediction.html#project-overview",
-    "title": "Weather Insurance Purchasing Prediction",
-    "section": "",
-    "text": "This project focuses on quantifying factors influencing Chinese farmers’ decisions to purchase weather insurance and predicting their purchasing probabilities. Using a dataset from Jiangxi, China, which includes 4,902 observations and 59 variables[cite: 30], the study navigates the challenges of predicting human economic behavior in a low-dimensional setting.\nBy implementing Lasso Cross-Validation and Random Forest algorithms, the project contrasts linear regularization methods with non-linear tree-based methods to identify significant determinants such as “Understanding” and “Social Network”.\n\n\n\nVariable Selection with Lasso: Utilized Lasso regularization to handle the bias-variance trade-off. The optimal \\(\\lambda\\) zeroed out 14 regressors, highlighting “Understanding” and “Network-related” variables as the most significant predictors.\nEnsemble Learning (Random Forest): Constructed a Random Forest model with 300 trees to capture non-linear relationships. Results revealed that unlike in the Lasso model, “Age” played a considerable role in purchasing decisions, while “Risk Averse” traits were surprisingly less important.\nPerformance Evaluation: Evaluated models using ROC Curves, Sensitivity/Specificity trade-offs, and \\(R^2\\). While the Lasso model achieved ~64% prediction correctness, the low \\(R^2\\) (&lt; 0.1) across both models highlighted the complexity of behavioral prediction and potential unobserved variables.\nData Cleaning & Bias Analysis: Processed raw data by handling NA values and removing variables with &gt;1000 missing entries. Conducted a critical analysis of data limitations, acknowledging potential biases from omitted variables like modern technology adoption."
-  },
-  {
-    "objectID": "posts/weather insurance purchasing prediction.html#paper-preview",
-    "href": "posts/weather insurance purchasing prediction.html#paper-preview",
-    "title": "Weather Insurance Purchasing Prediction",
-    "section": "Paper Preview",
-    "text": "Paper Preview\n\n\nUnable to display PDF file. Download instead."
-  },
-  {
-    "objectID": "posts/weather insurance purchasing prediction.html#link-to-repo",
-    "href": "posts/weather insurance purchasing prediction.html#link-to-repo",
-    "title": "Weather Insurance Purchasing Prediction",
-    "section": "Link to repo",
-    "text": "Link to repo\nGithub Repository"
-  },
-  {
-    "objectID": "resume.html",
-    "href": "resume.html",
-    "title": "Resume",
-    "section": "",
-    "text": "Download PDF Version"
-  },
-  {
-    "objectID": "resume.html#education",
-    "href": "resume.html#education",
-    "title": "Resume",
-    "section": "Education",
-    "text": "Education\nUniversity of British Columbia (UBC) | Vancouver, BC\nM.S. in Data Science, Computational Linguistics | Aug 2025 - Present\n\nRelevant Coursework: Supervised Learning, Unsupervised Learning, Natural Language Processing, Machine Learning, Statistics.\nAcademic Focus: Examining data patterns and building models to predict the future.\n\nUniversity of California, Santa Cruz (UCSC) | Santa Cruz, CA\nB.A. in Business Management Economics | Sep 2019 - June 2022\n\nRelevant Coursework: Advanced Quantitative Analysis, Machine Learning Economics, Statistics, Security Market.\nAcademic Focus: Analyzing economic patterns using Machine Learning and Statistics."
-  },
-  {
-    "objectID": "resume.html#technical-skills",
-    "href": "resume.html#technical-skills",
-    "title": "Resume",
-    "section": "Technical Skills",
-    "text": "Technical Skills\n\n\n\n\n\n\n\nCategory\nSkills\n\n\n\n\nLanguages\nPython (Advanced), R, SQL, Bash\n\n\nData Science\nPandas, NumPy, Scikit-Learn, PyTorch, HuggingFace\n\n\nNLP\nWord Embeddings, N-gram Models, Parsing Algorithms, NLTK, Spacy\n\n\nTools\nGit/GitHub, VS Code, Jupyter, Quarto, LaTeX\n\n\nPlatforms\nmacOS, Windows"
-  },
-  {
-    "objectID": "resume.html#experience",
-    "href": "resume.html#experience",
-    "title": "Resume",
-    "section": "Experience",
-    "text": "Experience\nCareer Mentorship Program | Mentee Jan 2026 - Present\n\nSelected for a professional mentorship program under industry veteran Jacob Oh.\nFocusing on software engineering best practices, career development in tech, and bridging academic concepts to industry standards."
-  },
-  {
-    "objectID": "resume.html#capstone",
-    "href": "resume.html#capstone",
-    "title": "Resume",
-    "section": "Capstone",
-    "text": "Capstone\nTBD"
-  },
-  {
-    "objectID": "posts/credit card default analysis.html",
-    "href": "posts/credit card default analysis.html",
-    "title": "Credit Card Default Analysis",
-    "section": "",
-    "text": "A project of credit card default analysis and corresponding prediction.\nhttps://github.com/SNALYF/Credit-Card-Default-Analysis\n\n\n\nEDA: Cleaned and implemented EDA to dataset, navigated on the correlations between numerical features and categorical features\nModel Selection: Conducted logistic model (Test F1-score: 0.530), SVC model (Test F1-score: 0.532), HistGradientBoosting (0.534), and XGBoosting model(0.507).\nHyperparameter Optimization: Implemented Randomized Search Cross-Validation on SVC, HistGradientBoosting, and XGBoosting model to obtain the highest F1-score.\nShap Interpretation: Analyzed SHAP plot to interpret black-box model decisions, identified most important feature."
-  },
-  {
-    "objectID": "posts/credit card default analysis.html#project-overview",
-    "href": "posts/credit card default analysis.html#project-overview",
-    "title": "Credit Card Default Analysis",
-    "section": "",
-    "text": "A project of credit card default analysis and corresponding prediction.\nhttps://github.com/SNALYF/Credit-Card-Default-Analysis\n\n\n\nEDA: Cleaned and implemented EDA to dataset, navigated on the correlations between numerical features and categorical features\nModel Selection: Conducted logistic model (Test F1-score: 0.530), SVC model (Test F1-score: 0.532), HistGradientBoosting (0.534), and XGBoosting model(0.507).\nHyperparameter Optimization: Implemented Randomized Search Cross-Validation on SVC, HistGradientBoosting, and XGBoosting model to obtain the highest F1-score.\nShap Interpretation: Analyzed SHAP plot to interpret black-box model decisions, identified most important feature."
-  },
-  {
-    "objectID": "posts/credit card default analysis.html#paper-preview",
-    "href": "posts/credit card default analysis.html#paper-preview",
-    "title": "Credit Card Default Analysis",
-    "section": "Paper Preview",
-    "text": "Paper Preview\n\n\nUnable to display PDF file. Download instead."
-  },
-  {
-    "objectID": "posts/credit card default analysis.html#link-to-repo",
-    "href": "posts/credit card default analysis.html#link-to-repo",
-    "title": "Credit Card Default Analysis",
-    "section": "Link to repo",
-    "text": "Link to repo\nGithub Repository"
-  },
-  {
-    "objectID": "posts/sentiment analysis.html",
-    "href": "posts/sentiment analysis.html",
-    "title": "Sentiment Analysis on Yelp Reviews",
-    "section": "",
-    "text": "This project focuses on performing sentiment analysis on the Yelp Review dataset, classifying reviews into 1 to 5 stars. The analysis explores various modeling approaches, ranging from traditional machine learning baselines to deep learning architectures.\nBy implementing and comparing TF-IDF with Logistic Regression, Continuous Bag of Words (CBOW), and Bidirectional LSTM models, the study evaluates the effectiveness of different techniques in handling text classification tasks.\n\n\n\nExploratory Data Analysis (EDA): Analyzed the distribution of ratings and review lengths using Altair. The dataset was found to be balanced across different rating classes.\nBaseline Modeling: Established a baseline using TF-IDF Vectorization and Logistic Regression, achieving a Macro F1 score of 0.5936, setting a strong benchmark for subsequent models.\nDeep Learning Architectures:\n\nCBOW (Continuous Bag of Words): Implemented a custom CBOW model using Spacy word embeddings.\nBi-LSTM (Bidirectional Long Short-Term Memory): Constructed a Bi-LSTM model to capture sequential dependencies in the text. The model outperformed the CBOW approach, achieving a Validation F1 score of approximately 0.557.\n\nHyperparameter Tuning: Conducted experiments with different architectures (e.g., varying hidden sizes and number of layers) to optimize the LSTM model performance."
-  },
-  {
-    "objectID": "posts/sentiment analysis.html#project-overview",
-    "href": "posts/sentiment analysis.html#project-overview",
-    "title": "Sentiment Analysis on Yelp Reviews",
-    "section": "",
-    "text": "This project focuses on performing sentiment analysis on the Yelp Review dataset, classifying reviews into 1 to 5 stars. The analysis explores various modeling approaches, ranging from traditional machine learning baselines to deep learning architectures.\nBy implementing and comparing TF-IDF with Logistic Regression, Continuous Bag of Words (CBOW), and Bidirectional LSTM models, the study evaluates the effectiveness of different techniques in handling text classification tasks.\n\n\n\nExploratory Data Analysis (EDA): Analyzed the distribution of ratings and review lengths using Altair. The dataset was found to be balanced across different rating classes.\nBaseline Modeling: Established a baseline using TF-IDF Vectorization and Logistic Regression, achieving a Macro F1 score of 0.5936, setting a strong benchmark for subsequent models.\nDeep Learning Architectures:\n\nCBOW (Continuous Bag of Words): Implemented a custom CBOW model using Spacy word embeddings.\nBi-LSTM (Bidirectional Long Short-Term Memory): Constructed a Bi-LSTM model to capture sequential dependencies in the text. The model outperformed the CBOW approach, achieving a Validation F1 score of approximately 0.557.\n\nHyperparameter Tuning: Conducted experiments with different architectures (e.g., varying hidden sizes and number of layers) to optimize the LSTM model performance."
-  },
-  {
-    "objectID": "posts/sentiment analysis.html#paper-preview",
-    "href": "posts/sentiment analysis.html#paper-preview",
-    "title": "Sentiment Analysis on Yelp Reviews",
-    "section": "Paper Preview",
-    "text": "Paper Preview\n\n\nUnable to display PDF file. Download instead."
-  },
-  {
-    "objectID": "posts/sentiment analysis.html#link-to-repo",
-    "href": "posts/sentiment analysis.html#link-to-repo",
-    "title": "Sentiment Analysis on Yelp Reviews",
-    "section": "Link to repo",
-    "text": "Link to repo\nGithub Repository"
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Tianhao Cao",
-    "section": "",
-    "text": "I am a student at the University of British Columbia (UBC), passionate about bridging the gap between Statistics and Computer Science.\nMy primary interests lie in Data Science, Machine Learning, and Natural Language Processing (NLP). I enjoy building tools that solve real-world problems—whether it’s uncovering underlying patterns behind phenomena or constructing fundamental models/algorithms to predict outcomes.\n\nEducation\nUniversity of British Columbia | Vancouver, BC, Canada\n\nM.S. in Data Science, Computational Linguistics | August 2025 - Present\n\nUniversity of California, Santa Cruz | Santa Cruz, CA, United States\n\nB.A. in Business Management Economics | Sept 2019 - June 2022\n\n\n\nInterests\n\nProgramming: Python (Pandas, NumPy, ScikitLearn, PyTorch), R, SQL\nData Science: Machine Learning, Data Analysis, NLP (Word Embeddings, Parsing)\nOther: Music Theory, Mathematics"
+    "text": "Focusing on advanced machine learning and NLP research.\n\n\n\n\n\n\n\n\n\n\n\n\nPython\n\nLLM\n\nNLP\n\nPrivacy & Security\n\nEnsemble Methods\n\n\n\nDual-model feature fusion to detect training data membership in fine-tuned language models\n\n\n\nTianhao Cao\n\n\nMar 18, 2026\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPython\n\nNLP\n\nDeep Learning\n\nClassification\n\n\n\nComparative analysis of CBOW and LSTM models for sentiment classification on Yelp reviews\n\n\n\nTianhao Cao\n\n\nFeb 1, 2026\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPython\n\nMachine Learning\n\nClassification\n\nEnsemble Methods\n\nExplainability\n\n\n\nUsing XGBoosting to predict credit card defaults\n\n\n\nTianhao Cao\n\n\nDec 11, 2025\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "projects.html#masters",
     "href": "projects.html#masters",
     "title": "Projects",
     "section": "",
-    "text": "Focusing on advanced machine learning and NLP research.\n\n\n\n\n\n\n\n\n\n\n\n\nNatural Language Processing\n\nPytorch\n\nLSTM\n\nDeep Learning\n\n\n\nComparative analysis of CBOW and LSTM models for sentiment classification on Yelp reviews\n\n\n\nTianhao Cao\n\n\nFeb 1, 2026\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPython\n\nSVC\n\nLogistic Regression\n\nRandom Forest\n\nHistGradientBoosting\n\nXGBoosting\n\n\n\nUsing XGBoosting to predict credit card defaults\n\n\n\nTianhao Cao\n\n\nDec 11, 2025\n\n\n\n\n\n\nNo matching items"
+    "text": "Focusing on advanced machine learning and NLP research.\n\n\n\n\n\n\n\n\n\n\n\n\nPython\n\nLLM\n\nNLP\n\nPrivacy & Security\n\nEnsemble Methods\n\n\n\nDual-model feature fusion to detect training data membership in fine-tuned language models\n\n\n\nTianhao Cao\n\n\nMar 18, 2026\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPython\n\nNLP\n\nDeep Learning\n\nClassification\n\n\n\nComparative analysis of CBOW and LSTM models for sentiment classification on Yelp reviews\n\n\n\nTianhao Cao\n\n\nFeb 1, 2026\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPython\n\nMachine Learning\n\nClassification\n\nEnsemble Methods\n\nExplainability\n\n\n\nUsing XGBoosting to predict credit card defaults\n\n\n\nTianhao Cao\n\n\nDec 11, 2025\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "projects.html#undergraduate",
     "href": "projects.html#undergraduate",
     "title": "Projects",
     "section": "Undergraduate",
-    "text": "Undergraduate\nFoundational projects in data science and economics.\n\n\n\n\n\n\n\n\n\n\nWeather Insurance Purchasing Prediction\n\n\n\nLasso\n\nRandom Forest\n\nCross-Validation\n\nEconometrics\n\n\n\nPredicting farmers’ insurance buying behavior using Lasso and Random Forest\n\n\n\nTianhao Cao\n\n\nJun 5, 2022\n\n\n\n\n\n\n\n\n\n\n\n\n\nCovid-19 DiD Analysis\n\n\n\nDifference-in-Difference\n\nLinear Regression\n\n\n\nIdentifying the influences of Early-Policies to the COVID-19 transmission and Deaths\n\n\n\nTianhao Cao\n\n\nMar 18, 2022\n\n\n\n\n\n\nNo matching items"
+    "text": "Undergraduate\nFoundational projects in data science and economics.\n\n\n\n\n\n\n\n\n\n\nWeather Insurance Purchasing Prediction\n\n\n\nR\n\nMachine Learning\n\nRegression\n\nEconometrics\n\n\n\nPredicting farmers’ insurance buying behavior using Lasso and Random Forest\n\n\n\nTianhao Cao\n\n\nJun 5, 2022\n\n\n\n\n\n\n\n\n\n\n\n\n\nCovid-19 DiD Analysis\n\n\n\nR\n\nCausal Inference\n\nRegression\n\nEconometrics\n\n\n\nIdentifying the influences of Early-Policies to the COVID-19 transmission and Deaths\n\n\n\nTianhao Cao\n\n\nMar 18, 2022\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "posts/undergraduate/weather insurance purchasing prediction.html",
@@ -266,6 +112,76 @@
     "text": "Link to repo\nGithub Repository"
   },
   {
+    "objectID": "resume.html",
+    "href": "resume.html",
+    "title": "Resume",
+    "section": "",
+    "text": "Download PDF Version"
+  },
+  {
+    "objectID": "resume.html#education",
+    "href": "resume.html#education",
+    "title": "Resume",
+    "section": "Education",
+    "text": "Education\nUniversity of British Columbia (UBC) | Vancouver, BC\nM.S. in Data Science, Computational Linguistics | Aug 2025 - Present\n\nRelevant Coursework: Supervised Learning, Unsupervised Learning, Natural Language Processing, Machine Learning, Statistics.\nAcademic Focus: Examining data patterns and building models to predict the future.\n\nUniversity of California, Santa Cruz (UCSC) | Santa Cruz, CA\nB.A. in Business Management Economics | Sep 2019 - June 2022\n\nRelevant Coursework: Advanced Quantitative Analysis, Machine Learning Economics, Statistics, Security Market.\nAcademic Focus: Analyzing economic patterns using Machine Learning and Statistics."
+  },
+  {
+    "objectID": "resume.html#technical-skills",
+    "href": "resume.html#technical-skills",
+    "title": "Resume",
+    "section": "Technical Skills",
+    "text": "Technical Skills\n\n\n\n\n\n\n\nCategory\nSkills\n\n\n\n\nLanguages\nPython, R, SQL, MongoDB, Bash\n\n\nML & AI\nPyTorch, Scikit-learn, XGBoost, Hugging Face Transformers, LLM Fine-tuning, RAG Pipelines, Vector Embeddings, Prompt Engineering, SHAP\n\n\nNLP\nWord Embeddings, N-gram Models, Parsing Algorithms, Membership Inference, NLTK, spaCy\n\n\nData Engineering\nPandas, NumPy, ETL Pipelines, Feature Engineering, Data Visualization\n\n\nMLOps & Cloud\nDocker, AWS, Git / GitHub, CI/CD, Weights & Biases (W&B)\n\n\nTools\nVS Code, Jupyter, Quarto, LaTeX"
+  },
+  {
+    "objectID": "resume.html#experience",
+    "href": "resume.html#experience",
+    "title": "Resume",
+    "section": "Experience",
+    "text": "Experience\nCareer Mentorship Program | Mentee Jan 2026 - Present\n\nSelected for a professional mentorship program under industry veteran Jacob Oh.\nFocusing on software engineering best practices, career development in tech, and bridging academic concepts to industry standards."
+  },
+  {
+    "objectID": "resume.html#capstone",
+    "href": "resume.html#capstone",
+    "title": "Resume",
+    "section": "Capstone",
+    "text": "Capstone\nTBD"
+  },
+  {
+    "objectID": "posts/masters/membership-inference-attack.html",
+    "href": "posts/masters/membership-inference-attack.html",
+    "title": "Membership Inference Attack on Fine-tuned LLMs",
+    "section": "",
+    "text": "A privacy attack research project investigating whether text samples were included in the fine-tuning dataset of a language model — a core problem in AI safety and LLM privacy auditing. Submitted as a Kaggle competition through UBC COLX 531.\n\n\n\nDual-Model Feature Engineering: Extracted a 16-dimensional feature vector per sample using four models simultaneously — two fine-tuned SmolLM2 variants (135M, 360M) and their base checkpoints — capturing reference ratios, neighborhood perturbation gaps, and cross-model agreement signals.\nImproved Neighborhood Attack: Replaced slow BERT mask-and-fill neighbor generation with fast token-drop perturbation (10% word dropout, 5 neighbors per sample), enabling large-scale inference without sacrificing signal quality.\nSupervised Ensemble Classifier: Trained a GradientBoosting classifier (300 estimators, max depth 4) on standardized features to distinguish members from non-members based on learned memorization patterns.\nResults: Achieved AUC 0.907 and TPR@FPR=0.1 of 0.697 on the validation split — a +55% improvement in AUC and +349% improvement in TPR over the raw-loss baseline.\nFeature Importance Analysis: Identified that cross-model reference signals (loss_diff_ft, ref_diff_2) account for 86% of model importance, confirming that larger fine-tuned models produce stronger memorization signatures than neighborhood-level perturbation."
+  },
+  {
+    "objectID": "posts/masters/membership-inference-attack.html#project-overview",
+    "href": "posts/masters/membership-inference-attack.html#project-overview",
+    "title": "Membership Inference Attack on Fine-tuned LLMs",
+    "section": "",
+    "text": "A privacy attack research project investigating whether text samples were included in the fine-tuning dataset of a language model — a core problem in AI safety and LLM privacy auditing. Submitted as a Kaggle competition through UBC COLX 531.\n\n\n\nDual-Model Feature Engineering: Extracted a 16-dimensional feature vector per sample using four models simultaneously — two fine-tuned SmolLM2 variants (135M, 360M) and their base checkpoints — capturing reference ratios, neighborhood perturbation gaps, and cross-model agreement signals.\nImproved Neighborhood Attack: Replaced slow BERT mask-and-fill neighbor generation with fast token-drop perturbation (10% word dropout, 5 neighbors per sample), enabling large-scale inference without sacrificing signal quality.\nSupervised Ensemble Classifier: Trained a GradientBoosting classifier (300 estimators, max depth 4) on standardized features to distinguish members from non-members based on learned memorization patterns.\nResults: Achieved AUC 0.907 and TPR@FPR=0.1 of 0.697 on the validation split — a +55% improvement in AUC and +349% improvement in TPR over the raw-loss baseline.\nFeature Importance Analysis: Identified that cross-model reference signals (loss_diff_ft, ref_diff_2) account for 86% of model importance, confirming that larger fine-tuned models produce stronger memorization signatures than neighborhood-level perturbation."
+  },
+  {
+    "objectID": "posts/masters/membership-inference-attack.html#technical-stack",
+    "href": "posts/masters/membership-inference-attack.html#technical-stack",
+    "title": "Membership Inference Attack on Fine-tuned LLMs",
+    "section": "Technical Stack",
+    "text": "Technical Stack\nPython · PyTorch · Hugging Face Transformers · scikit-learn · Pandas · NumPy"
+  },
+  {
+    "objectID": "posts/masters/membership-inference-attack.html#results-summary",
+    "href": "posts/masters/membership-inference-attack.html#results-summary",
+    "title": "Membership Inference Attack on Fine-tuned LLMs",
+    "section": "Results Summary",
+    "text": "Results Summary\n\n\n\nMethod\nAUC\nTPR @ FPR=0.1\n\n\n\n\nBaseline (Raw Loss)\n0.584\n0.155\n\n\nImproved Neighborhood Attack\n0.907\n0.697"
+  },
+  {
+    "objectID": "posts/masters/membership-inference-attack.html#link-to-repo",
+    "href": "posts/masters/membership-inference-attack.html#link-to-repo",
+    "title": "Membership Inference Attack on Fine-tuned LLMs",
+    "section": "Link to repo",
+    "text": "Link to repo\nGithub Repository"
+  },
+  {
     "objectID": "posts/masters/sentiment analysis.html",
     "href": "posts/masters/sentiment analysis.html",
     "title": "Sentiment Analysis on Yelp Reviews",
@@ -320,5 +236,12 @@
     "title": "Covid-19 DiD Analysis",
     "section": "Link to repo",
     "text": "Link to repo\nGithub Repository"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Tianhao Cao",
+    "section": "",
+    "text": "I am a student at the University of British Columbia (UBC), passionate about bridging the gap between Statistics and Computer Science.\nMy primary interests lie in Data Science, Machine Learning, and Natural Language Processing (NLP). I enjoy building tools that solve real-world problems—whether it’s uncovering underlying patterns behind phenomena or constructing fundamental models/algorithms to predict outcomes.\n\nEducation\nUniversity of British Columbia | Vancouver, BC, Canada\n\nM.S. in Data Science, Computational Linguistics | August 2025 - Present\n\nUniversity of California, Santa Cruz | Santa Cruz, CA, United States\n\nB.A. in Business Management Economics | Sept 2019 - June 2022\n\n\n\nInterests\n\nProgramming: Python (Pandas, NumPy, ScikitLearn, PyTorch), R, SQL\nData Science: Machine Learning, Data Analysis, NLP (Word Embeddings, Parsing)\nOther: Music Theory, Mathematics"
   }
 ]

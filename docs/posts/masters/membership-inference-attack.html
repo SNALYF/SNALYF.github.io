@@ -7,10 +7,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Tianhao Cao">
-<meta name="dcterms.date" content="2025-12-11">
-<meta name="description" content="Using XGBoosting to predict credit card defaults">
+<meta name="dcterms.date" content="2026-03-18">
+<meta name="description" content="Dual-model feature fusion to detect training data membership in fine-tuned language models">
 
-<title>Credit Card Default Analysis – Tianhao Cao</title>
+<title>Membership Inference Attack on Fine-tuned LLMs – Tianhao Cao</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -26,23 +26,23 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../site_libs/quarto-nav/headroom.min.js"></script>
-<script src="../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../">
-<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="../site_libs/quarto-html/popper.min.js"></script>
-<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-bc185b5c5bdbcb35c2eb49d8a876ef70.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-c09f7992e7ad36c4a4c784d127ab2153.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-bc185b5c5bdbcb35c2eb49d8a876ef70.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-c09f7992e7ad36c4a4c784d127ab2153.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -92,7 +92,7 @@ ul.task-list li input[type="checkbox"] {
 </script>
 
 
-<link rel="stylesheet" href="../styles.css">
+<link rel="stylesheet" href="../../styles.css">
 </head>
 
 <body class="nav-fixed quarto-light">
@@ -102,7 +102,7 @@ ul.task-list li input[type="checkbox"] {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="../index.html">
+    <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">Tianhao Cao</span>
     </a>
   </div>
@@ -113,19 +113,19 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../index.html"> 
+    <a class="nav-link" href="../../index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../projects.html"> 
+    <a class="nav-link" href="../../projects.html"> 
 <span class="menu-text">Projects</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../resume.html"> 
+    <a class="nav-link" href="../../resume.html"> 
 <span class="menu-text">Resume</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../about.html"> 
+    <a class="nav-link" href="../../about.html"> 
 <span class="menu-text">About</span></a>
   </li>  
 </ul>
@@ -165,7 +165,8 @@ ul.task-list li input[type="checkbox"] {
   <ul class="collapse">
   <li><a href="#key-concepts-applied" id="toc-key-concepts-applied" class="nav-link" data-scroll-target="#key-concepts-applied">Key Concepts Applied</a></li>
   </ul></li>
-  <li><a href="#paper-preview" id="toc-paper-preview" class="nav-link" data-scroll-target="#paper-preview">Paper Preview</a></li>
+  <li><a href="#technical-stack" id="toc-technical-stack" class="nav-link" data-scroll-target="#technical-stack">Technical Stack</a></li>
+  <li><a href="#results-summary" id="toc-results-summary" class="nav-link" data-scroll-target="#results-summary">Results Summary</a></li>
   <li><a href="#link-to-repo" id="toc-link-to-repo" class="nav-link" data-scroll-target="#link-to-repo">Link to repo</a></li>
   </ul>
 </nav>
@@ -175,21 +176,19 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Credit Card Default Analysis</h1>
+<h1 class="title">Membership Inference Attack on Fine-tuned LLMs</h1>
   <div class="quarto-categories">
-    <div class="quarto-category">Master's</div>
     <div class="quarto-category">Python</div>
-    <div class="quarto-category">SVC</div>
-    <div class="quarto-category">Logistic Regression</div>
-    <div class="quarto-category">Random Forest</div>
-    <div class="quarto-category">HistGradientBoosting</div>
-    <div class="quarto-category">XGBoosting</div>
+    <div class="quarto-category">LLM</div>
+    <div class="quarto-category">NLP</div>
+    <div class="quarto-category">Privacy &amp; Security</div>
+    <div class="quarto-category">Ensemble Methods</div>
   </div>
   </div>
 
 <div>
   <div class="description">
-    Using XGBoosting to predict credit card defaults
+    Dual-model feature fusion to detect training data membership in fine-tuned language models
   </div>
 </div>
 
@@ -206,7 +205,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">December 11, 2025</p>
+      <p class="date">March 18, 2026</p>
     </div>
   </div>
   
@@ -220,29 +219,49 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="project-overview" class="level2">
 <h2 class="anchored" data-anchor-id="project-overview">Project Overview</h2>
-<p>A project of credit card default analysis and corresponding prediction.</p>
-<p><a href="URL">https://github.com/SNALYF/Credit-Card-Default-Analysis</a></p>
+<p>A privacy attack research project investigating whether text samples were included in the fine-tuning dataset of a language model — a core problem in AI safety and LLM privacy auditing. Submitted as a Kaggle competition through UBC COLX 531.</p>
 <section id="key-concepts-applied" class="level3">
 <h3 class="anchored" data-anchor-id="key-concepts-applied">Key Concepts Applied</h3>
 <ul>
-<li><strong>EDA</strong>: Cleaned and implemented EDA to dataset, navigated on the correlations between numerical features and categorical features</li>
-<li><strong>Model Selection</strong>: Conducted logistic model (Test F1-score: 0.530), SVC model (Test F1-score: 0.532), HistGradientBoosting (0.534), and XGBoosting model(0.507).</li>
-<li><strong>Hyperparameter Optimization</strong>: Implemented Randomized Search Cross-Validation on SVC, HistGradientBoosting, and XGBoosting model to obtain the highest F1-score.</li>
-<li><strong>Shap Interpretation</strong>: Analyzed SHAP plot to interpret black-box model decisions, identified most important feature.</li>
+<li><strong>Dual-Model Feature Engineering</strong>: Extracted a 16-dimensional feature vector per sample using four models simultaneously — two fine-tuned SmolLM2 variants (135M, 360M) and their base checkpoints — capturing reference ratios, neighborhood perturbation gaps, and cross-model agreement signals.</li>
+<li><strong>Improved Neighborhood Attack</strong>: Replaced slow BERT mask-and-fill neighbor generation with fast token-drop perturbation (10% word dropout, 5 neighbors per sample), enabling large-scale inference without sacrificing signal quality.</li>
+<li><strong>Supervised Ensemble Classifier</strong>: Trained a GradientBoosting classifier (300 estimators, max depth 4) on standardized features to distinguish members from non-members based on learned memorization patterns.</li>
+<li><strong>Results</strong>: Achieved <strong>AUC 0.907</strong> and <strong>TPR@FPR=0.1 of 0.697</strong> on the validation split — a +55% improvement in AUC and +349% improvement in TPR over the raw-loss baseline.</li>
+<li><strong>Feature Importance Analysis</strong>: Identified that cross-model reference signals (<code>loss_diff_ft</code>, <code>ref_diff_2</code>) account for 86% of model importance, confirming that larger fine-tuned models produce stronger memorization signatures than neighborhood-level perturbation.</li>
 </ul>
 </section>
 </section>
-<section id="paper-preview" class="level2">
-<h2 class="anchored" data-anchor-id="paper-preview">Paper Preview</h2>
-<object data="pdfs/credit card default.pdf" type="application/pdf" width="100%" height="800px">
-<p>
-Unable to display PDF file. <a href="pdfs/credit card default.pdf">Download</a> instead.
-</p>
-</object>
+<section id="technical-stack" class="level2">
+<h2 class="anchored" data-anchor-id="technical-stack">Technical Stack</h2>
+<p><strong>Python · PyTorch · Hugging Face Transformers · scikit-learn · Pandas · NumPy</strong></p>
+</section>
+<section id="results-summary" class="level2">
+<h2 class="anchored" data-anchor-id="results-summary">Results Summary</h2>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Method</th>
+<th style="text-align: center;">AUC</th>
+<th style="text-align: center;">TPR @ FPR=0.1</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Baseline (Raw Loss)</td>
+<td style="text-align: center;">0.584</td>
+<td style="text-align: center;">0.155</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Improved Neighborhood Attack</strong></td>
+<td style="text-align: center;"><strong>0.907</strong></td>
+<td style="text-align: center;"><strong>0.697</strong></td>
+</tr>
+</tbody>
+</table>
 </section>
 <section id="link-to-repo" class="level2">
 <h2 class="anchored" data-anchor-id="link-to-repo">Link to repo</h2>
-<p><a href="https://github.com/SNALYF/Credit-Card-Default-Analysis">Github Repository</a></p>
+<p><a href="https://github.com/SNALYF/Neighborhood-Attack-MIA">Github Repository</a></p>
 
 
 </section>

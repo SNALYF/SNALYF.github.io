@@ -2,6 +2,7 @@
   {
     "listing": "/projects.html",
     "items": [
+      "/posts/masters/membership-inference-attack.html",
       "/posts/masters/sentiment analysis.html",
       "/posts/masters/credit card default analysis.html",
       "/posts/undergraduate/weather insurance purchasing prediction.html",

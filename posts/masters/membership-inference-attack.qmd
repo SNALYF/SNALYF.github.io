@@ -1,0 +1,34 @@
+---
+title: "Membership Inference Attack on Fine-tuned LLMs"
+description: "Dual-model feature fusion to detect training data membership in fine-tuned language models"
+author: "Tianhao Cao"
+date: "2026-03-18"
+categories: [Python, LLM, NLP, Privacy & Security, Ensemble Methods]
+image: ../../img/MIA.jpg
+---
+
+## Project Overview
+
+A privacy attack research project investigating whether text samples were included in the fine-tuning dataset of a language model — a core problem in AI safety and LLM privacy auditing. Submitted as a Kaggle competition through UBC COLX 531.
+
+### Key Concepts Applied
+
+* **Dual-Model Feature Engineering**: Extracted a 16-dimensional feature vector per sample using four models simultaneously — two fine-tuned SmolLM2 variants (135M, 360M) and their base checkpoints — capturing reference ratios, neighborhood perturbation gaps, and cross-model agreement signals.
+* **Improved Neighborhood Attack**: Replaced slow BERT mask-and-fill neighbor generation with fast token-drop perturbation (10% word dropout, 5 neighbors per sample), enabling large-scale inference without sacrificing signal quality.
+* **Supervised Ensemble Classifier**: Trained a GradientBoosting classifier (300 estimators, max depth 4) on standardized features to distinguish members from non-members based on learned memorization patterns.
+* **Results**: Achieved **AUC 0.907** and **TPR@FPR=0.1 of 0.697** on the validation split — a +55% improvement in AUC and +349% improvement in TPR over the raw-loss baseline.
+* **Feature Importance Analysis**: Identified that cross-model reference signals (`loss_diff_ft`, `ref_diff_2`) account for 86% of model importance, confirming that larger fine-tuned models produce stronger memorization signatures than neighborhood-level perturbation.
+
+## Technical Stack
+
+**Python · PyTorch · Hugging Face Transformers · scikit-learn · Pandas · NumPy**
+
+## Results Summary
+
+| Method | AUC | TPR @ FPR=0.1 |
+|:---|:--:|:--:|
+| Baseline (Raw Loss) | 0.584 | 0.155 |
+| **Improved Neighborhood Attack** | **0.907** | **0.697** |
+
+## Link to repo
+[Github Repository](https://github.com/SNALYF/Neighborhood-Attack-MIA)

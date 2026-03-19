@@ -29,11 +29,12 @@ layout: full
 
 | Category | Skills |
 |----------|--------|
-| **Languages** | Python (Advanced), R, SQL, Bash |
-| **Data Science** | Pandas, NumPy, Scikit-Learn, PyTorch, HuggingFace |
-| **NLP** | Word Embeddings, N-gram Models, Parsing Algorithms, NLTK, Spacy |
-| **Tools** | Git/GitHub, VS Code, Jupyter, Quarto, LaTeX |
-| **Platforms** | macOS, Windows |
+| **Languages** | Python, R, SQL, MongoDB, Bash |
+| **ML & AI** | PyTorch, Scikit-learn, XGBoost, Hugging Face Transformers, LLM Fine-tuning, RAG Pipelines, Vector Embeddings, Prompt Engineering, SHAP |
+| **NLP** | Word Embeddings, N-gram Models, Parsing Algorithms, Membership Inference, NLTK, spaCy |
+| **Data Engineering** | Pandas, NumPy, ETL Pipelines, Feature Engineering, Data Visualization |
+| **MLOps & Cloud** | Docker, AWS, Git / GitHub, CI/CD, Weights & Biases (W&B) |
+| **Tools** | VS Code, Jupyter, Quarto, LaTeX |
 
 ---
 

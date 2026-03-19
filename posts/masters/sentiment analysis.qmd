@@ -3,7 +3,7 @@ title: "Sentiment Analysis on Yelp Reviews"
 description: "Comparative analysis of CBOW and LSTM models for sentiment classification on Yelp reviews"
 author: "Tianhao Cao"
 date: "2026-02-01"
-categories: [Natural Language Processing, Pytorch, LSTM, Deep Learning]
+categories: [Python, NLP, Deep Learning, Classification]
 image: ../../img/sentiment.png
 ---
 
