@@ -39,14 +39,14 @@
     "href": "projects.html",
     "title": "Projects",
     "section": "",
-    "text": "Focusing on advanced machine learning and NLP research.\n\n\n\n\n\n\n\n\n\n\n\n\nPython\n\nLLM\n\nNLP\n\nPrivacy & Security\n\nEnsemble Methods\n\n\n\nDual-model feature fusion to detect training data membership in fine-tuned language models\n\n\n\nTianhao Cao\n\n\nMar 18, 2026\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPython\n\nNLP\n\nDeep Learning\n\nClassification\n\n\n\nComparative analysis of CBOW and LSTM models for sentiment classification on Yelp reviews\n\n\n\nTianhao Cao\n\n\nFeb 1, 2026\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPython\n\nMachine Learning\n\nClassification\n\nEnsemble Methods\n\nExplainability\n\n\n\nUsing XGBoosting to predict credit card defaults\n\n\n\nTianhao Cao\n\n\nDec 11, 2025\n\n\n\n\n\n\nNo matching items"
+    "text": "Focusing on advanced machine learning and NLP research.\n\n\n\n\n\n\n\n\n\n\n\n\nPython\n\nNLP\n\nRAG\n\nLLM\n\nInformation Retrieval\n\n\n\nA full RAG pipeline that answers recipe questions and scales ingredients, built on Betty Crocker’s Bisquick Cook Book using LLMs and semantic search.\n\n\n\nTianhao Cao\n\n\nMar 25, 2026\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPython\n\nLLM\n\nNLP\n\nPrivacy & Security\n\nEnsemble Methods\n\n\n\nDual-model feature fusion to detect training data membership in fine-tuned language models\n\n\n\nTianhao Cao\n\n\nMar 18, 2026\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPython\n\nNLP\n\nDeep Learning\n\nClassification\n\n\n\nComparative analysis of CBOW and LSTM models for sentiment classification on Yelp reviews\n\n\n\nTianhao Cao\n\n\nFeb 1, 2026\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPython\n\nMachine Learning\n\nClassification\n\nEnsemble Methods\n\nExplainability\n\n\n\nUsing XGBoosting to predict credit card defaults\n\n\n\nTianhao Cao\n\n\nDec 11, 2025\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "projects.html#masters",
     "href": "projects.html#masters",
     "title": "Projects",
     "section": "",
-    "text": "Focusing on advanced machine learning and NLP research.\n\n\n\n\n\n\n\n\n\n\n\n\nPython\n\nLLM\n\nNLP\n\nPrivacy & Security\n\nEnsemble Methods\n\n\n\nDual-model feature fusion to detect training data membership in fine-tuned language models\n\n\n\nTianhao Cao\n\n\nMar 18, 2026\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPython\n\nNLP\n\nDeep Learning\n\nClassification\n\n\n\nComparative analysis of CBOW and LSTM models for sentiment classification on Yelp reviews\n\n\n\nTianhao Cao\n\n\nFeb 1, 2026\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPython\n\nMachine Learning\n\nClassification\n\nEnsemble Methods\n\nExplainability\n\n\n\nUsing XGBoosting to predict credit card defaults\n\n\n\nTianhao Cao\n\n\nDec 11, 2025\n\n\n\n\n\n\nNo matching items"
+    "text": "Focusing on advanced machine learning and NLP research.\n\n\n\n\n\n\n\n\n\n\n\n\nPython\n\nNLP\n\nRAG\n\nLLM\n\nInformation Retrieval\n\n\n\nA full RAG pipeline that answers recipe questions and scales ingredients, built on Betty Crocker’s Bisquick Cook Book using LLMs and semantic search.\n\n\n\nTianhao Cao\n\n\nMar 25, 2026\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPython\n\nLLM\n\nNLP\n\nPrivacy & Security\n\nEnsemble Methods\n\n\n\nDual-model feature fusion to detect training data membership in fine-tuned language models\n\n\n\nTianhao Cao\n\n\nMar 18, 2026\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPython\n\nNLP\n\nDeep Learning\n\nClassification\n\n\n\nComparative analysis of CBOW and LSTM models for sentiment classification on Yelp reviews\n\n\n\nTianhao Cao\n\n\nFeb 1, 2026\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPython\n\nMachine Learning\n\nClassification\n\nEnsemble Methods\n\nExplainability\n\n\n\nUsing XGBoosting to predict credit card defaults\n\n\n\nTianhao Cao\n\n\nDec 11, 2025\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "projects.html#undergraduate",
@@ -84,30 +84,58 @@
     "text": "Link to repo\nGithub Repository"
   },
   {
-    "objectID": "posts/masters/credit card default analysis.html",
-    "href": "posts/masters/credit card default analysis.html",
-    "title": "Credit Card Default Analysis",
+    "objectID": "posts/masters/betty-talker-rag.html",
+    "href": "posts/masters/betty-talker-rag.html",
+    "title": "Betty Talker — Recipe RAG Pipeline",
     "section": "",
-    "text": "A project of credit card default analysis and corresponding prediction.\nhttps://github.com/SNALYF/Credit-Card-Default-Analysis\n\n\n\nEDA: Cleaned and implemented EDA to dataset, navigated on the correlations between numerical features and categorical features\nModel Selection: Conducted logistic model (Test F1-score: 0.530), SVC model (Test F1-score: 0.532), HistGradientBoosting (0.534), and XGBoosting model(0.507).\nHyperparameter Optimization: Implemented Randomized Search Cross-Validation on SVC, HistGradientBoosting, and XGBoosting model to obtain the highest F1-score.\nShap Interpretation: Analyzed SHAP plot to interpret black-box model decisions, identified most important feature."
+    "text": "Betty Talker is an end-to-end Retrieval-Augmented Generation (RAG) system. The assistant answers natural language questions about recipes from Betty Crocker’s Bisquick Cook Book (1957) and supports ingredient scaling for any serving size.\n\n\n\nData Collection: Parsed the full raw text from Project Gutenberg into structured recipe dictionaries, extracting titles, ingredients, instructions, serving sizes, and notes using regex-based parsing.\nVector Store & Search: Generated sentence embeddings with all-MiniLM-L6-v2 and implemented cosine-similarity-based retrieval to find the most relevant recipes for a given query.\nLLM + RAG: Connected the search results to a large language model via a structured prompt template. The assistant only answers questions grounded in the retrieved recipe data.\nActions & Intent Classification: Added few-shot LLM intent classification to route queries between recipe search, ingredient scaling, and off-topic refusal. Scaling supports Unicode fraction characters (½, ⅓, ¾, etc.).\n\n\n\n\nUser Query → classify_intent()\n               ├── SearchRecipeIntent → search() → construct_prompt() → call_llm()\n               ├── ScaleRecipeIntent  → search() → scale()\n               └── OtherIntent        → polite refusal via LLM"
   },
   {
-    "objectID": "posts/masters/credit card default analysis.html#project-overview",
-    "href": "posts/masters/credit card default analysis.html#project-overview",
-    "title": "Credit Card Default Analysis",
+    "objectID": "posts/masters/betty-talker-rag.html#project-overview",
+    "href": "posts/masters/betty-talker-rag.html#project-overview",
+    "title": "Betty Talker — Recipe RAG Pipeline",
     "section": "",
-    "text": "A project of credit card default analysis and corresponding prediction.\nhttps://github.com/SNALYF/Credit-Card-Default-Analysis\n\n\n\nEDA: Cleaned and implemented EDA to dataset, navigated on the correlations between numerical features and categorical features\nModel Selection: Conducted logistic model (Test F1-score: 0.530), SVC model (Test F1-score: 0.532), HistGradientBoosting (0.534), and XGBoosting model(0.507).\nHyperparameter Optimization: Implemented Randomized Search Cross-Validation on SVC, HistGradientBoosting, and XGBoosting model to obtain the highest F1-score.\nShap Interpretation: Analyzed SHAP plot to interpret black-box model decisions, identified most important feature."
+    "text": "Betty Talker is an end-to-end Retrieval-Augmented Generation (RAG) system. The assistant answers natural language questions about recipes from Betty Crocker’s Bisquick Cook Book (1957) and supports ingredient scaling for any serving size.\n\n\n\nData Collection: Parsed the full raw text from Project Gutenberg into structured recipe dictionaries, extracting titles, ingredients, instructions, serving sizes, and notes using regex-based parsing.\nVector Store & Search: Generated sentence embeddings with all-MiniLM-L6-v2 and implemented cosine-similarity-based retrieval to find the most relevant recipes for a given query.\nLLM + RAG: Connected the search results to a large language model via a structured prompt template. The assistant only answers questions grounded in the retrieved recipe data.\nActions & Intent Classification: Added few-shot LLM intent classification to route queries between recipe search, ingredient scaling, and off-topic refusal. Scaling supports Unicode fraction characters (½, ⅓, ¾, etc.).\n\n\n\n\nUser Query → classify_intent()\n               ├── SearchRecipeIntent → search() → construct_prompt() → call_llm()\n               ├── ScaleRecipeIntent  → search() → scale()\n               └── OtherIntent        → polite refusal via LLM"
   },
   {
-    "objectID": "posts/masters/credit card default analysis.html#paper-preview",
-    "href": "posts/masters/credit card default analysis.html#paper-preview",
-    "title": "Credit Card Default Analysis",
-    "section": "Paper Preview",
-    "text": "Paper Preview\n\n\nUnable to display PDF file. Download instead."
+    "objectID": "posts/masters/betty-talker-rag.html#link-to-repo",
+    "href": "posts/masters/betty-talker-rag.html#link-to-repo",
+    "title": "Betty Talker — Recipe RAG Pipeline",
+    "section": "Link to Repo",
+    "text": "Link to Repo\nGitHub Repository"
   },
   {
-    "objectID": "posts/masters/credit card default analysis.html#link-to-repo",
-    "href": "posts/masters/credit card default analysis.html#link-to-repo",
-    "title": "Credit Card Default Analysis",
+    "objectID": "posts/masters/membership-inference-attack.html",
+    "href": "posts/masters/membership-inference-attack.html",
+    "title": "Membership Inference Attack on Fine-tuned LLMs",
+    "section": "",
+    "text": "A privacy attack research project investigating whether text samples were included in the fine-tuning dataset of a language model — a core problem in AI safety and LLM privacy auditing. Submitted as a Kaggle competition through UBC COLX 531.\n\n\n\nDual-Model Feature Engineering: Extracted a 16-dimensional feature vector per sample using four models simultaneously — two fine-tuned SmolLM2 variants (135M, 360M) and their base checkpoints — capturing reference ratios, neighborhood perturbation gaps, and cross-model agreement signals.\nImproved Neighborhood Attack: Replaced slow BERT mask-and-fill neighbor generation with fast token-drop perturbation (10% word dropout, 5 neighbors per sample), enabling large-scale inference without sacrificing signal quality.\nSupervised Ensemble Classifier: Trained a GradientBoosting classifier (300 estimators, max depth 4) on standardized features to distinguish members from non-members based on learned memorization patterns.\nResults: Achieved AUC 0.907 and TPR@FPR=0.1 of 0.697 on the validation split — a +55% improvement in AUC and +349% improvement in TPR over the raw-loss baseline.\nFeature Importance Analysis: Identified that cross-model reference signals (loss_diff_ft, ref_diff_2) account for 86% of model importance, confirming that larger fine-tuned models produce stronger memorization signatures than neighborhood-level perturbation."
+  },
+  {
+    "objectID": "posts/masters/membership-inference-attack.html#project-overview",
+    "href": "posts/masters/membership-inference-attack.html#project-overview",
+    "title": "Membership Inference Attack on Fine-tuned LLMs",
+    "section": "",
+    "text": "A privacy attack research project investigating whether text samples were included in the fine-tuning dataset of a language model — a core problem in AI safety and LLM privacy auditing. Submitted as a Kaggle competition through UBC COLX 531.\n\n\n\nDual-Model Feature Engineering: Extracted a 16-dimensional feature vector per sample using four models simultaneously — two fine-tuned SmolLM2 variants (135M, 360M) and their base checkpoints — capturing reference ratios, neighborhood perturbation gaps, and cross-model agreement signals.\nImproved Neighborhood Attack: Replaced slow BERT mask-and-fill neighbor generation with fast token-drop perturbation (10% word dropout, 5 neighbors per sample), enabling large-scale inference without sacrificing signal quality.\nSupervised Ensemble Classifier: Trained a GradientBoosting classifier (300 estimators, max depth 4) on standardized features to distinguish members from non-members based on learned memorization patterns.\nResults: Achieved AUC 0.907 and TPR@FPR=0.1 of 0.697 on the validation split — a +55% improvement in AUC and +349% improvement in TPR over the raw-loss baseline.\nFeature Importance Analysis: Identified that cross-model reference signals (loss_diff_ft, ref_diff_2) account for 86% of model importance, confirming that larger fine-tuned models produce stronger memorization signatures than neighborhood-level perturbation."
+  },
+  {
+    "objectID": "posts/masters/membership-inference-attack.html#technical-stack",
+    "href": "posts/masters/membership-inference-attack.html#technical-stack",
+    "title": "Membership Inference Attack on Fine-tuned LLMs",
+    "section": "Technical Stack",
+    "text": "Technical Stack\nPython · PyTorch · Hugging Face Transformers · scikit-learn · Pandas · NumPy"
+  },
+  {
+    "objectID": "posts/masters/membership-inference-attack.html#results-summary",
+    "href": "posts/masters/membership-inference-attack.html#results-summary",
+    "title": "Membership Inference Attack on Fine-tuned LLMs",
+    "section": "Results Summary",
+    "text": "Results Summary\n\n\n\nMethod\nAUC\nTPR @ FPR=0.1\n\n\n\n\nBaseline (Raw Loss)\n0.584\n0.155\n\n\nImproved Neighborhood Attack\n0.907\n0.697"
+  },
+  {
+    "objectID": "posts/masters/membership-inference-attack.html#link-to-repo",
+    "href": "posts/masters/membership-inference-attack.html#link-to-repo",
+    "title": "Membership Inference Attack on Fine-tuned LLMs",
     "section": "Link to repo",
     "text": "Link to repo\nGithub Repository"
   },
@@ -147,37 +175,30 @@
     "text": "Capstone\nTBD"
   },
   {
-    "objectID": "posts/masters/membership-inference-attack.html",
-    "href": "posts/masters/membership-inference-attack.html",
-    "title": "Membership Inference Attack on Fine-tuned LLMs",
+    "objectID": "posts/masters/credit card default analysis.html",
+    "href": "posts/masters/credit card default analysis.html",
+    "title": "Credit Card Default Analysis",
     "section": "",
-    "text": "A privacy attack research project investigating whether text samples were included in the fine-tuning dataset of a language model — a core problem in AI safety and LLM privacy auditing. Submitted as a Kaggle competition through UBC COLX 531.\n\n\n\nDual-Model Feature Engineering: Extracted a 16-dimensional feature vector per sample using four models simultaneously — two fine-tuned SmolLM2 variants (135M, 360M) and their base checkpoints — capturing reference ratios, neighborhood perturbation gaps, and cross-model agreement signals.\nImproved Neighborhood Attack: Replaced slow BERT mask-and-fill neighbor generation with fast token-drop perturbation (10% word dropout, 5 neighbors per sample), enabling large-scale inference without sacrificing signal quality.\nSupervised Ensemble Classifier: Trained a GradientBoosting classifier (300 estimators, max depth 4) on standardized features to distinguish members from non-members based on learned memorization patterns.\nResults: Achieved AUC 0.907 and TPR@FPR=0.1 of 0.697 on the validation split — a +55% improvement in AUC and +349% improvement in TPR over the raw-loss baseline.\nFeature Importance Analysis: Identified that cross-model reference signals (loss_diff_ft, ref_diff_2) account for 86% of model importance, confirming that larger fine-tuned models produce stronger memorization signatures than neighborhood-level perturbation."
+    "text": "A project of credit card default analysis and corresponding prediction.\nhttps://github.com/SNALYF/Credit-Card-Default-Analysis\n\n\n\nEDA: Cleaned and implemented EDA to dataset, navigated on the correlations between numerical features and categorical features\nModel Selection: Conducted logistic model (Test F1-score: 0.530), SVC model (Test F1-score: 0.532), HistGradientBoosting (0.534), and XGBoosting model(0.507).\nHyperparameter Optimization: Implemented Randomized Search Cross-Validation on SVC, HistGradientBoosting, and XGBoosting model to obtain the highest F1-score.\nShap Interpretation: Analyzed SHAP plot to interpret black-box model decisions, identified most important feature."
   },
   {
-    "objectID": "posts/masters/membership-inference-attack.html#project-overview",
-    "href": "posts/masters/membership-inference-attack.html#project-overview",
-    "title": "Membership Inference Attack on Fine-tuned LLMs",
+    "objectID": "posts/masters/credit card default analysis.html#project-overview",
+    "href": "posts/masters/credit card default analysis.html#project-overview",
+    "title": "Credit Card Default Analysis",
     "section": "",
-    "text": "A privacy attack research project investigating whether text samples were included in the fine-tuning dataset of a language model — a core problem in AI safety and LLM privacy auditing. Submitted as a Kaggle competition through UBC COLX 531.\n\n\n\nDual-Model Feature Engineering: Extracted a 16-dimensional feature vector per sample using four models simultaneously — two fine-tuned SmolLM2 variants (135M, 360M) and their base checkpoints — capturing reference ratios, neighborhood perturbation gaps, and cross-model agreement signals.\nImproved Neighborhood Attack: Replaced slow BERT mask-and-fill neighbor generation with fast token-drop perturbation (10% word dropout, 5 neighbors per sample), enabling large-scale inference without sacrificing signal quality.\nSupervised Ensemble Classifier: Trained a GradientBoosting classifier (300 estimators, max depth 4) on standardized features to distinguish members from non-members based on learned memorization patterns.\nResults: Achieved AUC 0.907 and TPR@FPR=0.1 of 0.697 on the validation split — a +55% improvement in AUC and +349% improvement in TPR over the raw-loss baseline.\nFeature Importance Analysis: Identified that cross-model reference signals (loss_diff_ft, ref_diff_2) account for 86% of model importance, confirming that larger fine-tuned models produce stronger memorization signatures than neighborhood-level perturbation."
+    "text": "A project of credit card default analysis and corresponding prediction.\nhttps://github.com/SNALYF/Credit-Card-Default-Analysis\n\n\n\nEDA: Cleaned and implemented EDA to dataset, navigated on the correlations between numerical features and categorical features\nModel Selection: Conducted logistic model (Test F1-score: 0.530), SVC model (Test F1-score: 0.532), HistGradientBoosting (0.534), and XGBoosting model(0.507).\nHyperparameter Optimization: Implemented Randomized Search Cross-Validation on SVC, HistGradientBoosting, and XGBoosting model to obtain the highest F1-score.\nShap Interpretation: Analyzed SHAP plot to interpret black-box model decisions, identified most important feature."
   },
   {
-    "objectID": "posts/masters/membership-inference-attack.html#technical-stack",
-    "href": "posts/masters/membership-inference-attack.html#technical-stack",
-    "title": "Membership Inference Attack on Fine-tuned LLMs",
-    "section": "Technical Stack",
-    "text": "Technical Stack\nPython · PyTorch · Hugging Face Transformers · scikit-learn · Pandas · NumPy"
+    "objectID": "posts/masters/credit card default analysis.html#paper-preview",
+    "href": "posts/masters/credit card default analysis.html#paper-preview",
+    "title": "Credit Card Default Analysis",
+    "section": "Paper Preview",
+    "text": "Paper Preview\n\n\nUnable to display PDF file. Download instead."
   },
   {
-    "objectID": "posts/masters/membership-inference-attack.html#results-summary",
-    "href": "posts/masters/membership-inference-attack.html#results-summary",
-    "title": "Membership Inference Attack on Fine-tuned LLMs",
-    "section": "Results Summary",
-    "text": "Results Summary\n\n\n\nMethod\nAUC\nTPR @ FPR=0.1\n\n\n\n\nBaseline (Raw Loss)\n0.584\n0.155\n\n\nImproved Neighborhood Attack\n0.907\n0.697"
-  },
-  {
-    "objectID": "posts/masters/membership-inference-attack.html#link-to-repo",
-    "href": "posts/masters/membership-inference-attack.html#link-to-repo",
-    "title": "Membership Inference Attack on Fine-tuned LLMs",
+    "objectID": "posts/masters/credit card default analysis.html#link-to-repo",
+    "href": "posts/masters/credit card default analysis.html#link-to-repo",
+    "title": "Credit Card Default Analysis",
     "section": "Link to repo",
     "text": "Link to repo\nGithub Repository"
   },

@@ -1,0 +1,33 @@
+---
+title: "Betty Talker — Recipe RAG Pipeline"
+description: "A full RAG pipeline that answers recipe questions and scales ingredients, built on Betty Crocker's Bisquick Cook Book using LLMs and semantic search."
+author: "Tianhao Cao"
+date: "2026-03-25"
+categories: [Python, NLP, RAG, LLM, Information Retrieval]
+image: ../../img/betty_talker.png
+---
+
+## Project Overview
+
+Betty Talker is an end-to-end Retrieval-Augmented Generation (RAG) system. The assistant answers natural language questions about recipes from *Betty Crocker's Bisquick Cook Book* (1957) and supports ingredient scaling for any serving size.
+
+
+### Pipeline Components
+
+- **Data Collection**: Parsed the full raw text from Project Gutenberg into structured recipe dictionaries, extracting titles, ingredients, instructions, serving sizes, and notes using regex-based parsing.
+- **Vector Store & Search**: Generated sentence embeddings with `all-MiniLM-L6-v2` and implemented cosine-similarity-based retrieval to find the most relevant recipes for a given query.
+- **LLM + RAG**: Connected the search results to a large language model via a structured prompt template. The assistant only answers questions grounded in the retrieved recipe data.
+- **Actions & Intent Classification**: Added few-shot LLM intent classification to route queries between recipe search, ingredient scaling, and off-topic refusal. Scaling supports Unicode fraction characters (½, ⅓, ¾, etc.).
+
+### System Flow
+
+```
+User Query → classify_intent()
+               ├── SearchRecipeIntent → search() → construct_prompt() → call_llm()
+               ├── ScaleRecipeIntent  → search() → scale()
+               └── OtherIntent        → polite refusal via LLM
+```
+
+## Link to Repo
+
+[GitHub Repository](https://github.com/SNALYF/Betty-Talker)

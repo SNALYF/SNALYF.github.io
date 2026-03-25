@@ -6,8 +6,11 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Tianhao Cao">
+<meta name="dcterms.date" content="2026-03-25">
+<meta name="description" content="A full RAG pipeline that answers recipe questions and scales ingredients, built on Betty Crocker’s Bisquick Cook Book using LLMs and semantic search.">
 
-<title>Projects – Tianhao Cao</title>
+<title>Betty Talker — Recipe RAG Pipeline – Tianhao Cao</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,26 +26,24 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<link href="./favicon.svg" rel="icon" type="image/svg+xml">
-<script src="site_libs/quarto-listing/list.min.js"></script>
-<script src="site_libs/quarto-listing/quarto-listing.js"></script>
-<script src="site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-bc185b5c5bdbcb35c2eb49d8a876ef70.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-c09f7992e7ad36c4a4c784d127ab2153.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../favicon.svg" rel="icon" type="image/svg+xml">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-bc185b5c5bdbcb35c2eb49d8a876ef70.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-c09f7992e7ad36c4a4c784d127ab2153.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -70,63 +71,6 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<script>
-
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-masters .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
-
-    const options = {
-      valueNames: ['listing-title','listing-author','listing-date','listing-image','listing-description','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
-      
-      searchColumns: ["listing-title","listing-author","listing-date","listing-image","listing-description","listing-categories"],
-    };
-
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-masters'] = new List('listing-masters', options);
-
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  });
-
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
-  
-
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-undergrad .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
-
-    const options = {
-      valueNames: ['listing-title','listing-author','listing-date','listing-image','listing-description','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
-      
-      searchColumns: ["listing-title","listing-author","listing-date","listing-image","listing-description","listing-categories"],
-    };
-
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-undergrad'] = new List('listing-undergrad', options);
-
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  });
-
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
-  </script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
 <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
@@ -148,47 +92,18 @@ ul.task-list li input[type="checkbox"] {
   });
 </script>
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
-
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="../../styles.css">
 </head>
 
 <body class="nav-fixed quarto-light">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+  <header id="quarto-header" class="headroom fixed-top">
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">Tianhao Cao</span>
     </a>
   </div>
@@ -199,19 +114,19 @@ window.Quarto = {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./index.html"> 
+    <a class="nav-link" href="../../index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="./projects.html" aria-current="page"> 
+    <a class="nav-link" href="../../projects.html"> 
 <span class="menu-text">Projects</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./resume.html"> 
+    <a class="nav-link" href="../../resume.html"> 
 <span class="menu-text">Resume</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./about.html"> 
+    <a class="nav-link" href="../../about.html"> 
 <span class="menu-text">About</span></a>
   </li>  
 </ul>
@@ -239,24 +154,7 @@ window.Quarto = {
     </nav>
 </header>
 <!-- content -->
-<header id="title-block-header" class="quarto-title-block default page-columns page-full">
-  <div class="quarto-title-banner page-columns page-full">
-    <div class="quarto-title column-page-left">
-      <h1 class="title">Projects</h1>
-            <p class="subtitle lead">A collection of my work in Data Science, NLP, and Engineering.</p>
-                      </div>
-  </div>
-    
-  
-  <div class="quarto-title-meta column-page-left">
-
-      
-    
-      
-    </div>
-    
-  
-  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
@@ -264,252 +162,84 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#masters" id="toc-masters" class="nav-link active" data-scroll-target="#masters">Master’s</a></li>
-  <li><a href="#undergraduate" id="toc-undergraduate" class="nav-link" data-scroll-target="#undergraduate">Undergraduate</a></li>
+  <li><a href="#project-overview" id="toc-project-overview" class="nav-link active" data-scroll-target="#project-overview">Project Overview</a>
+  <ul class="collapse">
+  <li><a href="#pipeline-components" id="toc-pipeline-components" class="nav-link" data-scroll-target="#pipeline-components">Pipeline Components</a></li>
+  <li><a href="#system-flow" id="toc-system-flow" class="nav-link" data-scroll-target="#system-flow">System Flow</a></li>
+  </ul></li>
+  <li><a href="#link-to-repo" id="toc-link-to-repo" class="nav-link" data-scroll-target="#link-to-repo">Link to Repo</a></li>
   </ul>
 </nav>
-    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(6)</span></div><div class="category" data-category="Q2F1c2FsJTIwSW5mZXJlbmNl">Causal Inference <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Q2xhc3NpZmljYXRpb24=">Classification <span class="quarto-category-count">(2)</span></div><div class="category" data-category="RGVlcCUyMExlYXJuaW5n">Deep Learning <span class="quarto-category-count">(1)</span></div><div class="category" data-category="RWNvbm9tZXRyaWNz">Econometrics <span class="quarto-category-count">(2)</span></div><div class="category" data-category="RW5zZW1ibGUlMjBNZXRob2Rz">Ensemble Methods <span class="quarto-category-count">(2)</span></div><div class="category" data-category="RXhwbGFpbmFiaWxpdHk=">Explainability <span class="quarto-category-count">(1)</span></div><div class="category" data-category="SW5mb3JtYXRpb24lMjBSZXRyaWV2YWw=">Information Retrieval <span class="quarto-category-count">(1)</span></div><div class="category" data-category="TExN">LLM <span class="quarto-category-count">(2)</span></div><div class="category" data-category="TWFjaGluZSUyMExlYXJuaW5n">Machine Learning <span class="quarto-category-count">(2)</span></div><div class="category" data-category="TkxQ">NLP <span class="quarto-category-count">(3)</span></div><div class="category" data-category="UHJpdmFjeSUyMCUyNiUyMFNlY3VyaXR5">Privacy &amp; Security <span class="quarto-category-count">(1)</span></div><div class="category" data-category="UHl0aG9u">Python <span class="quarto-category-count">(4)</span></div><div class="category" data-category="Ug==">R <span class="quarto-category-count">(2)</span></div><div class="category" data-category="UkFH">RAG <span class="quarto-category-count">(1)</span></div><div class="category" data-category="UmVncmVzc2lvbg==">Regression <span class="quarto-category-count">(2)</span></div></div></div>
+    </div>
 <!-- main -->
-<main class="content quarto-banner-title-block column-page-left" id="quarto-document-content">
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Betty Talker — Recipe RAG Pipeline</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">Python</div>
+    <div class="quarto-category">NLP</div>
+    <div class="quarto-category">RAG</div>
+    <div class="quarto-category">LLM</div>
+    <div class="quarto-category">Information Retrieval</div>
+  </div>
+  </div>
+
+<div>
+  <div class="description">
+    A full RAG pipeline that answers recipe questions and scales ingredients, built on Betty Crocker’s Bisquick Cook Book using LLMs and semantic search.
+  </div>
+</div>
 
 
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Tianhao Cao </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">March 25, 2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
 
 
+</header>
 
-<section id="masters" class="level2">
-<h2 class="anchored" data-anchor-id="masters">Master’s</h2>
-<p><em>Focusing on advanced machine learning and NLP research.</em></p>
-<div id="listing-masters" class="quarto-listing quarto-listing-container-grid">
-<div class="list grid quarto-listing-cols-3">
-<div class="g-col-1" data-index="0" data-categories="UHl0aG9uJTJDTkxQJTJDUkFHJTJDTExNJTJDSW5mb3JtYXRpb24lMjBSZXRyaWV2YWw=" data-listing-date-sort="1774422000000" data-listing-file-modified-sort="1774479415077" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="219">
-<a href="./posts/masters/betty-talker-rag.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left">
-<p class="card-img-top">
-<img loading="lazy" src="./img/betty_talker.png" class="thumbnail-image card-img" style="height: 150px;">
-</p>
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-Betty Talker — Recipe RAG Pipeline
-</h5>
-<div class="listing-categories">
 
-<div class="listing-category" onclick="window.quartoListingCategory('UHl0aG9u'); return false;">Python</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('TkxQ'); return false;">NLP</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('UkFH'); return false;">RAG</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('TExN'); return false;">LLM</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('SW5mb3JtYXRpb24lMjBSZXRyaWV2YWw='); return false;">Information Retrieval</div>
-
-</div>
-<div class="card-text listing-description delink">
-<p>A full RAG pipeline that answers recipe questions and scales ingredients, built on Betty Crocker’s Bisquick Cook Book using LLMs and semantic search.</p>
-</div>
-<div class="card-attribution card-text-small justify">
-<div class="listing-author">
-Tianhao Cao
-</div>
-<div class="listing-date">
-Mar 25, 2026
-</div>
-</div>
-</div>
-</div></a>
-</div>
-<div class="g-col-1" data-index="1" data-categories="UHl0aG9uJTJDTExNJTJDTkxQJTJDUHJpdmFjeSUyMCUyNiUyMFNlY3VyaXR5JTJDRW5zZW1ibGUlMjBNZXRob2Rz" data-listing-date-sort="1773817200000" data-listing-file-modified-sort="1773905094686" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="229">
-<a href="./posts/masters/membership-inference-attack.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left">
-<p class="card-img-top">
-<img loading="lazy" src="./img/MIA.jpg" class="thumbnail-image card-img" style="height: 150px;">
-</p>
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-Membership Inference Attack on Fine-tuned LLMs
-</h5>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('UHl0aG9u'); return false;">Python</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('TExN'); return false;">LLM</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('TkxQ'); return false;">NLP</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('UHJpdmFjeSUyMCUyNiUyMFNlY3VyaXR5'); return false;">Privacy &amp; Security</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('RW5zZW1ibGUlMjBNZXRob2Rz'); return false;">Ensemble Methods</div>
-
-</div>
-<div class="card-text listing-description delink">
-<p>Dual-model feature fusion to detect training data membership in fine-tuned language models</p>
-</div>
-<div class="card-attribution card-text-small justify">
-<div class="listing-author">
-Tianhao Cao
-</div>
-<div class="listing-date">
-Mar 18, 2026
-</div>
-</div>
-</div>
-</div></a>
-</div>
-<div class="g-col-1" data-index="2" data-categories="UHl0aG9uJTJDTkxQJTJDRGVlcCUyMExlYXJuaW5nJTJDQ2xhc3NpZmljYXRpb24=" data-listing-date-sort="1769932800000" data-listing-file-modified-sort="1773903435399" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="216">
-<a href="./posts/masters/sentiment analysis.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left">
-<p class="card-img-top">
-<img loading="lazy" src="./img/sentiment.png" class="thumbnail-image card-img" style="height: 150px;">
-</p>
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-Sentiment Analysis on Yelp Reviews
-</h5>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('UHl0aG9u'); return false;">Python</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('TkxQ'); return false;">NLP</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('RGVlcCUyMExlYXJuaW5n'); return false;">Deep Learning</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('Q2xhc3NpZmljYXRpb24='); return false;">Classification</div>
-
-</div>
-<div class="card-text listing-description delink">
-<p>Comparative analysis of CBOW and LSTM models for sentiment classification on Yelp reviews</p>
-</div>
-<div class="card-attribution card-text-small justify">
-<div class="listing-author">
-Tianhao Cao
-</div>
-<div class="listing-date">
-Feb 1, 2026
-</div>
-</div>
-</div>
-</div></a>
-</div>
-<div class="g-col-1" data-index="3" data-categories="UHl0aG9uJTJDTWFjaGluZSUyMExlYXJuaW5nJTJDQ2xhc3NpZmljYXRpb24lMkNFbnNlbWJsZSUyME1ldGhvZHMlMkNFeHBsYWluYWJpbGl0eQ==" data-listing-date-sort="1765440000000" data-listing-file-modified-sort="1773903428811" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="105">
-<a href="./posts/masters/credit card default analysis.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left">
-<p class="card-img-top">
-<img loading="lazy" src="./img/creditcard.png" class="thumbnail-image card-img" style="height: 150px;">
-</p>
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-Credit Card Default Analysis
-</h5>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('UHl0aG9u'); return false;">Python</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('TWFjaGluZSUyMExlYXJuaW5n'); return false;">Machine Learning</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('Q2xhc3NpZmljYXRpb24='); return false;">Classification</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('RW5zZW1ibGUlMjBNZXRob2Rz'); return false;">Ensemble Methods</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('RXhwbGFpbmFiaWxpdHk='); return false;">Explainability</div>
-
-</div>
-<div class="card-text listing-description delink">
-<p>Using XGBoosting to predict credit card defaults</p>
-</div>
-<div class="card-attribution card-text-small justify">
-<div class="listing-author">
-Tianhao Cao
-</div>
-<div class="listing-date">
-Dec 11, 2025
-</div>
-</div>
-</div>
-</div></a>
-</div>
-</div>
-<div class="listing-no-matching d-none">No matching items</div>
-</div>
+<section id="project-overview" class="level2">
+<h2 class="anchored" data-anchor-id="project-overview">Project Overview</h2>
+<p>Betty Talker is an end-to-end Retrieval-Augmented Generation (RAG) system. The assistant answers natural language questions about recipes from <em>Betty Crocker’s Bisquick Cook Book</em> (1957) and supports ingredient scaling for any serving size.</p>
+<section id="pipeline-components" class="level3">
+<h3 class="anchored" data-anchor-id="pipeline-components">Pipeline Components</h3>
+<ul>
+<li><strong>Data Collection</strong>: Parsed the full raw text from Project Gutenberg into structured recipe dictionaries, extracting titles, ingredients, instructions, serving sizes, and notes using regex-based parsing.</li>
+<li><strong>Vector Store &amp; Search</strong>: Generated sentence embeddings with <code>all-MiniLM-L6-v2</code> and implemented cosine-similarity-based retrieval to find the most relevant recipes for a given query.</li>
+<li><strong>LLM + RAG</strong>: Connected the search results to a large language model via a structured prompt template. The assistant only answers questions grounded in the retrieved recipe data.</li>
+<li><strong>Actions &amp; Intent Classification</strong>: Added few-shot LLM intent classification to route queries between recipe search, ingredient scaling, and off-topic refusal. Scaling supports Unicode fraction characters (½, ⅓, ¾, etc.).</li>
+</ul>
 </section>
-<section id="undergraduate" class="level2">
-<h2 class="anchored" data-anchor-id="undergraduate">Undergraduate</h2>
-<p><em>Foundational projects in data science and economics.</em></p>
-<div id="listing-undergrad" class="quarto-listing quarto-listing-container-grid">
-<div class="list grid quarto-listing-cols-3">
-<div class="g-col-1" data-index="0" data-categories="UiUyQ01hY2hpbmUlMjBMZWFybmluZyUyQ1JlZ3Jlc3Npb24lMkNFY29ub21ldHJpY3M=" data-listing-date-sort="1654412400000" data-listing-file-modified-sort="1773903444766" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="242">
-<a href="./posts/undergraduate/weather insurance purchasing prediction.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left">
-<p class="card-img-top">
-<img loading="lazy" src="./img/weather.png" class="thumbnail-image card-img" style="height: 150px;">
-</p>
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-Weather Insurance Purchasing Prediction
-</h5>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('Ug=='); return false;">R</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('TWFjaGluZSUyMExlYXJuaW5n'); return false;">Machine Learning</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('UmVncmVzc2lvbg=='); return false;">Regression</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('RWNvbm9tZXRyaWNz'); return false;">Econometrics</div>
-
-</div>
-<div class="card-text listing-description delink">
-<p>Predicting farmers’ insurance buying behavior using Lasso and Random Forest</p>
-</div>
-<div class="card-attribution card-text-small justify">
-<div class="listing-author">
-Tianhao Cao
-</div>
-<div class="listing-date">
-Jun 5, 2022
-</div>
-</div>
-</div>
-</div></a>
-</div>
-<div class="g-col-1" data-index="1" data-categories="UiUyQ0NhdXNhbCUyMEluZmVyZW5jZSUyQ1JlZ3Jlc3Npb24lMkNFY29ub21ldHJpY3M=" data-listing-date-sort="1647586800000" data-listing-file-modified-sort="1773903440987" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="210">
-<a href="./posts/undergraduate/covid19 did analysis.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left">
-<p class="card-img-top">
-<img loading="lazy" src="./img/covid.png" class="thumbnail-image card-img" style="height: 150px;">
-</p>
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-Covid-19 DiD Analysis
-</h5>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('Ug=='); return false;">R</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('Q2F1c2FsJTIwSW5mZXJlbmNl'); return false;">Causal Inference</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('UmVncmVzc2lvbg=='); return false;">Regression</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('RWNvbm9tZXRyaWNz'); return false;">Econometrics</div>
-
-</div>
-<div class="card-text listing-description delink">
-<p>Identifying the influences of Early-Policies to the COVID-19 transmission and Deaths</p>
-</div>
-<div class="card-attribution card-text-small justify">
-<div class="listing-author">
-Tianhao Cao
-</div>
-<div class="listing-date">
-Mar 18, 2022
-</div>
-</div>
-</div>
-</div></a>
-</div>
-</div>
-<div class="listing-no-matching d-none">No matching items</div>
-</div>
-
+<section id="system-flow" class="level3">
+<h3 class="anchored" data-anchor-id="system-flow">System Flow</h3>
+<pre><code>User Query → classify_intent()
+               ├── SearchRecipeIntent → search() → construct_prompt() → call_llm()
+               ├── ScaleRecipeIntent  → search() → scale()
+               └── OtherIntent        → polite refusal via LLM</code></pre>
+</section>
+</section>
+<section id="link-to-repo" class="level2">
+<h2 class="anchored" data-anchor-id="link-to-repo">Link to Repo</h2>
+<p><a href="https://github.com/SNALYF/Betty-Talker">GitHub Repository</a></p>
 
 
 </section>
