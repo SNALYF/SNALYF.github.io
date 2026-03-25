@@ -3,6 +3,7 @@ project:
   output-dir: docs
 website:
   title: "Tianhao Cao"  # Name
+  favicon: favicon.svg
   navbar:
     left:
       - href: index.qmd

@@ -38,4 +38,10 @@ My primary interests lie in **Data Science**, **Machine Learning**, and **Natura
 * **Programming**: Python (Pandas, NumPy, ScikitLearn, PyTorch), R, SQL
 * **Data Science**: Machine Learning, Data Analysis, NLP (Word Embeddings, Parsing)
 * **Other**: Music Theory, Mathematics
+
+<div class="hero-cta">
+  <a href="projects.html" class="cta-btn primary">🚀 View My Projects</a>
+  <a href="resume.html" class="cta-btn secondary">📄 See Resume</a>
+</div>
+
 </div>
