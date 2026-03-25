@@ -40,8 +40,8 @@ My primary interests lie in **Data Science**, **Machine Learning**, and **Natura
 * **Other**: Music Theory, Mathematics
 
 <div class="hero-cta">
-  <a href="projects.html" class="cta-btn primary">🚀 View My Projects</a>
-  <a href="resume.html" class="cta-btn secondary">📄 See Resume</a>
+  <a href="projects.html" class="cta-btn">View My Projects</a>
+  <a href="resume.html" class="cta-btn">See Resume</a>
 </div>
 
 </div>
