@@ -1,0 +1,44 @@
+---
+title: "Membership Inference Attack on Fine-tuned VLMs"
+description: "Multimodal attack pipeline combining CLIP embeddings, loss-ratio signals, and neighborhood perturbation to detect training data membership in vision-language models"
+author: "Tianhao Cao"
+date: "2026-04-18"
+categories: [Python, VLM, NLP, Privacy & Security, Multimodal, Ensemble Methods]
+image: ../../img/MIA_VLM.png
+---
+
+## Project Overview
+
+A multimodal privacy attack research project investigating whether (image, caption) pairs were included in the fine-tuning dataset of a vision-language model — extending membership inference attack (MIA) research from text-only LLMs to the VLM setting. Target model: SmolVLM-256M-Instruct.
+
+### Key Concepts Applied
+
+* **Three-Layer MIA Attack**: Probed the fine-tuned model through three perturbation strategies — loss ratio (fine-tuned vs. base model loss), caption contrast (original vs. randomly shuffled captions), and image corruption sensitivity (clean vs. Gaussian-blurred image). The loss ratio alone achieved AUC 0.815, serving as the dominant single signal.
+* **Adapted M⁴I Framework**: Modernized the M⁴I attack (Hu et al., NeurIPS 2022) for CLIP + SmolVLM — replaced legacy ResNet-152/LSTM shadow models with off-the-shelf CLIP ViT-B/32 as a cross-modal feature extractor, achieving Kaggle AUC **0.8056** with no shadow model training required. Identified `clip_img_text_sim` as the single most important feature (48% of XGBoost importance).
+* **Dual-Modal Neighborhood Attack**: Extended the text-only neighborhood attack to both modalities — generating text perturbations (10% word dropout) and image perturbations (Gaussian noise, patch masking, random crop) across fine-tuned and base models to extract 17 cross-modal sensitivity features.
+* **Combined Ensemble**: Merged the three-layer MIA (3 features) and dual-modal neighborhood features (17 features) via Logistic Regression, demonstrating that orthogonal signal families — absolute memorization vs. perturbation sensitivity — are complementary.
+* **Key Finding**: VLM generation-based signals add near-zero discriminative value (Δ Kaggle AUC = +0.00023 vs. CLIP-only), indicating the membership signal is encoded in data-level image-text alignment rather than model output behavior.
+
+## Technical Stack
+
+**Python · PyTorch · Hugging Face Transformers · CLIP (ViT-B/32) · XGBoost · scikit-learn · Pandas · NumPy**
+
+## Results Summary
+
+| Method | Val AUC | Val TPR @ FPR=0.1 |
+|:---|:--:|:--:|
+| Baseline (Raw Loss) | 0.501 | 0.120 |
+| Neighborhood Attack | 0.599 | 0.187 |
+| M⁴I-CLIP Attack | 0.809 | 0.300 |
+| Three-Layer MIA only | 0.815 | 0.355 |
+| Hybrid MIA + LiRA | 0.806 | 0.263 |
+| **Neighborhood + MIA Combined** | **0.849** | **0.388** |
+
+## Paper
+
+<object data="../pdfs/MIA_LLM_VLM.pdf" type="application/pdf" width="100%" height="800px">
+    <p>Unable to display PDF file. <a href="../pdfs/MIA_LLM_VLM.pdf">Download</a> instead.</p>
+</object>
+
+## Link to repo
+[Github Repository](https://github.com/SNALYF/MIA---Large-Language-Model---Vison-Language-Model)
