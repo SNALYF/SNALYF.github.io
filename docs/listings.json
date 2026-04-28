@@ -2,6 +2,7 @@
   {
     "listing": "/projects.html",
     "items": [
+      "/posts/masters/fraud-corpus.html",
       "/posts/masters/membership-inference-attack-vlm.html",
       "/posts/masters/betty-talker-rag.html",
       "/posts/masters/membership-inference-attack.html",
