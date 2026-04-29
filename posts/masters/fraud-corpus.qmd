@@ -41,4 +41,4 @@ A multilingual annotated corpus and machine learning system for detecting social
 
 ## Link to Repo
 
-[GitHub Repository](https://github.com/SNALYF/FraudCorpus)
+[GitHub Repository](https://github.com/SNALYF/Fast-Repository-for-Analyzing-Unreliable-Discourse)
