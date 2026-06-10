@@ -30,17 +30,32 @@ layout: full
 | Category | Skills |
 |----------|--------|
 | **Languages** | Python, R, SQL, MongoDB, Bash |
-| **ML & AI** | PyTorch, Scikit-learn, XGBoost, Hugging Face Transformers, LLM Fine-tuning, RAG Pipelines, Vector Embeddings, Prompt Engineering, SHAP |
-| **NLP** | Word Embeddings, N-gram Models, Parsing Algorithms, Membership Inference, NLTK, spaCy |
-| **Data Engineering** | Pandas, NumPy, ETL Pipelines, Feature Engineering, Data Visualization |
-| **MLOps & Cloud** | Docker, AWS, Git / GitHub, CI/CD, Weights & Biases (W&B) |
+| **ML & AI** | PyTorch, Scikit-learn, XGBoost, Hugging Face Transformers, BERT, RoBERTa, Flan-T5, sentence-transformers, LLM Fine-tuning, RAG, Multi-agent LLM, Vector Embeddings, Prompt Engineering, SHAP |
+| **NLP** | Word Embeddings, N-gram Models, Parsing Algorithms, Membership Inference, NLTK, spaCy, CEFR |
+| **Data Engineering** | Pandas, NumPy, Apache Parquet, ETL Pipelines, Feature Engineering, Data Visualization |
+| **MLOps & Cloud** | Docker, AWS, Git / GitHub, CI/CD, Weights & Biases (W&B), LangChain / LlamaIndex |
 | **Tools** | VS Code, Jupyter, Quarto, LaTeX |
 
 ---
 
 ## Experience
 
-**Career Mentorship Program** | *Mentee* *Jan 2026 - Present*
+**Applied Machine Learning Engineer Intern** | *Ednoda x UBC MDS-CL Capstone* | *Jan 2026 - June 2026*
+
+Built an end-to-end AI-powered curriculum content pipeline for an ESL edtech platform, spanning grammar analysis, semantic retrieval, and automated teaching material generation.
+
+* Designed and implemented 29 spaCy DependencyMatcher grammar templates to classify ESL sentences by syntactic structure, achieving 65.8% coverage on production sentence data and 54.2% on the CEFR-SP benchmark corpus (A1–C2 consistent)
+* Built an offline embedding pipeline using all-MiniLM-L6-v2 to encode 6,477 grammar-tagged sentences into a searchable semantic index
+* Fine-tuned a BERT model for CEFR difficulty classification (A1–C2), achieving 92% (±1) accuracy
+* Engineered a three-layer sentence retrieval system combining grammar structure filtering, CEFR difficulty matching, and cosine similarity ranking to surface curriculum-aligned example sentences
+* Built a three-layer content generation system that produces new ESL practice sentences by detecting replaceable slots, generating masked-token candidates (RoBERTa for single-token slots, T5/Flan-T5 for multi-token spans), and ranking candidates by cosine similarity for fluency and difficulty fit
+* Engineered a PDF parsing pipeline to extract and structure question sections from textbook PDFs into machine-readable question datasets
+* Built a RAG (Retrieval-Augmented Generation) system that retrieves semantically relevant existing questions to reduce redundancy and improve consistency across generated content
+* Designed a multi-agent LLM workflow that ingests a textbook PDF and automatically produces a complete teaching package — structured lesson notebook, practice questions, and graded quiz — ready for classroom use
+
+---
+
+**Career Mentorship Program** | *Mentee* | *Jan 2026 - Present*
 
 * Selected for a professional mentorship program under industry veteran Jacob Oh.
 * Focusing on software engineering best practices, career development in tech, and bridging academic concepts to industry standards.
@@ -50,4 +65,8 @@ layout: full
 
 ## Capstone
 
-**TBD**
+**Ednoda x UBC MDS-CL Capstone** — *Applied Machine Learning Engineer Intern*
+
+Built an end-to-end AI-powered curriculum content pipeline for an ESL edtech platform, spanning grammar analysis, semantic retrieval, and automated teaching material generation.
+
+**Tech Stack**: Python · spaCy · sentence-transformers · BERT · RoBERTa · Flan-T5 · LangChain / LlamaIndex · RAG · Multi-agent LLM · pandas · Apache Parquet · NLP · CEFR

@@ -221,21 +221,21 @@
     "href": "resume.html#technical-skills",
     "title": "Resume",
     "section": "Technical Skills",
-    "text": "Technical Skills\n\n\n\n\n\n\n\nCategory\nSkills\n\n\n\n\nLanguages\nPython, R, SQL, MongoDB, Bash\n\n\nML & AI\nPyTorch, Scikit-learn, XGBoost, Hugging Face Transformers, LLM Fine-tuning, RAG Pipelines, Vector Embeddings, Prompt Engineering, SHAP\n\n\nNLP\nWord Embeddings, N-gram Models, Parsing Algorithms, Membership Inference, NLTK, spaCy\n\n\nData Engineering\nPandas, NumPy, ETL Pipelines, Feature Engineering, Data Visualization\n\n\nMLOps & Cloud\nDocker, AWS, Git / GitHub, CI/CD, Weights & Biases (W&B)\n\n\nTools\nVS Code, Jupyter, Quarto, LaTeX"
+    "text": "Technical Skills\n\n\n\n\n\n\n\nCategory\nSkills\n\n\n\n\nLanguages\nPython, R, SQL, MongoDB, Bash\n\n\nML & AI\nPyTorch, Scikit-learn, XGBoost, Hugging Face Transformers, BERT, RoBERTa, Flan-T5, sentence-transformers, LLM Fine-tuning, RAG, Multi-agent LLM, Vector Embeddings, Prompt Engineering, SHAP\n\n\nNLP\nWord Embeddings, N-gram Models, Parsing Algorithms, Membership Inference, NLTK, spaCy, CEFR\n\n\nData Engineering\nPandas, NumPy, Apache Parquet, ETL Pipelines, Feature Engineering, Data Visualization\n\n\nMLOps & Cloud\nDocker, AWS, Git / GitHub, CI/CD, Weights & Biases (W&B), LangChain / LlamaIndex\n\n\nTools\nVS Code, Jupyter, Quarto, LaTeX"
   },
   {
     "objectID": "resume.html#experience",
     "href": "resume.html#experience",
     "title": "Resume",
     "section": "Experience",
-    "text": "Experience\nCareer Mentorship Program | Mentee Jan 2026 - Present\n\nSelected for a professional mentorship program under industry veteran Jacob Oh.\nFocusing on software engineering best practices, career development in tech, and bridging academic concepts to industry standards."
+    "text": "Experience\nApplied Machine Learning Engineer Intern | Ednoda x UBC MDS-CL Capstone | Jan 2026 - June 2026\nBuilt an end-to-end AI-powered curriculum content pipeline for an ESL edtech platform, spanning grammar analysis, semantic retrieval, and automated teaching material generation.\n\nDesigned and implemented 29 spaCy DependencyMatcher grammar templates to classify ESL sentences by syntactic structure, achieving 65.8% coverage on production sentence data and 54.2% on the CEFR-SP benchmark corpus (A1–C2 consistent)\nBuilt an offline embedding pipeline using all-MiniLM-L6-v2 to encode 6,477 grammar-tagged sentences into a searchable semantic index\nFine-tuned a BERT model for CEFR difficulty classification (A1–C2), achieving 92% (±1) accuracy\nEngineered a three-layer sentence retrieval system combining grammar structure filtering, CEFR difficulty matching, and cosine similarity ranking to surface curriculum-aligned example sentences\nBuilt a three-layer content generation system that produces new ESL practice sentences by detecting replaceable slots, generating masked-token candidates (RoBERTa for single-token slots, T5/Flan-T5 for multi-token spans), and ranking candidates by cosine similarity for fluency and difficulty fit\nEngineered a PDF parsing pipeline to extract and structure question sections from textbook PDFs into machine-readable question datasets\nBuilt a RAG (Retrieval-Augmented Generation) system that retrieves semantically relevant existing questions to reduce redundancy and improve consistency across generated content\nDesigned a multi-agent LLM workflow that ingests a textbook PDF and automatically produces a complete teaching package — structured lesson notebook, practice questions, and graded quiz — ready for classroom use\n\n\nCareer Mentorship Program | Mentee | Jan 2026 - Present\n\nSelected for a professional mentorship program under industry veteran Jacob Oh.\nFocusing on software engineering best practices, career development in tech, and bridging academic concepts to industry standards."
   },
   {
     "objectID": "resume.html#capstone",
     "href": "resume.html#capstone",
     "title": "Resume",
     "section": "Capstone",
-    "text": "Capstone\nTBD"
+    "text": "Capstone\nEdnoda x UBC MDS-CL Capstone — Applied Machine Learning Engineer Intern\nBuilt an end-to-end AI-powered curriculum content pipeline for an ESL edtech platform, spanning grammar analysis, semantic retrieval, and automated teaching material generation.\nTech Stack: Python · spaCy · sentence-transformers · BERT · RoBERTa · Flan-T5 · LangChain / LlamaIndex · RAG · Multi-agent LLM · pandas · Apache Parquet · NLP · CEFR"
   },
   {
     "objectID": "posts/masters/credit card default analysis.html",

@@ -1,0 +1,230 @@
+<script>
+/* =====================================================
+   FX — 前卫动效系统 (Tianhao Cao)
+   1. 粒子神经网络背景  2. 弹簧物理 3D 卡片
+   3. 滚动驱动动画      4. 标题解码 + 自定义光标
+   ===================================================== */
+(function () {
+  "use strict";
+
+  var REDUCED = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (REDUCED) return; // 尊重系统"减少动态效果"设置，全部降级为静态
+
+  var FINE = window.matchMedia("(pointer: fine)").matches;
+  var CYAN = "#00d4ff", PURPLE = "#7c3aed";
+
+  document.addEventListener("DOMContentLoaded", function () {
+
+    /* ---------- 1. 粒子神经网络背景 ---------- */
+    (function particles() {
+      var cv = document.createElement("canvas");
+      cv.setAttribute("aria-hidden", "true");
+      cv.style.cssText =
+        "position:fixed;inset:0;width:100%;height:100%;z-index:-1;pointer-events:none;";
+      document.body.prepend(cv);
+
+      var cx = cv.getContext("2d"), W, H, ps = [], m = { x: -9999, y: -9999 };
+
+      function resize() {
+        W = cv.width = window.innerWidth;
+        H = cv.height = window.innerHeight;
+        var n = Math.min(70, Math.round((W * H) / 18000));
+        while (ps.length < n)
+          ps.push({
+            x: Math.random() * W, y: Math.random() * H,
+            vx: (Math.random() - 0.5) * 0.4, vy: (Math.random() - 0.5) * 0.4,
+            c: Math.random() < 0.25 ? PURPLE : CYAN
+          });
+        ps.length = n;
+      }
+      resize();
+      window.addEventListener("resize", resize);
+
+      if (FINE) {
+        window.addEventListener("mousemove", function (e) { m.x = e.clientX; m.y = e.clientY; });
+        window.addEventListener("mouseout", function () { m.x = -9999; m.y = -9999; });
+      }
+
+      (function loop() {
+        cx.clearRect(0, 0, W, H);
+        var i, j, p, q, dx, dy, d2;
+        for (i = 0; i < ps.length; i++) {
+          p = ps[i];
+          dx = m.x - p.x; dy = m.y - p.y; d2 = dx * dx + dy * dy;
+          if (d2 < 10000 && d2 > 1) { // 鼠标力场扰动（非线性）
+            var d = Math.sqrt(d2);
+            p.vx -= (dx / d) * 0.05; p.vy -= (dy / d) * 0.05;
+          }
+          p.vx += (Math.random() - 0.5) * 0.03; // 噪声漂移
+          p.vy += (Math.random() - 0.5) * 0.03;
+          p.vx *= 0.985; p.vy *= 0.985;
+          p.x += p.vx; p.y += p.vy;
+          if (p.x < 0 || p.x > W) p.vx *= -1;
+          if (p.y < 0 || p.y > H) p.vy *= -1;
+          p.x = Math.max(0, Math.min(W, p.x));
+          p.y = Math.max(0, Math.min(H, p.y));
+        }
+        cx.lineWidth = 0.5;
+        for (i = 0; i < ps.length; i++) for (j = i + 1; j < ps.length; j++) {
+          p = ps[i]; q = ps[j];
+          dx = p.x - q.x; dy = p.y - q.y; d2 = dx * dx + dy * dy;
+          if (d2 < 12100) {
+            cx.strokeStyle = "rgba(0,212,255," + ((1 - d2 / 12100) * 0.28).toFixed(3) + ")";
+            cx.beginPath(); cx.moveTo(p.x, p.y); cx.lineTo(q.x, q.y); cx.stroke();
+          }
+        }
+        for (i = 0; i < ps.length; i++) {
+          p = ps[i];
+          cx.fillStyle = p.c;
+          cx.beginPath(); cx.arc(p.x, p.y, 1.5, 0, 7); cx.fill();
+        }
+        requestAnimationFrame(loop);
+      })();
+    })();
+
+    /* ---------- 滚动进度条（顶部，滚动驱动最直观的展示） ---------- */
+    var progressBar = document.createElement("div");
+    progressBar.setAttribute("aria-hidden", "true");
+    progressBar.style.cssText =
+      "position:fixed;top:0;left:0;height:3px;width:100%;z-index:100000;pointer-events:none;" +
+      "background:linear-gradient(90deg," + CYAN + "," + PURPLE + ");" +
+      "transform:scaleX(0);transform-origin:left;";
+    document.body.appendChild(progressBar);
+
+    /* ---------- 2+3. 弹簧 3D 卡片 & 滚动驱动动画（统一写入器） ---------- */
+    (function springAndScroll() {
+      var cards = [].slice.call(document.querySelectorAll(".card, .listing-item"));
+      var reveals = [].slice.call(document.querySelectorAll(
+        "main h2, main h3, .hero-cta, .about-links, .quarto-title-meta"));
+      var t0 = performance.now() + 80; // 入场级联起点
+
+      function mkCard(el) {
+        el.style.transition = "box-shadow .3s ease, border-color .3s ease";
+        var s = { el: el, rx: 0, ry: 0, vx: 0, vy: 0, sc: 1, vs: 0,
+                  trx: 0, tryy: 0, tsc: 1, top: 0, h: 1, rv: 1 };
+        if (FINE) {
+          el.addEventListener("mousemove", function (e) {
+            var r = el.getBoundingClientRect();
+            s.tryy = ((e.clientX - r.left) / r.width - 0.5) * 16;
+            s.trx = -((e.clientY - r.top) / r.height - 0.5) * 16;
+            s.tsc = 1.04;
+          });
+          el.addEventListener("mouseleave", function () { s.trx = 0; s.tryy = 0; s.tsc = 1; });
+        }
+        return s;
+      }
+      var cs = cards.map(mkCard);
+      var rs = reveals.map(function (el) { return { el: el, top: 0, rv: 1 }; });
+
+      function measure() { // 记录元素未变换时的文档位置，避免 transform 反馈循环
+        cs.concat(rs).forEach(function (s) {
+          var prev = s.el.style.transform;
+          s.el.style.transform = "none";
+          var r = s.el.getBoundingClientRect();
+          s.top = r.top + window.scrollY;
+          s.el.style.transform = prev;
+        });
+      }
+      measure();
+      window.addEventListener("resize", measure);
+      window.addEventListener("load", function () { measure(); setTimeout(measure, 800); });
+
+      function ease(t) { return 1 - Math.pow(1 - t, 3); }
+      function clamp01(v) { return Math.max(0, Math.min(1, v)); }
+      function progress(top, idx) {
+        // 滚动进度 × 入场级联：两者取较小值，首屏元素也有依次浮现的过程
+        var sp = clamp01((window.scrollY + window.innerHeight - top) / (window.innerHeight * 0.55));
+        var ip = clamp01((performance.now() - t0 - idx * 70) / 450);
+        return ease(Math.min(sp, ip));
+      }
+
+      var needsPerspective = {};
+      cards.forEach(function (el) {
+        if (el.parentElement && !needsPerspective[0]) el.parentElement.style.perspective = "900px";
+      });
+
+      (function loop() {
+        var max = document.documentElement.scrollHeight - window.innerHeight;
+        progressBar.style.transform =
+          "scaleX(" + (max > 0 ? (window.scrollY / max).toFixed(4) : 0) + ")";
+        var i, s, p;
+        for (i = 0; i < cs.length; i++) {
+          s = cs[i];
+          p = progress(s.top, i);
+          s.vx += (s.trx - s.rx) * 0.08; s.vx *= 0.82; s.rx += s.vx;   // 弹簧积分
+          s.vy += (s.tryy - s.ry) * 0.08; s.vy *= 0.82; s.ry += s.vy;
+          s.vs += (s.tsc - s.sc) * 0.1;  s.vs *= 0.75; s.sc += s.vs;
+          s.el.style.opacity = p;
+          s.el.style.transform =
+            "translateY(" + (28 * (1 - p)).toFixed(2) + "px) rotateX(" + s.rx.toFixed(2) +
+            "deg) rotateY(" + s.ry.toFixed(2) + "deg) scale(" + s.sc.toFixed(3) + ")";
+        }
+        for (i = 0; i < rs.length; i++) {
+          s = rs[i];
+          p = progress(s.top, i);
+          s.el.style.opacity = p;
+          s.el.style.transform = "translateY(" + (18 * (1 - p)).toFixed(2) + "px)";
+          if (s.el.tagName === "H2") s.el.style.setProperty("--h2p", p.toFixed(3));
+        }
+        requestAnimationFrame(loop);
+      })();
+    })();
+
+    /* ---------- 4a. 标题解码动画 ---------- */
+    (function decode() {
+      var el = document.querySelector("h1.title");
+      if (!el || !el.textContent.trim()) return;
+      var target = el.textContent;
+      el.setAttribute("aria-label", target);
+      var glyphs = "!<>-_\\/[]{}—=+*^?#01";
+      var frame = 0;
+      var iv = setInterval(function () {
+        frame++;
+        var out = "";
+        for (var i = 0; i < target.length; i++) {
+          var ch = target[i] === " " ? "&nbsp;" : target[i];
+          if (frame > i * 2 + 6) out += ch;
+          else if (frame > i * 2)
+            out += '<span style="color:' + PURPLE + '" aria-hidden="true">' +
+                   glyphs[Math.floor(Math.random() * glyphs.length)] + "</span>";
+          else
+            // 未开始的字符用隐形占位，保持整行宽度恒定（居中标题不再左右晃动）
+            out += '<span style="visibility:hidden" aria-hidden="true">' + ch + "</span>";
+        }
+        el.innerHTML = out;
+        if (frame > target.length * 2 + 6) { clearInterval(iv); el.textContent = target; }
+      }, 28);
+    })();
+
+    /* ---------- 4b. 自定义光标（延迟跟随外环） ---------- */
+    if (FINE) (function cursor() {
+      document.documentElement.classList.add("fx-cursor");
+      var dot = document.createElement("div"), ring = document.createElement("div");
+      dot.setAttribute("aria-hidden", "true"); ring.setAttribute("aria-hidden", "true");
+      dot.style.cssText =
+        "position:fixed;width:6px;height:6px;border-radius:50%;background:" + CYAN +
+        ";pointer-events:none;z-index:99999;left:0;top:0;transform:translate(-100px,-100px);";
+      ring.style.cssText =
+        "position:fixed;width:32px;height:32px;border-radius:50%;border:1.5px solid " + PURPLE +
+        ";pointer-events:none;z-index:99998;left:0;top:0;transform:translate(-100px,-100px);" +
+        "transition:width .25s ease,height .25s ease,border-color .25s ease;";
+      document.body.appendChild(dot); document.body.appendChild(ring);
+
+      var mx = -100, my = -100, ox = -100, oy = -100, grow = false;
+      window.addEventListener("mousemove", function (e) {
+        mx = e.clientX; my = e.clientY;
+        grow = !!(e.target.closest && e.target.closest("a, button, .card, .listing-item, .nav-link, input"));
+      });
+      (function follow() {
+        ox += (mx - ox) * 0.14; oy += (my - oy) * 0.14; // 指数趋近 = 非线性延迟跟随
+        dot.style.transform = "translate(" + (mx - 3) + "px," + (my - 3) + "px)";
+        var r = grow ? 24 : 16;
+        ring.style.width = ring.style.height = r * 2 + "px";
+        ring.style.borderColor = grow ? CYAN : PURPLE;
+        ring.style.transform = "translate(" + (ox - r) + "px," + (oy - r) + "px)";
+        requestAnimationFrame(follow);
+      })();
+    })();
+  });
+})();
+</script>
